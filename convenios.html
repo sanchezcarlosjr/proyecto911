@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap resources-->    
+    <link href="bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+    
+    <!--color de los nav items-->
+    <link href="js/navitems.css" rel="stylesheet">
+    
+    <!--css de forms-->
+    <link href="js/form.css" rel="stylesheet">
+
+    <title>Convenios</title>
+  </head>
+  <body>
+  <div class="container">
+    <div class="row">
+    
+    
+        <div class="col-sm-4" style="background-color:#007141">
+        <!--La barra de navegacion lateral va aqui-->
+        <ul class="nav flex-column" style="background-color:#007141;">
+        <li class="nav-item" style="margin-top:35px;">
+            <a class="navbar-brand" href="#">
+              <img src="imagenes/uabc.png" alt="" width="24" height="30" class="d-inline-block align-text-top">
+              Nombre del usuario
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Movilidad academica</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="movilidad-entrada.html">Entrada</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="movilidad-salida.html">Salida</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Intercambio estudiantil</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Entrada</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Salida</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="convenios.html">Convenios</a>
+          </li>
+          <li class="nav-item" style="margin-top:50px">
+            <a class="nav-link" href="#">Ayuda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cerrar sesion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="margin-bottom:100%" href="#"></a>
+          </li>
+        </ul>
+        </div>
+        
+        
+        <div class="col" style="margin-top:20px">
+        <!-- aqui ira el contenido que se muestre segun la opcion elegida----------------------->
+        <!--justificar un row de contenido en el centro-->
+        <h2 align="center">Convenios</h2>
+        <form style="margin-left:20px;">
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" id="periodoId" placeholder="">
+                  <label for="floatingInput">Periodo ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="periodo" placeholder="">
+                  <label for="floatingInput">Periodo</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="convenioVincId" placeholder="">
+                  <label for="floatingInput">Convenio de vinculación ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="convenioVinc" placeholder="">
+                  <label for="floatingInput">Convenio de vinculación</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-sm">
+                  <input type="date" class="form-control" id="fecha" placeholder="">
+                  <label for="floatingInput">Unidad ID</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" id="sectorId" placeholder="">
+                  <label for="floatingInput">Sector ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="sector" placeholder="">
+                  <label for="floatingInput">Sector</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" id="origenId" placeholder="">
+                  <label for="floatingInput">Origen ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="origen" placeholder="">
+                  <label for="floatingInput">Origen</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="paisVinc" placeholder="">
+                  <label for="floatingInput">País de origen</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="instOrg" placeholder="">
+                  <label for="floatingInput">Institución y organización</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <select class="form-select" id="coop" aria-label="Floating label select example">
+                    <option selected>Selecciona una opción</option>
+                    <option value="1">Sí</option>
+                    <option value="2">No</option>
+                  </select>
+                  <label for="coop">¿Es convenio de Cooperación académica?</label>
+                </div>
+                <div class="form-floating col-6">
+                  <select class="form-select" id="inve" aria-label="Floating label select example">
+                    <option selected>Selecciona una opción</option>
+                    <option value="1">Sí</option>
+                    <option value="2">No</option>
+                  </select>
+                  <label for="inve">¿Es convenio de Investigación?</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <select class="form-select" id="inter" aria-label="Floating label select example">
+                    <option selected>Selecciona una opción</option>
+                    <option value="1">Sí</option>
+                    <option value="2">No</option>
+                  </select>
+                  <label for="inter">¿Es convenio de intercambio estudiantil?</label>
+                </div>
+                <div class="form-floating col-6">
+                  <select class="form-select" id="movi" aria-label="Floating label select example">
+                    <option selected>Selecciona una opción</option>
+                    <option value="1">Sí</option>
+                    <option value="2">No</option>
+                  </select>
+                  <label for="movi">¿Es convenio de movilidad académica?</label>
+                </div>
+            </div>
+            <div class="row justify-content-end" style="margin-top:50px">
+                <div class="col-sm-4">
+                    <button type="submit" class="btn btn-primary mb-3">Guardar</button>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+  </div>
+  </body>
+</html>
+

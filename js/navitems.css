@@ -1,0 +1,23 @@
+.nav > .active > a {
+  color: #f9f9f9;
+  background-color: #f9f9f9;
+}
+.nav-item > a:hover {
+  color: #f9f9f9;
+}
+.nav-link{
+  color: #f9f9f9;
+  margin-left:20px;
+}
+
+.nav-item > .active > b {
+    color:#f9f9f9;
+}
+.nav-link > b:hover{
+    color:#f9f9f9;
+}
+.navbar-brand{
+  color: #f9f9f9;
+  font-weight:bold;
+}
+

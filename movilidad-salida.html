@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap resources-->    
+    <link href="bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+    
+    <!--color de los nav items-->
+    <link href="js/navitems.css" rel="stylesheet">
+    
+    <!--css de forms-->
+    <link href="js/form.css" rel="stylesheet">
+
+    <title>Movilidad Academica de Salida</title>
+  </head>
+  <body>
+  <div class="container">
+    <div class="row">
+    
+    
+        <div class="col-sm-4" style="background-color:#007141">
+        <!--La barra de navegacion lateral va aqui-->
+        <ul class="nav flex-column" style="background-color:#007141;">
+        <li class="nav-item" style="margin-top:35px;">
+            <a class="navbar-brand" href="#">
+              <img src="imagenes/uabc.png" alt="" width="24" height="30" class="d-inline-block align-text-top">
+              Nombre del usuario
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Movilidad academica</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="movilidad-entrada.html">Entrada</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="movilidad-salida.html">Salida</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Intercambio estudiantil</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Entrada</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Salida</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="convenios.html">Convenios</a>
+          </li>
+          <li class="nav-item" style="margin-top:50px">
+            <a class="nav-link" href="#">Ayuda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cerrar sesion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="margin-bottom:100%" href="#"></a>
+          </li>
+        </ul>
+        </div>
+        
+        
+        <div class="col" style="margin-top:20px">
+        <!-- aqui ira el contenido que se muestre segun la opcion elegida----------------------->
+        <!--justificar un row de contenido en el centro-->
+        <h2 align="center">Movilidad Academica de Salida</h2>
+        <form style="margin-left:20px;">
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" id="periodoId" placeholder="">
+                  <label for="floatingInput">Periodo ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="periodo" placeholder="">
+                  <label for="floatingInput">Periodo</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" id="campusId" placeholder="">
+                  <label for="floatingInput">Campus ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="campus" placeholder="">
+                  <label for="floatingInput">Campus Destino</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" id="unidadId" placeholder="">
+                  <label for="floatingInput">Unidad ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="unidad" placeholder="">
+                  <label for="floatingInput">Unidad</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" id="empleadoId" placeholder="">
+                  <label for="floatingInput">Empleado ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="empleado_nombre" placeholder="">
+                  <label for="floatingInput">Nombre Empleado</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="apellido1" placeholder="">
+                  <label for="floatingInput">Apellido Paterno</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="apellido2" placeholder="">
+                  <label for="floatingInput">Apellido Materno</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <select class="form-select" id="sexoId" aria-label="Floating label select example">
+                    <option selected>Selecciona una opcion</option>
+                    <option value="1">Femenino</option>
+                    <option value="2">Masculino</option>
+                  </select>
+                  <label for="sexoId">Sexo</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="ur" placeholder="">
+                  <label for="floatingInput">Unidad Receptora</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="urPais" placeholder="">
+                  <label for="floatingInput">Pais de la Unidad Receptora</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="urEntidad" placeholder="">
+                  <label for="floatingInput">Entidad de la Unidad Receptora</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" id="urIdioma" placeholder="">
+                  <label for="floatingInput">Idioma de la Unidad Receptora</label>
+                </div>
+                <div class="form-floating col-6">
+                  <select class="form-select" id="tmaId" aria-label="Floating label select example">
+                    <option selected>Selecciona una opcion</option>
+                    <option value="1">Docencia</option>
+                    <option value="2">Estancias Sabaticas</option>
+                    <option value="3">Estancia de Investigacion</option>
+                  </select>
+                  <label for="tmaId">Tipo de Movilidad</label>
+                </div>
+            </div>
+            <div class="row justify-content-end" style="margin-top:50px">
+                <div class="col-sm-4">
+                    <button type="submit" class="btn btn-primary mb-3">Guardar</button>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+  </div>
+  </body>
+</html>
+
