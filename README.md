@@ -1,7 +1,7 @@
 # proyecto911
 sistema de reportes para el departamento administrativo de UABC
 
-Prerequisitos para correr el servidor.
+Prerrequisitos para correr el servidor.
 
 
 nodejs 16.14.2 (LTS)
