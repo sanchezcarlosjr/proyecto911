@@ -21,6 +21,10 @@ En consola correr:
 
 cd ../proyecto911/
 
+crear base 911db
+
+importar usando mysql 911db < 911-db.sql
+
 npm install express body-parser mysql
 
 
