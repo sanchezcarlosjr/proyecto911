@@ -43,7 +43,7 @@ app.post('/', function(req, res){
     host: "localhost",
     user: "jorge",
     password: "qwerty",
-    database: "test"
+    database: "911db"
   });
   if(req.body.form == "movilidad-entrada")
     con.connect(function(err) {
@@ -51,7 +51,7 @@ app.post('/', function(req, res){
     console.log("Connected!");
     var sql = "INSERT INTO movilidad_academica_entrada (`PERIODO_ID`,`PERIODO`,`CAMPUS_ID`,`CAMPUS_DESC`,`UNIDAD_ID`,`UNIDAD`,"
     +"`VISITANTE_ID`,`VISITANTE_NOMBRE`,`VISITANTE_APELLIDO1`,`VISITANTE_APELLIDO2`,`SEXO_ID`,`SEXO`,`NIVEL_ID`,`NIVEL`,`DISCAPACIDAD`,"
-    +"`HABLANTE_INDIGENA`,`ORIGEN_INDIGENA`,`UE`,`UE_PAIS`,`UE_ENTIDAD`,`UE_IDIOMA`,`TMA_ID`,`validar`,) VALUES ?";
+    +"`HABLANTE_INDIGENA`,`ORIGEN_INDIGENA`,`UE`,`UE_PAIS`,`UE_ENTIDAD`,`UE_IDIOMA`,`TMA_ID`,`validar`) VALUES ?";
     var sexo,nivel;
     if(req.body.sexoId == 1)
       sexo="Femenino"
