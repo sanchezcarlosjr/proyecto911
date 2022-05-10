@@ -49,9 +49,24 @@ app.post('/', function(req, res){
     con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
-    var sql = "INSERT INTO tabla1 (´nombre´, ´apellido´) VALUES ?";
+    var sql = "INSERT INTO movilidad_academica_entrada (`PERIODO_ID`,`PERIODO`,`CAMPUS_ID`,`CAMPUS_DESC`,`UNIDAD_ID`,`UNIDAD`,"
+    +"`VISITANTE_ID`,`VISITANTE_NOMBRE`,`VISITANTE_APELLIDO1`,`VISITANTE_APELLIDO2`,`SEXO_ID`,`SEXO`,`NIVEL_ID`,`NIVEL`,`DISCAPACIDAD`,"
+    +"`HABLANTE_INDIGENA`,`ORIGEN_INDIGENA`,`UE`,`UE_PAIS`,`UE_ENTIDAD`,`UE_IDIOMA`,`TMA_ID`,`validar`,) VALUES ?";
+    var sexo,nivel;
+    if(req.body.sexoId == 1)
+      sexo="Femenino"
+    else
+      sexo="Masculino"
+    if(req.body.nivelId == 1)
+      nivel="Licenciatura"
+    else if (req.body.nivelId == 2)
+      nivel="Especialidad"
+    else if (req.body.nivelId == 3)
+      nivel="Maestria"
+    else
+      nivel="Doctorado"
     var values = [
-      [req.body.periodo, 'exitosa']
+      [parseInt(req.body.periodoId),req.body.periodo,parseInt(req.body.campusId),req.body.campus,parseInt(req.body.unidadId),req.body.unidad,parseInt(req.body.visistanteId),req.body.visitante_nombre,req.body.apellido1,req.body.apellido2,parseInt(req.body.sexoId),sexo,parseInt(req.body.nivelId),nivel,parseInt(req.body.discapacidadId),parseInt(req.body.hablanteId),parseInt(req.body.origenId),req.body.ue,req.body.uePais,req.body.ueEntidad,req.body.ueIdioma,parseInt(req.body.tmaId),0]
     ];
     con.query(sql, [values], function (err, result) {
       if (err) throw err;
