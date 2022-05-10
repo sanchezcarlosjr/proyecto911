@@ -4,7 +4,12 @@ sistema de reportes para el departamento administrativo de UABC
 Prerrequisitos para correr el servidor.
 
 
+
 nodejs 16.14.2 (LTS)
+
+
+mysql
+
 
 
 npm 8.5.0
