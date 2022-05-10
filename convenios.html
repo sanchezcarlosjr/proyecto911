@@ -68,66 +68,66 @@
         <!-- aqui ira el contenido que se muestre segun la opcion elegida----------------------->
         <!--justificar un row de contenido en el centro-->
         <h2 align="center">Convenios</h2>
-        <form style="margin-left:20px;">
+        <form style="margin-left:20px;" action="/" method="POST">
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" id="periodoId" placeholder="">
+                  <input type="number" class="form-control" name="periodoId" placeholder="">
                   <label for="floatingInput">Periodo ID</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" id="periodo" placeholder="">
+                  <input type="text" class="form-control" name="periodo" placeholder="">
                   <label for="floatingInput">Periodo</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" id="convenioVincId" placeholder="">
+                  <input type="text" class="form-control" name="convenioVincId" placeholder="">
                   <label for="floatingInput">Convenio de vinculación ID</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" id="convenioVinc" placeholder="">
+                  <input type="text" class="form-control" name="convenioVinc" placeholder="">
                   <label for="floatingInput">Convenio de vinculación</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-sm">
-                  <input type="date" class="form-control" id="fecha" placeholder="">
-                  <label for="floatingInput">Unidad ID</label>
+                  <input type="date" class="form-control" name="fecha" placeholder="">
+                  <label for="floatingInput">Fecha</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" id="sectorId" placeholder="">
+                  <input type="number" class="form-control" name="sectorId" placeholder="">
                   <label for="floatingInput">Sector ID</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" id="sector" placeholder="">
+                  <input type="text" class="form-control" name="sector" placeholder="">
                   <label for="floatingInput">Sector</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" id="origenId" placeholder="">
+                  <input type="number" class="form-control" name="origenId" placeholder="">
                   <label for="floatingInput">Origen ID</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" id="origen" placeholder="">
+                  <input type="text" class="form-control" name="origen" placeholder="">
                   <label for="floatingInput">Origen</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" id="paisVinc" placeholder="">
+                  <input type="text" class="form-control" name="paisVinc" placeholder="">
                   <label for="floatingInput">País de origen</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" id="instOrg" placeholder="">
+                  <input type="text" class="form-control" name="instOrg" placeholder="">
                   <label for="floatingInput">Institución y organización</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <select class="form-select" id="coop" aria-label="Floating label select example">
+                  <select class="form-select" name="coop" aria-label="Floating label select example">
                     <option selected>Selecciona una opción</option>
                     <option value="1">Sí</option>
                     <option value="2">No</option>
@@ -135,7 +135,7 @@
                   <label for="coop">¿Es convenio de Cooperación académica?</label>
                 </div>
                 <div class="form-floating col-6">
-                  <select class="form-select" id="inve" aria-label="Floating label select example">
+                  <select class="form-select" name="inve" aria-label="Floating label select example">
                     <option selected>Selecciona una opción</option>
                     <option value="1">Sí</option>
                     <option value="2">No</option>
@@ -145,7 +145,7 @@
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <select class="form-select" id="inter" aria-label="Floating label select example">
+                  <select class="form-select" name="inter" aria-label="Floating label select example">
                     <option selected>Selecciona una opción</option>
                     <option value="1">Sí</option>
                     <option value="2">No</option>
@@ -153,7 +153,7 @@
                   <label for="inter">¿Es convenio de intercambio estudiantil?</label>
                 </div>
                 <div class="form-floating col-6">
-                  <select class="form-select" id="movi" aria-label="Floating label select example">
+                  <select class="form-select" name="movi" aria-label="Floating label select example">
                     <option selected>Selecciona una opción</option>
                     <option value="1">Sí</option>
                     <option value="2">No</option>
@@ -161,6 +161,7 @@
                   <label for="movi">¿Es convenio de movilidad académica?</label>
                 </div>
             </div>
+            <input type="hidden" name="form" value="convenios" >
             <div class="row justify-content-end" style="margin-top:50px">
                 <div class="col-sm-4">
                     <button type="submit" class="btn btn-primary mb-3">Guardar</button>

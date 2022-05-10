@@ -137,7 +137,30 @@ app.post('/', function(req, res){
     });
     console.log(req.body.form);
     res.sendFile(path.join(__dirname+'/main.html'));
+  }else if(req.body.form == "convenios"){
+    con.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected!");
+      var sql = "INSERT INTO convenios (`PERIODO_ID`,`PERIODO`,`CONVENIO_VINCID`,`CONVENIO_VINC`,`FECHA`,`SECTOR_ID`,"
+      +"`SECTOR`,`ORIGEN_ID`,`ORIGEN`,`PAIS_VINC`,`INST_ORG`,"
+      +"`COOP`,`INVE`,`INTER`,`MOVI`,`validar`) VALUES ?";
+      
+      var values = [
+        [parseInt(req.body.periodoId),req.body.periodo,parseInt(req.body.convenioVincId),
+        req.body.convenioVinc,req.body.fecha,parseInt(req.body.sectorId),
+        req.body.sector,parseInt(req.body.origenId),req.body.origen,
+        req.body.paisVinc,req.body.instOrg,parseInt(req.body.coop),
+        parseInt(req.body.inve),parseInt(req.body.inter),parseInt(req.body.movi),0]
+      ];
+      con.query(sql, [values], function (err, result) {
+        if (err) throw err;
+        console.log("Number of records inserted: " + result.affectedRows);
+      });
+    });
+    console.log(req.body.form);
+    res.sendFile(path.join(__dirname+'/main.html'));
   }
+  
   
 });
 
