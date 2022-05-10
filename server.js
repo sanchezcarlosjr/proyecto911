@@ -46,7 +46,8 @@ app.post('/', function(req, res){
     database: "911db"
   });
   
-  if(req.body.form == "movilidad-entrada"){
+  switch (req.body.form) {
+  case "movilidad-entrada":
     con.connect(function(err) {
       if (err) throw err;
       console.log("Connected!");
@@ -93,7 +94,8 @@ app.post('/', function(req, res){
     });
     console.log(req.body.periodo);
     res.sendFile(path.join(__dirname+'/main.html'));
-  }else if(req.body.form == "movilidad-salida"){
+    break;
+  case "movilidad-salida":
     con.connect(function(err) {
       if (err) throw err;
       console.log("Connected!");
@@ -137,7 +139,8 @@ app.post('/', function(req, res){
     });
     console.log(req.body.form);
     res.sendFile(path.join(__dirname+'/main.html'));
-  }else if(req.body.form == "convenios"){
+    break;
+  case "convenios":
     con.connect(function(err) {
       if (err) throw err;
       console.log("Connected!");
