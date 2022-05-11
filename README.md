@@ -25,7 +25,7 @@ crear base 911db
 
 importar usando mysql 911db < 911-db.sql
 
-npm install express body-parser mysql
+npm install express body-parser mysql bcrypt
 
 
 para andar el servidor usar comando
