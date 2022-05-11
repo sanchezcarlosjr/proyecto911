@@ -26,6 +26,14 @@ router.get('/movilidad-salida',function(req,res){
   res.sendFile(path.join(__dirname+'/movilidad-salida.html'));
 });
 
+router.get('/intercambio-entrada',function(req,res){
+  res.sendFile(path.join(__dirname+'/intercambio-entrada.html'));
+});
+
+router.get('/intercambio-salida',function(req,res){
+  res.sendFile(path.join(__dirname+'/intercambio-salida.html'));
+});
+
 router.get('/index',function(req,res){
   res.sendFile(path.join(__dirname+'/index.html'));
 });
@@ -46,8 +54,7 @@ app.post('/', function(req, res){
     database: "911db"
   });
   
-  switch (req.body.form) {
-  case "movilidad-entrada":
+  if(req.body.form == "movilidad-entrada"){
     con.connect(function(err) {
       if (err) throw err;
       console.log("Connected!");
@@ -94,8 +101,7 @@ app.post('/', function(req, res){
     });
     console.log(req.body.periodo);
     res.sendFile(path.join(__dirname+'/main.html'));
-    break;
-  case "movilidad-salida":
+  }else if(req.body.form == "movilidad-salida"){
     con.connect(function(err) {
       if (err) throw err;
       console.log("Connected!");
@@ -139,8 +145,7 @@ app.post('/', function(req, res){
     });
     console.log(req.body.form);
     res.sendFile(path.join(__dirname+'/main.html'));
-    break;
-  case "convenios":
+  }else if(req.body.form == "convenios"){
     con.connect(function(err) {
       if (err) throw err;
       console.log("Connected!");
@@ -162,7 +167,90 @@ app.post('/', function(req, res){
     });
     console.log(req.body.form);
     res.sendFile(path.join(__dirname+'/main.html'));
+  }else if(req.body.form == "intercambio-entrada"){
+    con.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected!");
+      var sql = "INSERT INTO intercambio_estudiantil_entrada (`PERIODO_ID`,`PERIODO`,`CAMPUS_ID`,`CAMPUS_DESC`,`UNIDAD_ID`,`UNIDAD`,"
+      +"`NIVEL_ID`,`NIVEL`,`PROGRAMA_ID`,`PROGRAMA_DESC`,`AREA_ID`,`AREA`,`ESTUDIANTE_ID`,`ESTUDIANTE_NOMBRE`,`ESTUDIANTE_APELLIDO1`,`ESTUDIANTE_APELLIDO2`,`SEXO_ID`,`SEXO`,`DISCAPACIDAD`,"
+      +"`HABLANTE_INDIGENA`,`ORIGEN_INDIGENA`,`UR`,`UR_PAIS`,`UR_ENTIDAD`,`UR_IDIOMA`,`FINAN_ID`,`FINAN`,`FINAN_VAL`,`DATE_START`,`DATE_END`,`validar`) VALUES ?"
+      var nivel,sexo,finan;
+      
+      if(req.body.sexoId == 1)
+        sexo="Femenino"
+      else
+        sexo="Masculino"
+        
+      if(req.body.finanId == 1)
+        finan="Si"
+      else
+        finan="No"
+      
+      if(req.body.nivelId == 1)
+        nivel="Licenciatura"
+      else if (req.body.nivelId == 2)
+        nivel="Especialidad"
+      else if (req.body.nivelId == 3)
+        nivel="Maestria"
+      else
+        nivel="Doctorado"
+      
+      var values = [
+        [parseInt(req.body.periodoId),req.body.periodo,parseInt(req.body.campusId),req.body.campus,parseInt(req.body.unidadId),req.body.unidad,
+        parseInt(req.body.nivelId),nivel,parseInt(req.body.programaId),req.body.programa,parseInt(req.body.areaId),req.body.area,parseInt(req.body.estudianteId),
+        req.body.estudiante_nombre,req.body.apellido1,req.body.apellido2,parseInt(req.body.sexoId),sexo,parseInt(req.body.discapacidadId),parseInt(req.body.hablanteId),parseInt(req.body.origenId),
+        req.body.ue,req.body.uePais,req.body.ueEntidad,req.body.ueIdioma,parseInt(req.body.finanId),finan,parseInt(req.body.finan_val),req.body.fechaInicio,req.body.fechaFinal,0]
+      ];
+      con.query(sql, [values], function (err, result) {
+        if (err) throw err;
+        console.log("Number of records inserted: " + result.affectedRows);
+      });
+    });
+    console.log(req.body.form);
+    res.sendFile(path.join(__dirname+'/main.html'));
+  }else if(req.body.form == "intercambio-salida"){
+    con.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected!");
+      var sql = "INSERT INTO intercambio_estudiantil_salida (`PERIODO_ID`,`PERIODO`,`CAMPUS_ID`,`CAMPUS_DESC`,`UNIDAD_ID`,`UNIDAD`,"
+      +"`NIVEL_ID`,`NIVEL`,`PROGRAMA_ID`,`PROGRAMA_DESC`,`AREA_ID`,`AREA`,`ESTUDIANTE_ID`,`ESTUDIANTE_NOMBRE`,`ESTUDIANTE_APELLIDO1`,`ESTUDIANTE_APELLIDO2`,`SEXO_ID`,`SEXO`,`DISCAPACIDAD`,"
+      +"`HABLANTE_INDIGENA`,`ORIGEN_INDIGENA`,`UR`,`UR_PAIS`,`UR_ENTIDAD`,`UR_IDIOMA`,`FINAN_ID`,`FINAN`,`FINAN_VAL`,`DATE_START`,`DATE_END`,`validar`) VALUES ?"
+      var nivel,sexo,finan;
+      
+      if(req.body.sexoId == 1)
+        sexo="Femenino"
+      else
+        sexo="Masculino"
+        
+      if(req.body.finanId == 1)
+        finan="Si"
+      else
+        finan="No"
+      
+      if(req.body.nivelId == 1)
+        nivel="Licenciatura"
+      else if (req.body.nivelId == 2)
+        nivel="Especialidad"
+      else if (req.body.nivelId == 3)
+        nivel="Maestria"
+      else
+        nivel="Doctorado"
+      
+      var values = [
+        [parseInt(req.body.periodoId),req.body.periodo,parseInt(req.body.campusId),req.body.campus,parseInt(req.body.unidadId),req.body.unidad,
+        parseInt(req.body.nivelId),nivel,parseInt(req.body.programaId),req.body.programa,parseInt(req.body.areaId),req.body.area,parseInt(req.body.estudianteId),
+        req.body.estudiante_nombre,req.body.apellido1,req.body.apellido2,parseInt(req.body.sexoId),sexo,parseInt(req.body.discapacidadId),parseInt(req.body.hablanteId),parseInt(req.body.origenId),
+        req.body.ue,req.body.uePais,req.body.ueEntidad,req.body.ueIdioma,parseInt(req.body.finanId),finan,parseInt(req.body.finan_val),req.body.fechaInicio,req.body.fechaFinal,0]
+      ];
+      con.query(sql, [values], function (err, result) {
+        if (err) throw err;
+        console.log("Number of records inserted: " + result.affectedRows);
+      });
+    });
+    console.log(req.body.form);
+    res.sendFile(path.join(__dirname+'/main.html'));
   }
+  
   
   
 });
