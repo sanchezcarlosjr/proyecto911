@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `intercambio_estudiantil_entrada` (
   `UR_ENTIDAD` varchar(50) NOT NULL,
   `UR_IDIOMA` varchar(50) NOT NULL,
   `FINAN_ID` tinyint(1) NOT NULL,
-  `FINAN` tinyint(1) NOT NULL,
+  `FINAN` varchar(10) NOT NULL,
   `FINAN_VAL` int(11) NOT NULL,
   `DATE_START` date NOT NULL,
   `DATE_END` date NOT NULL,
@@ -127,6 +127,7 @@ CREATE TABLE IF NOT EXISTS `movilidad_academica_entrada` (
   `UE_ENTIDAD` varchar(50) NOT NULL,
   `UE_IDIOMA` varchar(50) NOT NULL,
   `TMA_ID` tinyint(3) UNSIGNED NOT NULL,
+  `TMA` varchar(20) NOT NULL,
   `validar` tinyint(1) NOT NULL,
   PRIMARY KEY (ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -154,13 +155,6 @@ CREATE TABLE IF NOT EXISTS `movilidad_academica_salida` (
   `validar` tinyint(1) NOT NULL,
   PRIMARY KEY (ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS `usuarios` (
-	`USUARIO` varchar(20) NOT NULL,
-	`PASSWORD` password varchar(20) NOT NULL,
-	PRIMARY KEY (USUARIO)
-)
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
