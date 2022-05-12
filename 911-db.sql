@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `movilidad_academica_entrada` (
   `UE_ENTIDAD` varchar(50) NOT NULL,
   `UE_IDIOMA` varchar(50) NOT NULL,
   `TMA_ID` tinyint(3) UNSIGNED NOT NULL,
-  `TMA` varchar(20) NOT NULL,
+  `TMA` varchar(50) NOT NULL,
   `validar` tinyint(1) NOT NULL,
   PRIMARY KEY (ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
