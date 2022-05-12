@@ -1,5 +1,28 @@
-var Sql = require('./models/mov-entr');
 const excelJS = require('exceljs');
+var mysqlConf = require('../js/config.js').mysql_pool;
+
+function get_info(callback){
+  mysqlConf.getConnection(function (err, connection) {
+      connection.query('SELECT * FROM movilidad_academica_entrada' , function (err, rows, fields) {
+      console.log("Query correcto");
+    
+      lsq = rows;
+      //console.log(worksheet)
+      connection.release();   //---> don't forget the connection release.
+      
+      return callback(rows);
+    });
+  }); 
+}
+
+var lsq;
+
+get_info(function(rows){
+  lsq = rows;
+  //console.log(lsq);
+  //rest of your code goes in here
+});
+
 
 const exportData = async (req, res) => {
   // WRITE DOWNLOAD EXCEL LOGIC
@@ -33,37 +56,41 @@ const exportData = async (req, res) => {
     { header: "Unidad entidad", key: "UE_ENTIDAD", width: 10 },
     { header: "Unidad idioma", key: "UE_IDIOMA", width: 10 },
     { header: "TMA id", key: "TMA_ID", width: 10 },
-    { header: "Tipo de movilidad", key: "TMA", width: 10 },
     { header: "validado", key: "validar", width: 10 },
+    { header: "Tipo de movilidad", key: "TMA", width: 10 },
     
-    ];
-    
-  // Looping through User data
-  let counter = 1; 
+  ];
   
-  Sql.forEach((data2) => {
-    data2.s_no = counter;
-    worksheet.addRow(data2); // Add data in worksheet
-    counter++;
+  
+  // Looping through User data
+  let counter = 1;
+  lsq.forEach((row) => {
+    
+    worksheet.addRow(row); // Add data in worksheet
   });
+  
   
   // Making first line in excel bold
   worksheet.getRow(1).eachCell((cell) => {
     cell.font = { bold: true };
   });
+  console.log("SEGUNDO WOORKSHEET---------------------------------------")
+
+  
   try {  
-    const data = await workbook.xlsx.writeFile("${path}/users.xlsx")
+    const data = await workbook.xlsx.writeFile( path + "/users.xlsx")
    .  then(() => {
         res.send({
           status: "success",
           message: "file successfully downloaded",
-          path: "${path}/users.xlsx",
+          path: path + "/users.xlsx",
         });
    });
    }catch (err) {
      res.send({
       status: "error",
       message: "Something went wrong",
+      path: path + "/users.xlsx",
      });
    }
 };

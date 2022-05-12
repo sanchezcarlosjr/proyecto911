@@ -7,14 +7,16 @@ var con = mysql.createConnection({
   database: "911db"
 });
 
+var Sql;
+
 con.connect(function(err) {
   if (err) throw err;
   con.query("SELECT * FROM movilidad_academica_entrada", function (err, result, fields) {
     if (err) throw err;
-    console.log("QUERY COMPLETE!");
+    console.log("QUERY COMPLETE! "+result);
+    Sql=result;
     
-    module.exports = result;
   });
 });
-
+module.exports = Sql;
 
