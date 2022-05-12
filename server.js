@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const exportData = require('./controller/mov-entr'); // CONTROLLER
+
 
 
 
@@ -18,29 +20,12 @@ router.get('/',function(req,res){
   //__dirname : It will resolve to your project folder.
 });
 
-router.get('/movilidad-entrada',function(req,res){
-  res.sendFile(path.join(__dirname+'/movilidad-entrada.html'));
-});
-
-router.get('/movilidad-salida',function(req,res){
-  res.sendFile(path.join(__dirname+'/movilidad-salida.html'));
-});
-
-router.get('/intercambio-entrada',function(req,res){
-  res.sendFile(path.join(__dirname+'/intercambio-entrada.html'));
-});
-
-router.get('/intercambio-salida',function(req,res){
-  res.sendFile(path.join(__dirname+'/intercambio-salida.html'));
-});
-
 router.get('/index',function(req,res){
   res.sendFile(path.join(__dirname+'/index.html'));
 });
 
-router.get('/convenios',function(req,res){
-  res.sendFile(path.join(__dirname+'/convenios.html'));
-});
+router.get('/excel-movilidad-entrada', exportData);
+
 
 //add the router
 app.use('/', router);
