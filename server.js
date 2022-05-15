@@ -4,6 +4,7 @@ const path = require('path');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const exportData = require('./controller/mov-entr'); // CONTROLLER
+const encoder = bodyParser.urlencoded();
 
 
 
@@ -29,7 +30,7 @@ router.get('/excel-movilidad-entrada', exportData);
 
 //add the router
 app.use('/', router);
-app.post('/', function(req, res){
+app.post('/', encoder, function(req, res){
   var mysql = require('mysql');
 
   var con = mysql.createConnection({
@@ -38,6 +39,21 @@ app.post('/', function(req, res){
     password: "qwerty",
     database: "911db"
   });
+
+	/* login */
+	var username = req.body.username;
+	var password = req.body.password;
+	con.query("select * from usuarios where USUARIO = ? and PASSWORD = ?", [user, passwd], function(error, results, fields) {
+		if (results.length > 0) {
+			res.redirect("/main.html");
+		} else {
+			res.redirect("/");
+		}
+		res.end();
+	})
+	app.get("/welcome", function(req, res) {
+		res.sendFile(__dirname + "/welcome.html");
+	})
   
   if(req.body.form == "movilidad-entrada"){
     con.connect(function(err) {
