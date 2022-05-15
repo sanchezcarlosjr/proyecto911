@@ -10,7 +10,6 @@
   "scripts": {
     "start": "node server.js"
   },
-  "name": "proyecto-911",
   "name": "baz",
   "version": "1.0.0",
   "main": "server.js",
