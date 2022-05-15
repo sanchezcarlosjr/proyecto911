@@ -54,6 +54,7 @@ app.post('/', encoder, function(req, res){
 	app.get("/welcome", function(req, res) {
 		res.sendFile(__dirname + "/welcome.html");
 	})
+	/* falta probar y probablemente arreglar el query */
   
   if(req.body.form == "movilidad-entrada"){
     con.connect(function(err) {
