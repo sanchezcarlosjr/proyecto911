@@ -1,5 +1,5 @@
 const excelJS = require('exceljs');
-var mysqlConf = require('../js/config.js').mysql_pool;
+var mysqlConf = require('../js/config').mysql_pool;
 
 function get_info(callback){
   mysqlConf.getConnection(function (err, connection) {
@@ -78,7 +78,7 @@ const exportData = async (req, res) => {
 
   
   try {  
-    const data = await workbook.xlsx.writeFile( path + "/users.xlsx")
+    const data = await workbook.xlsx.writeFile( path + "/move-ent-report.xlsx")
    .  then(() => {
         res.send({
           status: "success",
