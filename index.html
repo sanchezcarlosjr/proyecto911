@@ -13,12 +13,13 @@
 	<body style="background-color:#007141">
 		<div class="container-fluid">
 			<div class="form form-log">
-				<form class="login-form">
+				<form class="login-form" action="/" method="POST">
 					<img class="logo" src="imagenes/uabc.png" width="60" alt="">
 					<h2 style="color:#548235" align="center">UNIVERSIDAD AUTÓNOMA DE BAJA CALIFORNIA</h2>
 					<h2><b>Sistema 9/11</b></h2>
-					<input type="text" class="form-control" placeholder="Usuario"/>
-					<input type="password" placeholder="Contraseña"/>
+					<input name="username" type="text" class="form-control" placeholder="Usuario"/>
+					<input name="password" type="password" placeholder="Contraseña"/>
+					<input type="hidden" name="form" value="login" >
 					<button id="loginBtn">Ingresar</button>
 					<p></p>
 					<button id="helpBtn" align="right">Ayuda</button>

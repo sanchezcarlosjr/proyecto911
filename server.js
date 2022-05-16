@@ -5,6 +5,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const exportData = require('./controller/mov-entr'); // CONTROLLER
 const encoder = bodyParser.urlencoded();
+const tipo="";
 
 
 
@@ -40,21 +41,31 @@ app.post('/', encoder, function(req, res){
     database: "911db"
   });
 
-	/* login */
-	var username = req.body.username;
-	var password = req.body.password;
-	con.query("select * from usuarios where USUARIO = ? and PASSWORD = ?", [user, passwd], function(error, results, fields) {
-		if (results.length > 0) {
-			res.redirect("/main.html");
-		} else {
-			res.redirect("/");
-		}
-		res.end();
-	})
-	app.get("/welcome", function(req, res) {
-		res.sendFile(__dirname + "/welcome.html");
-	})
-	/* falta probar y probablemente arreglar el query */
+  if(req.body.form == "login"){
+  //DIEGO para agregar contraseñas la funcion password no esta soportada en mysql 8
+  // debemos usar la funcion directa UPPER(SHA1(UNHEX(SHA1('qwerty'))))
+  //asi quedaria insert into usuarios (USUARIO, PASSWORD, TIPO) values ('judith',UPPER(SHA1(UNHEX(SHA1('qwerty')))), 'Coordinador');
+
+
+	  /* login */
+	  var username = req.body.username;
+	  var password = req.body.password;
+	  con.query("select * from usuarios where USUARIO = ? and PASSWORD = UPPER(SHA1(UNHEX(SHA1('?'))))", [username, password], function(error, results, fields) {
+		  if (results.length > 0) {
+		    tipo=tipo+results[0].TIPO;
+		    console.log("Sesion iniciada: "+results[0].USUARIO);
+			  res.redirect("/main");
+		  } else {
+		    console.log("LOGIN INCORRECTO: "+ results)
+			  res.redirect("/");
+		  }
+		  res.end();
+	  })
+	  app.get("/welcome", function(req, res) {
+		  res.sendFile(__dirname + "/welcome.html");
+	  })
+	  /* falta probar y probablemente arreglar el query */
+  }
   
   if(req.body.form == "movilidad-entrada"){
     con.connect(function(err) {

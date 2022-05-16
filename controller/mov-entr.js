@@ -1,7 +1,7 @@
 const excelJS = require('exceljs');
 var mysqlConf = require('../js/config').mysql_pool;
 
-function get_info(callback){
+async function get_info(callback){
   mysqlConf.getConnection(function (err, connection) {
       connection.query('SELECT * FROM movilidad_academica_entrada' , function (err, rows, fields) {
       console.log("Query correcto");
