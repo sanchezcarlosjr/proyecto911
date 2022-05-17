@@ -5,28 +5,64 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const exportData = require('./controller/mov-entr'); // CONTROLLER
 const encoder = bodyParser.urlencoded();
-const tipo="";
-
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 
 
 
 //para poder acceder a los recursos staticos como los js o los css o los htmls...
 app.use(express.static(__dirname));
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('views', __dirname);
+
+//session initialize
+app.use(cookieParser());
+app.use(session({secret: "Shh, its a secret!"}));
 
 
 router.get('/',function(req,res){
-  res.sendFile(path.join(__dirname+'/main.html'));
+  res.render('/index.html');
   //__dirname : It will resolve to your project folder.
 });
 
-router.get('/index',function(req,res){
-  res.sendFile(path.join(__dirname+'/index.html'));
+router.get('/main',function(req,res){
+  if(req.session.username){
+    res.render('main.html',{name:req.session.username});
+  }else{
+    res.redirect("/");
+  }
 });
 
 router.get('/excel-movilidad-entrada', exportData);
+
+//formularios
+router.get('/movilidad-entrada',function(req,res){
+  res.sendFile(path.join(__dirname+'/movilidad-entrada.html'));
+});
+
+router.get('/movilidad-salida',function(req,res){
+  res.sendFile(path.join(__dirname+'/movilidad-salida.html'));
+});
+
+router.get('/intercambio-entrada',function(req,res){
+  res.sendFile(path.join(__dirname+'/intercambio-entrada.html'));
+});
+
+router.get('/intercambio-salida',function(req,res){
+  res.sendFile(path.join(__dirname+'/intercambio-salida.html'));
+});
+
+router.get('/convenios',function(req,res){
+  res.sendFile(path.join(__dirname+'/convenios.html'));
+});
+router.get('/signout',function(req,res){
+  req.session.destroy();
+  res.redirect('/');
+});
 
 
 //add the router
@@ -50,15 +86,16 @@ app.post('/', encoder, function(req, res){
 	  /* login */
 	  var username = req.body.username;
 	  var password = req.body.password;
-	  con.query("select * from usuarios where USUARIO = ? and PASSWORD = UPPER(SHA1(UNHEX(SHA1('?'))))", [username, password], function(error, results, fields) {
-		  if (results.length > 0) {
-		    tipo=tipo+results[0].TIPO;
-		    console.log("Sesion iniciada: "+results[0].USUARIO);
+	  con.query("select * from usuarios where USUARIO = ? and PASSWORD = UPPER(SHA1(UNHEX(SHA1(?))))", [username, password], function(error, results, fields) {
+		  if (results != null) {
+		    req.session.tipo=results[0].TIPO;
+		    req.session.username=req.body.username;
+		    console.log("Sesion iniciada: "+req.session.username +"\ntipo: "+req.session.tipo);
 			  res.redirect("/main");
 		  } else {
 		    console.log("LOGIN INCORRECTO: "+ results)
 			  res.redirect("/");
-		  }
+		  }    
 		  res.end();
 	  })
 	  app.get("/welcome", function(req, res) {
