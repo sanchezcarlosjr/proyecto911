@@ -27,35 +27,49 @@
         <!--La barra de navegacion lateral va aqui-->
         <ul class="nav flex-column" style="background-color:#007141;">
         <li class="nav-item" style="margin-top:35px;">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/main">
               <img src="imagenes/uabc.png" alt="" width="24" height="30" class="d-inline-block align-text-top">
-              Nombre del usuario
+              <%= name %>
             </a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Movilidad academica</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="movilidad-entrada.html">Entrada</a></li>
+              <li><a class="dropdown-item" href="/movilidad-entrada">Entrada</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="movilidad-salida.html">Salida</a></li>
+              <li><a class="dropdown-item" href="/movilidad-salida">Salida</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Intercambio estudiantil</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Entrada</a></li>
+              <li><a class="dropdown-item" href="/intercambio_estudiantil_entrada">Entrada</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Salida</a></li>
+              <li><a class="dropdown-item" href="/intercambio_estudiantil_salida">Salida</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="convenios.html">Convenios</a>
+            <a class="nav-link" href="/convenios">Convenios</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Reportes</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/excel-movilidad-entrada">Movilidad de entrada</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/excel-movilidad-salida">Movilidad de salida</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/excel-intercambio-entrada">Intercambio de entrada</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/excel-intercambio-salida">Intercambio de salida</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/excel-convenios">Convenios</a></li>
+            </ul>
           </li>
           <li class="nav-item" style="margin-top:50px">
             <a class="nav-link" href="#">Ayuda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cerrar sesion</a>
+            <a class="nav-link" href="/signout">Cerrar sesion</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" style="margin-bottom:100%" href="#"></a>

@@ -16,7 +16,7 @@
     <!--css de forms-->
     <link href="js/form.css" rel="stylesheet">
 
-    <title>Movilidad Academica de Entrada</title>
+    <title>Intercambio Estudiantil de Entrada</title>
   </head>
   <body>
   <div class="container">
@@ -79,7 +79,7 @@
         <div class="col" style="margin-top:20px">
         <!-- aqui ira el contenido que se muestre segun la opcion elegida----------------------->
         <!--justificar un row de contenido en el centro-->
-        <h2 align="center">Movilidad Academica de Entrada</h2>
+        <h2 align="center">Intercambio Estudiantil de Entrada</h2>
         <form style="margin-left:20px;" action="/" method="POST">
             <div class="row">
                 <div class="form-floating col-6">
@@ -98,7 +98,7 @@
                 </div>
                 <div class="form-floating col-6">
                   <input type="text" class="form-control" name="campus" placeholder="">
-                  <label for="floatingInput">Campus Destino</label>
+                  <label for="floatingInput">Campus</label>
                 </div>
             </div>
             <div class="row">
@@ -112,13 +112,45 @@
                 </div>
             </div>
             <div class="row">
+                <div class="form-floating col-sm">
+                  <select class="form-select" name="nivelId" aria-label="Floating label select example">
+                    <option selected>Selecciona una opcion</option>
+                    <option value="1">Licenciatura</option>
+                    <option value="2">Especialidad</option>
+                    <option value="3">Maestria</option>
+                    <option value="4">Doctorado</option>
+                  </select>
+                  <label for="nivelId">Nivel de Estudios</label>
+                </div>
+            </div>
+            <div class="row">
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" name="visistanteId" placeholder="">
-                  <label for="floatingInput">Visitante ID</label>
+                  <input type="text" class="form-control" name="programaId" placeholder="">
+                  <label for="floatingInput">Programa ID</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="visitante_nombre" placeholder="">
-                  <label for="floatingInput">Nombre Visitante</label>
+                  <input type="text" class="form-control" name="programa" placeholder="">
+                  <label for="floatingInput">Programa</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" name="areaId" placeholder="">
+                  <label for="floatingInput">Area ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" name="area" placeholder="">
+                  <label for="floatingInput">Area</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" name="estudianteId" placeholder="">
+                  <label for="floatingInput">Estudiante ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" name="estudiante_nombre" placeholder="">
+                  <label for="floatingInput">Nombre Estudiante</label>
                 </div>
             </div>
             <div class="row">
@@ -141,32 +173,12 @@
                   <label for="sexoId">Sexo</label>
                 </div>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="nivelId" aria-label="Floating label select example">
-                    <option selected>Selecciona una opcion</option>
-                    <option value="1">Licenciatura</option>
-                    <option value="2">Especialidad</option>
-                    <option value="3">Maestria</option>
-                    <option value="4">Doctorado</option>
-                  </select>
-                  <label for="nivelId">Nivel de Estudios</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-floating col-6">
                   <select class="form-select" name="discapacidadId" aria-label="Floating label select example">
                     <option selected>Selecciona una opcion</option>
                     <option value="1">Si</option>
                     <option value="2">No</option>
                   </select>
                   <label for="discapacidadId">Discapacidad</label>
-                </div>
-                <div class="form-floating col-6">
-                  <select class="form-select" name="hablanteId" aria-label="Floating label select example">
-                    <option selected>Selecciona una opcion</option>
-                    <option value="1">Si</option>
-                    <option value="2">No</option>
-                  </select>
-                  <label for="hablanteId">Hablante indigena</label>
                 </div>
             </div>
             <div class="row">
@@ -177,6 +189,14 @@
                     <option value="2">No</option>
                   </select>
                   <label for="origenId">Origen Indigena</label>
+                </div>
+                <div class="form-floating col-6">
+                  <select class="form-select" name="hablanteId" aria-label="Floating label select example">
+                    <option selected>Selecciona una opcion</option>
+                    <option value="1">Si</option>
+                    <option value="2">No</option>
+                  </select>
+                  <label for="hablanteId">Hablante indigena</label>
                 </div>
             </div>
             <div class="row">
@@ -200,17 +220,30 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-floating col-12">
-                  <select class="form-select" name="tmaId" aria-label="Floating label select example">
+                <div class="form-floating col-sm">
+                  <select class="form-select" name="finanId" aria-label="Floating label select example">
                     <option selected>Selecciona una opcion</option>
-                    <option value="1">Docencia</option>
-                    <option value="2">Estancias Sabaticas</option>
-                    <option value="3">Estancia de Investigacion</option>
+                    <option value="1">Si</option>
+                    <option value="2">No</option>
                   </select>
-                  <label for="tmaId">Tipo de Movilidad</label>
+                  <label for="origenId">¿Recibió financiamiento?</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" name="finan_val" placeholder="">
+                  <label for="floatingInput">Monto recibido</label>
                 </div>
             </div>
-            <input type="hidden" name="form" value="movilidad-entrada" >
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="date" class="form-control" name="fechaInicio" placeholder="">
+                  <label for="floatingInput">Fecha de inicio</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="date" class="form-control" name="fechaFinal" placeholder="">
+                  <label for="floatingInput">Fecha de terminación</label>
+                </div>
+            </div>
+            <input type="hidden" name="form" value="intercambio-entrada" >
             <div class="row justify-content-end" style="margin-top:50px">
                 <div class="col-sm-4">
                     <button type="submit" class="btn btn-primary mb-3">Guardar</button>

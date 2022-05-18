@@ -29,8 +29,11 @@ app.use(session({secret: "Shh, its a secret!"}));
 
 
 router.get('/',function(req,res){
-  res.render('/index.html');
-  //__dirname : It will resolve to your project folder.
+  if(req.session.username){
+    res.render('main.html',{name:req.session.username});
+  }else{
+    res.render('index.html');
+  }
 });
 
 router.get('/main',function(req,res){
