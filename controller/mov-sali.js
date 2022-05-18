@@ -9,7 +9,7 @@ var con = mysql.createConnection({
 });
 
 async function get_info(callback){
-  con.query('SELECT * FROM movilidad_academica_entrada where validar=1', function(error, results, fields) {
+  con.query('SELECT * FROM movilidad_academica_salida', function(error, results, fields) {
 		  if (results != null) {
 		    console.log("Reporte generado con exito");
 			  
@@ -28,7 +28,7 @@ var lsq;
 const exportData = async (req, res) => {
   // WRITE DOWNLOAD EXCEL LOGIC
   const workbook = new excelJS.Workbook();  // Create a new workbook  
-  const worksheet = workbook.addWorksheet("Movilidad academica de entrada"); // New Worksheet  
+  const worksheet = workbook.addWorksheet("Movilidad academica de salida"); // New Worksheet  
   const path = "./files";  // Path to download excel
   
     // Column for data in excel. key must match data key
@@ -39,26 +39,21 @@ const exportData = async (req, res) => {
     { header: "Periodo", key: "PERIODO", width: 10 },
     { header: "Campus Id", key: "CAMPUS_ID", width: 10 },
     { header: "Campus", key: "CAMPUS_DESC", width: 10 },
-    { header: "Unidad ID", key: "UNIDAD_ID", width: 10 },
+    { header: "Unidad Id", key: "UNIDAD_ID", width: 10 },
     { header: "Unidad", key: "UNIDAD", width: 10 },
-    { header: "Visitante ID", key: "VISITANTE_ID", width: 10 },
-    { header: "Visitante Nombre", key: "VISITANTE_NOMBRE", width: 10 },
-    { header: "Apellido paterno", key: "VISITANTE_APELLIDO1", width: 10 },
-    { header: "Apellido materno", key: "VISITANTE_APELLIDO2", width: 10 },
-    { header: "Sexo id", key: "SEXO_ID", width: 10 },
+    { header: "Empleado Id", key: "EMPLEADO_ID", width: 10 },
+    { header: "Empleado Nombre", key: "EMPLEADO_NOMBRE", width: 10 },
+    { header: "Apellido Paterno", key: "EMPLEADO_APELLIDO1", width: 10 },
+    { header: "Apellido Materno", key: "EMPLEADO_APELLIDO2", width: 10 },
+    { header: "Sexo Id", key: "SEXO_ID", width: 10 },
     { header: "Sexo", key: "SEXO", width: 10 },
-    { header: "Nivel ID", key: "NIVEL_ID", width: 10 },
-    { header: "Nivel", key: "NIVEL", width: 10 },
-    { header: "Discapacidad", key: "DISCAPACIDAD", width: 10 },
-    { header: "Hablante indigena", key: "HABLANTE_INDIGENA", width: 10 },
-    { header: "Origen indigena", key: "ORIGEN_INDIGENA", width: 10 },
-    { header: "Unidad emisora", key: "UE", width: 10 },
-    { header: "Unidad pais", key: "UE_PAIS", width: 10 },
-    { header: "Unidad entidad", key: "UE_ENTIDAD", width: 10 },
-    { header: "Unidad idioma", key: "UE_IDIOMA", width: 10 },
-    { header: "TMA id", key: "TMA_ID", width: 10 },
-    { header: "validado", key: "validar", width: 10 },
-    { header: "Tipo de movilidad", key: "TMA", width: 10 },
+    { header: "Unidad Receptora", key: "UR", width: 10 },
+    { header: "Unidad Pais", key: "UR_PAIS", width: 10 },
+    { header: "Unidad Entidad", key: "UR_ENTIDAD", width: 10 },
+    { header: "Unidad Idioma", key: "UR_IDIOMA", width: 10 },
+    { header: "TMA Id", key: "TMA_ID", width: 10 },
+    { header: "Tipo de movilidad", key: "TMA", width: 10 }, 
+    { header: "Validado", key: "validar", width: 10 },
     { header: "Autor", key: "AUTOR", width: 10 },
     
   ];
@@ -81,15 +76,19 @@ const exportData = async (req, res) => {
       cell.font = { bold: true };
     });
     try {  
-      var data = workbook.xlsx.writeFile( path + "/reporte-movilidad-entrada.xlsx")
+      var data = workbook.xlsx.writeFile( path + "/reporte-movilidad-salida.xlsx")
    .  then(() => {
-        res.download(path + "/reporte-movilidad-entrada.xlsx");
+        res.send({
+          status: "success",
+          message: "file successfully downloaded",
+          path: path + "/reporte-movilidad-salida.xlsx",
+        });
      });
      }catch (err) {
        res.send({
         status: "error",
         message: "Something went wrong",
-        path: path + "/users.xlsx",
+        path: path + "/reporte-movilidad-salida.xlsx",
        });
      }
   });

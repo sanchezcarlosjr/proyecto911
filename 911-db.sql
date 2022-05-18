@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `convenios` (
   `INTER` tinyint(1) NOT NULL,
   `MOVI` tinyint(1) NOT NULL,
   `validar` tinyint(1) NOT NULL,
+  `AUTOR` varchar(50) NOT NULL,
   PRIMARY KEY (ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -64,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `intercambio_estudiantil_entrada` (
   `DATE_START` date NOT NULL,
   `DATE_END` date NOT NULL,
   `validar` tinyint(1) NOT NULL,
+  `AUTOR` varchar(50) NOT NULL,
   PRIMARY KEY (ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -100,6 +102,7 @@ CREATE TABLE IF NOT EXISTS `intercambio_estudiantil_salida` (
   `DATE_START` date NOT NULL,
   `DATE_END` date NOT NULL,
   `validar` tinyint(1) NOT NULL,
+  `AUTOR` varchar(50) NOT NULL,
   PRIMARY KEY (ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -127,8 +130,9 @@ CREATE TABLE IF NOT EXISTS `movilidad_academica_entrada` (
   `UE_ENTIDAD` varchar(50) NOT NULL,
   `UE_IDIOMA` varchar(50) NOT NULL,
   `TMA_ID` tinyint(3) UNSIGNED NOT NULL,
-  `TMA` varchar(50) NOT NULL,
   `validar` tinyint(1) NOT NULL,
+  `TMA` varchar(50) NOT NULL,
+  `AUTOR` varchar(50) NOT NULL,
   PRIMARY KEY (ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -153,6 +157,7 @@ CREATE TABLE IF NOT EXISTS `movilidad_academica_salida` (
   `TMA_ID` int(10) UNSIGNED NOT NULL,
   `TMA` varchar(50) NOT NULL,
   `validar` tinyint(1) NOT NULL,
+  `AUTOR` varchar(50) NOT NULL,
   PRIMARY KEY (ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
