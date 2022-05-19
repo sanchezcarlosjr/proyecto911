@@ -43,9 +43,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Intercambio estudiantil</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/intercambio_estudiantil_entrada">Entrada</a></li>
+              <li><a class="dropdown-item" href="/intercambio-entrada">Entrada</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/intercambio_estudiantil_salida">Salida</a></li>
+              <li><a class="dropdown-item" href="/intercambio-salida">Salida</a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -85,51 +85,51 @@
         <form style="margin-left:20px;" action="/" method="POST">
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" name="periodoId" placeholder="">
+                  <input type="number" class="form-control" name="periodoId" placeholder="" required>
                   <label for="floatingInput">Periodo ID</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="periodo" placeholder="">
+                  <input type="text" class="form-control" name="periodo" placeholder="" required>
                   <label for="floatingInput">Periodo</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" name="campusId" placeholder="">
+                  <input type="number" class="form-control" name="campusId" placeholder="" required>
                   <label for="floatingInput">Campus ID</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="campus" placeholder="">
+                  <input type="text" class="form-control" name="campus" placeholder="" required>
                   <label for="floatingInput">Campus</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" name="unidadId" placeholder="">
+                  <input type="number" class="form-control" name="unidadId" placeholder="" required>
                   <label for="floatingInput">Unidad ID</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="unidad" placeholder="">
+                  <input type="text" class="form-control" name="unidad" placeholder="" required>
                   <label for="floatingInput">Unidad</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" name="empleadoId" placeholder="">
+                  <input type="number" class="form-control" name="empleadoId" placeholder="" required>
                   <label for="floatingInput">Empleado ID</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="empleado_nombre" placeholder="">
+                  <input type="text" class="form-control" name="empleado_nombre" placeholder="" required>
                   <label for="floatingInput">Nombre Empleado</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="apellido1" placeholder="">
+                  <input type="text" class="form-control" name="apellido1" placeholder="" required>
                   <label for="floatingInput">Apellido Paterno</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="apellido2" placeholder="">
+                  <input type="text" class="form-control" name="apellido2" placeholder="" required>
                   <label for="floatingInput">Apellido Materno</label>
                 </div>
             </div>
@@ -143,23 +143,23 @@
                   <label for="sexoId">Sexo</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="ur" placeholder="">
+                  <input type="text" class="form-control" name="ur" placeholder="" required>
                   <label for="floatingInput">Unidad Receptora</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="urPais" placeholder="">
+                  <input type="text" class="form-control" name="urPais" placeholder="" required>
                   <label for="floatingInput">Pais de la Unidad Receptora</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="urEntidad" placeholder="">
+                  <input type="text" class="form-control" name="urEntidad" placeholder="" required>
                   <label for="floatingInput">Entidad de la Unidad Receptora</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="urIdioma" placeholder="">
+                  <input type="text" class="form-control" name="urIdioma" placeholder="" required>
                   <label for="floatingInput">Idioma de la Unidad Receptora</label>
                 </div>
                 <div class="form-floating col-6">

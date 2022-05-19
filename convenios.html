@@ -23,7 +23,7 @@
     <div class="row">
     
     
-        <div class="col-sm-4" style="background-color:#007141">
+        <div class="col-sm-3" style="background-color:#007141">
         <!--La barra de navegacion lateral va aqui-->
         <ul class="nav flex-column" style="background-color:#007141;">
         <li class="nav-item" style="margin-top:35px;">
@@ -43,9 +43,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Intercambio estudiantil</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/intercambio_estudiantil_entrada">Entrada</a></li>
+              <li><a class="dropdown-item" href="/intercambio-entrada">Entrada</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/intercambio_estudiantil_salida">Salida</a></li>
+              <li><a class="dropdown-item" href="/intercambio-salida">Salida</a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -75,8 +75,7 @@
             <a class="nav-link" style="margin-bottom:100%" href="#"></a>
           </li>
         </ul>
-        </div>
-        
+        </div>        
         
         <div class="col" style="margin-top:20px">
         <!-- aqui ira el contenido que se muestre segun la opcion elegida----------------------->
@@ -85,57 +84,57 @@
         <form style="margin-left:20px;" action="/" method="POST">
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" name="periodoId" placeholder="">
+                  <input type="number" class="form-control" name="periodoId" placeholder="" required>
                   <label for="floatingInput">Periodo ID</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="periodo" placeholder="">
+                  <input type="text" class="form-control" name="periodo" placeholder="" required>
                   <label for="floatingInput">Periodo</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="convenioVincId" placeholder="">
+                  <input type="text" class="form-control" name="convenioVincId" placeholder="" required>
                   <label for="floatingInput">Convenio de vinculación ID</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="convenioVinc" placeholder="">
+                  <input type="text" class="form-control" name="convenioVinc" placeholder="" required>
                   <label for="floatingInput">Convenio de vinculación</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-sm">
-                  <input type="date" class="form-control" name="fecha" placeholder="">
+                  <input type="date" class="form-control" name="fecha" placeholder="" required>
                   <label for="floatingInput">Fecha</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" name="sectorId" placeholder="">
+                  <input type="number" class="form-control" name="sectorId" placeholder="" required>
                   <label for="floatingInput">Sector ID</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="sector" placeholder="">
+                  <input type="text" class="form-control" name="sector" placeholder="" required>
                   <label for="floatingInput">Sector</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" name="origenId" placeholder="">
+                  <input type="number" class="form-control" name="origenId" placeholder="" required>
                   <label for="floatingInput">Origen ID</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="origen" placeholder="">
+                  <input type="text" class="form-control" name="origen" placeholder="" required>
                   <label for="floatingInput">Origen</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="paisVinc" placeholder="">
+                  <input type="text" class="form-control" name="paisVinc" placeholder="" required>
                   <label for="floatingInput">País de origen</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" class="form-control" name="instOrg" placeholder="">
+                  <input type="text" class="form-control" name="instOrg" placeholder="" required>
                   <label for="floatingInput">Institución y organización</label>
                 </div>
             </div>
