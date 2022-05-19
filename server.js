@@ -11,6 +11,7 @@ const exportData5 = require('./controller/convenios'); // CONTROLLER
 const encoder = bodyParser.urlencoded();
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var mysql = require('mysql');
 
 
 
@@ -38,7 +39,22 @@ router.get('/',function(req,res){
 
 router.get('/main',function(req,res){
   if(req.session.username){
-    res.render('main.html',{name:req.session.username});
+    var con = mysql.createConnection({
+    host: "localhost",
+    user: "jorge",
+    password: "qwerty",
+    database: "911db"
+    });
+    con.query('SELECT * FROM movilidad_academica_entrada',function(err,rows)     {
+      if(err){
+       if (error) throw error; 
+       res.render('main.html',{name:req.session.username,data:''});   
+      }else{
+          
+          res.render('main.html',{name:req.session.username,data:rows});
+      }
+      res.end();
+     });
   }else{
     res.redirect("/");
   }
@@ -99,8 +115,6 @@ router.get('/signout',function(req,res){
 //add the router
 app.use('/', router);
 app.post('/', encoder, function(req, res){
-  var mysql = require('mysql');
-
   var con = mysql.createConnection({
     host: "localhost",
     user: "jorge",
@@ -127,8 +141,7 @@ app.post('/', encoder, function(req, res){
 		  } else {
 		    console.log("LOGIN INCORRECTO: "+ results)
 			  res.redirect("/");
-		  }    
-		  res.end();
+		  }
 	  })
 	  app.get("/welcome", function(req, res) {
 		  res.sendFile(__dirname + "/welcome.html");
@@ -331,6 +344,7 @@ app.post('/', encoder, function(req, res){
     });
     console.log(req.body.form);
     res.sendFile(path.join(__dirname+'/main.html'));
+    res.end();
   }
   
   

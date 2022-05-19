@@ -83,6 +83,52 @@
              <h3 align="center">UNIVERSIDAD AUTÓNOMA DE BAJA CALIFORNIA</h3> 
              <h class="fw-bold text-center py-2">Sistema 9/11</h>
             </div>
+            
+            <!--AQUI INICIA TABLA DE REGISTROS SIN VALIDAR POR COORDINADOR JUDITH O QUIEN SEA   --------->
+            <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">PeriodoId</th>
+                <th scope="col">Periodo</th>
+                <th width="col">CampusId</th>
+                <th width="col">Campus</th>
+                <th width="col">UnidadId</th>
+                <th width="col">Unidad</th>
+                <th width="col">VisitanteId</th>
+                <th width="col">Visitante</th>
+                <th width="col">Autor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if(data.length){
+             
+              for(var i = 0; i< data.length; i++) {%>  
+              <tr>
+                <th scope="row"><%= data[i].ID %></th>
+                <td><%= data[i].PERIODO_ID%></td>
+                <td><%= data[i].PERIODO%></td>
+                <td><%= data[i].CAMPUS_ID%></td>
+                <td><%= data[i].CAMPUS_DESC%></td>
+                <td><%= data[i].UNIDAD_ID%></td>
+                <td><%= data[i].UNIDAD%></td>
+                <td><%= data[i].VISITANTE_ID%></td>
+                <td><%= data[i].VISITANTE_NOMBRE%></td>
+                <td><%= data[i].AUTOR%></td>
+                <td>
+                <a class="btn btn-success edit" href="../users/edit/<%=data[i].id%>">Edit</a>                                            
+               </td>
+              </tr>
+              <% }
+                       
+               }else{ %>
+                   <tr>
+                      <td colspan="3">No user</td>
+                   </tr>
+                <% } %>    
+              
+            </tbody>
+            </table>
        </article>
         </div>
     </div>
