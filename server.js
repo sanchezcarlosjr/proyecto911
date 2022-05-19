@@ -39,27 +39,33 @@ router.get('/',function(req,res){
 
 router.get('/main',function(req,res){
   if(req.session.username){
-    var con = mysql.createConnection({
-    host: "localhost",
-    user: "jorge",
-    password: "qwerty",
-    database: "911db"
-    });
-    con.query('SELECT * FROM movilidad_academica_entrada',function(err,rows)     {
-      if(err){
-       if (error) throw error; 
-       res.render('main.html',{name:req.session.username,data:''});   
-      }else{
-          
-          res.render('main.html',{name:req.session.username,data:rows});
-      }
-      res.end();
-     });
+    if(req.session.tipo=="Coordinador"){
+      var con = mysql.createConnection({
+      host: "localhost",
+      user: "jorge",
+      password: "qwerty",
+      database: "911db"
+      });
+      con.query('SELECT * FROM movilidad_academica_entrada order by validar',function(err,rows)     {
+        if(err){
+         throw error; 
+         res.render('main.html',{name:req.session.username,data:''});   
+        }else{
+            res.render('main.html',{name:req.session.username,data:rows});
+        }
+        res.end();
+       });
+    }else{
+      //EL USUARIO NO ES COORDINADOR O ADMIN
+      res.render('main.html',{name:req.session.usename,data:'NoAuth'});
+    }
+
   }else{
     res.redirect("/");
   }
 });
 
+//aqui convertimos la data de la base de datos a excel y la exportamos
 router.get('/excel-movilidad-entrada', exportData);
 router.get('/excel-movilidad-salida', exportData2);
 router.get('/excel-intercambio-entrada', exportData3);
