@@ -118,7 +118,7 @@ app.post('/', encoder, function(req, res){
 	  var username = req.body.username;
 	  var password = req.body.password;
 	  con.query("select * from usuarios where USUARIO = ? and PASSWORD = UPPER(SHA1(UNHEX(SHA1(?))))", [username, password], function(error, results, fields) {
-		  if (results != null) {
+		  if (results  && results.length > 0) {
 		    req.session.tipo=results[0].TIPO;
 		    req.session.username=req.body.username;
 		    console.log("Sesion iniciada: "+req.session.username +"\ntipo: "+req.session.tipo);
