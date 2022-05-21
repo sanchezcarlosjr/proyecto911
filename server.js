@@ -16,7 +16,7 @@ var mysql = require('mysql');
 
 
 //para poder acceder a los recursos staticos como los js o los css o los htmls...
-app.use(express.static(__dirname));
+app.use(express.static(__dirname+"/views"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -31,33 +31,28 @@ app.use(session({secret: "Shh, its a secret!"}));
 
 router.get('/',function(req,res){
   if(req.session.username){
-    res.render('main.html',{name:req.session.username});
+    res.render('views/main.html',{name:req.session.username});
   }else{
-    res.render('index.html');
+    res.render('views/index.html');
   }
 });
 
 router.get('/main',function(req,res){
   if(req.session.username){
     if(req.session.tipo=="Coordinador"){
-      var con = mysql.createConnection({
-      host: "localhost",
-      user: "jorge",
-      password: "qwerty",
-      database: "911db"
-      });
+      var con = require('./config');
       con.query('SELECT * FROM movilidad_academica_entrada order by validar',function(err,rows)     {
         if(err){
          throw error; 
-         res.render('main.html',{name:req.session.username,data:''});   
+         res.render('views/main.html',{name:req.session.username,data:''});   
         }else{
-            res.render('main.html',{name:req.session.username,data:rows});
+            res.render('views/main.html',{name:req.session.username,data:rows});
         }
         res.end();
        });
     }else{
       //EL USUARIO NO ES COORDINADOR O ADMIN
-      res.render('main.html',{name:req.session.usename,data:'NoAuth'});
+      res.render('views/main.html',{name:req.session.usename,data:'NoAuth'});
     }
 
   }else{
@@ -75,7 +70,7 @@ router.get('/excel-convenios', exportData5);
 //formularios
 router.get('/movilidad-entrada',function(req,res){
   if(req.session.username){
-    res.render('movilidad-entrada.html',{name:req.session.username});
+    res.render('views/movilidad-entrada.html',{name:req.session.username});
   }else{
     res.redirect("/");
   }
@@ -83,7 +78,7 @@ router.get('/movilidad-entrada',function(req,res){
 
 router.get('/movilidad-salida',function(req,res){
   if(req.session.username){
-    res.render('movilidad-salida.html',{name:req.session.username});
+    res.render('views/movilidad-salida.html',{name:req.session.username});
   }else{
     res.redirect("/");
   }
@@ -91,7 +86,7 @@ router.get('/movilidad-salida',function(req,res){
 
 router.get('/intercambio-entrada',function(req,res){
   if(req.session.username){
-    res.render('intercambio-entrada.html',{name:req.session.username});
+    res.render('views/intercambio-entrada.html',{name:req.session.username});
   }else{
     res.redirect("/");
   }
@@ -99,7 +94,7 @@ router.get('/intercambio-entrada',function(req,res){
 
 router.get('/intercambio-salida',function(req,res){
   if(req.session.username){
-    res.render('intercambio-salida.html',{name:req.session.username});
+    res.render('views/intercambio-salida.html',{name:req.session.username});
   }else{
     res.redirect("/");
   }
@@ -107,7 +102,7 @@ router.get('/intercambio-salida',function(req,res){
 
 router.get('/convenios',function(req,res){
   if(req.session.username){
-    res.render('convenios.html',{name:req.session.username});
+    res.render('views/convenios.html',{name:req.session.username});
   }else{
     res.redirect("/");
   }
@@ -121,12 +116,7 @@ router.get('/signout',function(req,res){
 //add the router
 app.use('/', router);
 app.post('/', encoder, function(req, res){
-  var con = mysql.createConnection({
-    host: "localhost",
-    user: "jorge",
-    password: "qwerty",
-    database: "911db"
-  });
+  var con = require('./config');
 
   if(req.body.form == "login"){
   //DIEGO para agregar contraseñas la funcion password no esta soportada en mysql 8
@@ -148,9 +138,6 @@ app.post('/', encoder, function(req, res){
 		    console.log("LOGIN INCORRECTO: "+ results)
 			  res.redirect("/");
 		  }
-	  })
-	  app.get("/welcome", function(req, res) {
-		  res.sendFile(__dirname + "/welcome.html");
 	  })
 	  /* falta probar y probablemente arreglar el query */
   }
@@ -201,7 +188,7 @@ app.post('/', encoder, function(req, res){
       });
     });
     console.log(req.body.periodo);
-    res.sendFile(path.join(__dirname+'/main.html'));
+    res.redirect('/main');
   }else if(req.body.form == "movilidad-salida"){
     con.connect(function(err) {
       if (err) throw err;
@@ -245,7 +232,7 @@ app.post('/', encoder, function(req, res){
       });
     });
     console.log(req.body.form);
-    res.sendFile(path.join(__dirname+'/main.html'));
+    res.redirect('/main');
   }else if(req.body.form == "convenios"){
     con.connect(function(err) {
       if (err) throw err;
@@ -267,7 +254,7 @@ app.post('/', encoder, function(req, res){
       });
     });
     console.log(req.body.form);
-    res.sendFile(path.join(__dirname+'/main.html'));
+    res.redirect('/main');
   }else if(req.body.form == "intercambio-entrada"){
     con.connect(function(err) {
       if (err) throw err;
@@ -308,7 +295,7 @@ app.post('/', encoder, function(req, res){
       });
     });
     console.log(req.body.form);
-    res.sendFile(path.join(__dirname+'/main.html'));
+    res.redirect('/main');
   }else if(req.body.form == "intercambio-salida"){
     con.connect(function(err) {
       if (err) throw err;
@@ -349,8 +336,7 @@ app.post('/', encoder, function(req, res){
       });
     });
     console.log(req.body.form);
-    res.sendFile(path.join(__dirname+'/main.html'));
-    res.end();
+    res.redirect('/main');
   }
   
   
