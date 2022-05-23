@@ -44,11 +44,38 @@ router.get('/main',function(req,res){
       con.query('SELECT * FROM movilidad_academica_entrada order by validar',function(err,rows)     {
         if(err){
          throw error; 
-         res.render('views/main.html',{name:req.session.username,data:''});   
+         res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});   
         }else{
-            res.render('views/main.html',{name:req.session.username,data:rows});
+            con.query('SELECT * FROM movilidad_academica_salida order by validar',function(err,rows2)     {
+              if(err){
+               throw error; 
+               res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
+              }else{
+                con.query('SELECT * FROM intercambio_estudiantil_entrada order by validar',function(err,rows3)     {
+                  if(err){
+                   throw error; 
+                   res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
+                  }else{
+                    con.query('SELECT * FROM intercambio_estudiantil_salida order by validar',function(err,rows4)     {
+                      if(err){
+                       throw error; 
+                       res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
+                      }else{
+                        con.query('SELECT * FROM convenios order by validar',function(err,rows5)     {
+                          if(err){
+                           throw error; 
+                           res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
+                          }else{
+                              res.render('views/main.html',{name:req.session.username,data:rows,data2:rows2,data3:rows3,data4:rows4,data5:rows5});
+                          }
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+            });
         }
-        res.end();
        });
     }else{
       //EL USUARIO NO ES COORDINADOR O ADMIN

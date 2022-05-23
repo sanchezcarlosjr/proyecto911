@@ -89,7 +89,7 @@
             <br>
             <h4>Registros añadidos recientemente</h4>
             <br>
-            <h5>Movilidad Academica Entrada</h5>
+            <h6>Movilidad Academica Entrada</h6>
             <table class="table">
             <thead>
               <tr>
@@ -142,6 +142,219 @@
               
             </tbody>
             </table>
+            <h6>Movilidad Academica Salida</h6>
+            <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Validado</th>
+                <th scope="col">Periodo</th>
+                <th width="col">CampusId</th>
+                <th width="col">Campus</th>
+                <th width="col">UnidadId</th>
+                <th width="col">Unidad</th>
+                <th width="col">VisitanteId</th>
+                <th width="col">Visitante</th>
+                <th width="col">Autor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% 
+              var tmp;
+              if(data2.length){
+             
+              for(var i = 0; i< data2.length; i++) {
+              
+              if(data2[i].validar==0){
+                tmp="No";
+              }else
+                tmp="Si";
+              %>  
+              <tr>
+                <th scope="row"><%= data2[i].ID %></th>
+                <td><%= tmp%></td>
+                <td><%= data2[i].PERIODO%></td>
+                <td><%= data2[i].CAMPUS_ID%></td>
+                <td><%= data2[i].CAMPUS_DESC%></td>
+                <td><%= data2[i].UNIDAD_ID%></td>
+                <td><%= data2[i].UNIDAD%></td>
+                <td><%= data2[i].ESTUDIANTE_ID%></td>
+                <td><%= data2[i].ESTUDIANTE_NOMBRE%></td>
+                <td><%= data2[i].AUTOR%></td>
+                <td>
+                <a class="btn btn-success edit" href="/movilidad-entrada?id=<%=data2[i].ID%>">Edit</a>                                            
+               </td>
+              </tr>
+              <% }
+                       
+               }else{ %>
+                   <tr>
+                      <td colspan="3">Vacio</td>
+                   </tr>
+                <% } %>    
+              
+            </tbody>
+            </table>
+            <h6>Intercambio Estudiantil de Entrada</h6>
+            <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Validado</th>
+                <th scope="col">Periodo</th>
+                <th width="col">CampusId</th>
+                <th width="col">Campus</th>
+                <th width="col">UnidadId</th>
+                <th width="col">Unidad</th>
+                <th width="col">VisitanteId</th>
+                <th width="col">Visitante</th>
+                <th width="col">Autor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% 
+              var tmp;
+              if(data3.length){
+             
+              for(var i = 0; i< data3.length; i++) {
+              
+              if(data3[i].validar==0){
+                tmp="No";
+              }else
+                tmp="Si";
+              %>  
+              <tr>
+                <th scope="row"><%= data3[i].ID %></th>
+                <td><%= tmp%></td>
+                <td><%= data3[i].PERIODO%></td>
+                <td><%= data3[i].CAMPUS_ID%></td>
+                <td><%= data3[i].CAMPUS_DESC%></td>
+                <td><%= data3[i].UNIDAD_ID%></td>
+                <td><%= data3[i].UNIDAD%></td>
+                <td><%= data3[i].ESTUDIANTE_ID%></td>
+                <td><%= data3[i].ESTUDIANTE_NOMBRE%></td>
+                <td><%= data3[i].AUTOR%></td>
+                <td>
+                <a class="btn btn-success edit" href="/movilidad-entrada?id=<%=data3[i].ID%>">Edit</a>                                            
+               </td>
+              </tr>
+              <% }
+                       
+               }else{ %>
+                   <tr>
+                      <td colspan="3">Vacio</td>
+                   </tr>
+                <% } %>    
+              
+            </tbody>
+            </table>
+            <h6>Intercambio Estudiantil Salida</h6>
+            <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Validado</th>
+                <th scope="col">Periodo</th>
+                <th width="col">CampusId</th>
+                <th width="col">Campus</th>
+                <th width="col">UnidadId</th>
+                <th width="col">Unidad</th>
+                <th width="col">VisitanteId</th>
+                <th width="col">Visitante</th>
+                <th width="col">Autor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% 
+              var tmp;
+              if(data4.length){
+             
+              for(var i = 0; i< data4.length; i++) {
+              
+              if(data4[i].validar==0){
+                tmp="No";
+              }else
+                tmp="Si";
+              %>  
+              <tr>
+                <th scope="row"><%= data4[i].ID %></th>
+                <td><%= tmp%></td>
+                <td><%= data4[i].PERIODO%></td>
+                <td><%= data4[i].CAMPUS_ID%></td>
+                <td><%= data4[i].CAMPUS_DESC%></td>
+                <td><%= data4[i].UNIDAD_ID%></td>
+                <td><%= data4[i].UNIDAD%></td>
+                <td><%= data4[i].ESTUDIANTE_ID%></td>
+                <td><%= data4[i].ESTUDIANTE_NOMBRE%></td>
+                <td><%= data4[i].AUTOR%></td>
+                <td>
+                <a class="btn btn-success edit" href="/movilidad-entrada?id=<%=data4[i].ID%>">Edit</a>                                            
+               </td>
+              </tr>
+              <% }
+                       
+               }else{ %>
+                   <tr>
+                      <td colspan="3">Vacio</td>
+                   </tr>
+                <% } %>    
+              
+            </tbody>
+            </table>
+            <h6>Convenios</h6>
+            <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Validado</th>
+                <th scope="col">Periodo</th>
+                <th width="col">ConvenioId</th>
+                <th width="col">Convenio</th>
+                <th width="col">Fecha</th>
+                <th width="col">Sector</th>
+                <th width="col">OrigenId</th>
+                <th width="col">Origen</th>
+                <th width="col">Autor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% 
+              var tmp;
+              if(data5.length){
+             
+              for(var i = 0; i< data5.length; i++) {
+              
+              if(data5[i].validar==0){
+                tmp="No";
+              }else
+                tmp="Si";
+              %>  
+              <tr>
+                <th scope="row"><%= data5[i].ID %></th>
+                <td><%= tmp%></td>
+                <td><%= data5[i].PERIODO%></td>
+                <td><%= data5[i].CONVENIO_VINCID%></td>
+                <td><%= data5[i].CONVENIO_VINC%></td>
+                <td><%= data5[i].FECHA%></td>
+                <td><%= data5[i].SECTOR%></td>
+                <td><%= data5[i].ORIGEN_ID%></td>
+                <td><%= data5[i].ORIGEN%></td>
+                <td><%= data5[i].AUTOR%></td>
+                <td>
+                <a class="btn btn-success edit" href="/movilidad-entrada?id=<%=data5[i].ID%>">Edit</a>                                            
+               </td>
+              </tr>
+              <% }
+                       
+               }else{ %>
+                   <tr>
+                      <td colspan="3">Vacio</td>
+                   </tr>
+                <% } %>    
+              
+            </tbody>
+            </table>
+            <br>
             <%}%>
        </article>
         </div>
