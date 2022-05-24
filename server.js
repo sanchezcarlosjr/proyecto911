@@ -161,6 +161,29 @@ app.post('/main',encoder, function(req, res) {
   }
 });
 
+app.post('/convenios',encoder,function(req,res){
+  var con = require('./config');
+  if(req.body.form=="guardar"){
+    var sql = "UPDATE convenios SET PERIODO_ID=?,PERIODO=?,CONVENIO_VINCID=?,CONVENIO_VINC=?,FECHA=?,SECTOR_ID=?,SECTOR=?"
+    +",ORIGEN_ID=?,ORIGEN=?,PAIS_VINC=?,INST_ORG=?,COOP=?,INVE=?,INTER=?,MOVI=?,validar=? WHERE ID="+req.body.id;
+    
+      con.query(sql, [parseInt(req.body.periodoId),req.body.periodo,parseInt(req.body.convenioVincId),
+        req.body.convenioVinc,req.body.fecha,parseInt(req.body.sectorId),
+        req.body.sector,parseInt(req.body.origenId),req.body.origen,
+        req.body.paisVinc,req.body.instOrg,parseInt(req.body.coop),
+        parseInt(req.body.inve),parseInt(req.body.inter),parseInt(req.body.movi),1,parseInt(req.body.id)], function (err, result) {
+        if (err) throw err;
+        console.log("Number of records updated: " + result.affectedRows);
+      });
+  }else if(req.body.form=="validar"){
+    con.query("update convenios set validar=1 where ID="+req.body.id,function(err,row){
+      if(err) throw err;
+      console.log("Number of record validated: " + row.affectedRows);
+    });
+  }
+  res.redirect('/main');
+});
+
 //formularios inputs
 app.post('/', encoder, function(req, res){
   var con = require('./config');
