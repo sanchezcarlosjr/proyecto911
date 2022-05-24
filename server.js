@@ -129,7 +129,7 @@ router.get('/intercambio-salida',function(req,res){
 
 router.get('/convenios',function(req,res){
   if(req.session.username){
-    res.render('views/convenios.html',{name:req.session.username});
+    res.render('views/convenios.html',{name:req.session.username,data:''});
   }else{
     res.redirect("/");
   }
@@ -142,6 +142,26 @@ router.get('/signout',function(req,res){
 
 //add the router
 app.use('/', router);
+
+//main post methods here, we get main request, specific when coordinador wants to edit/validate some row.
+
+app.post('/main',encoder, function(req, res) {
+  var table = req.body.table;
+  var ids = req.body.id;
+  //console.log("POST success");
+  if(table== "convenios"){
+    var con = require('./config');
+    con.query('SELECT * FROM convenios where ID='+ids,function(err,row)     {
+      if(err){
+        throw error;
+      }else{
+        res.render('views/convenios.html',{name:req.session.username,data:row});
+      }
+    });
+  }
+});
+
+//formularios inputs
 app.post('/', encoder, function(req, res){
   var con = require('./config');
 

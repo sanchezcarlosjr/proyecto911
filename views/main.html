@@ -288,7 +288,7 @@
                 <td><%= data4[i].ESTUDIANTE_NOMBRE%></td>
                 <td><%= data4[i].AUTOR%></td>
                 <td>
-                <a class="btn btn-success edit" href="/movilidad-entrada?id=<%=data4[i].ID%>">Edit</a>                                            
+                <a class="btn btn-success edit" href="/?id=<%=data4[i].ID%>">Edit</a>                                            
                </td>
               </tr>
               <% }
@@ -341,7 +341,11 @@
                 <td><%= data5[i].ORIGEN%></td>
                 <td><%= data5[i].AUTOR%></td>
                 <td>
-                <a class="btn btn-success edit" href="/movilidad-entrada?id=<%=data5[i].ID%>">Edit</a>                                            
+                <form action="/main" method="POST">
+                <input type="hidden" name="table" value="convenios" >
+                <input type="hidden" name="id" value="<%=data5[i].ID%>" >
+                <button type="submit" class="btn btn-success edit">Edit</button>
+                </form>
                </td>
               </tr>
               <% }
