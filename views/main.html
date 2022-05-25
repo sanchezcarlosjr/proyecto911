@@ -129,7 +129,11 @@
                 <td><%= data[i].VISITANTE_NOMBRE%></td>
                 <td><%= data[i].AUTOR%></td>
                 <td>
-                <a class="btn btn-success edit" href="/movilidad-entrada?id=<%=data[i].ID%>">Edit</a>                                            
+                <form action="/main" method="POST">
+                <input type="hidden" name="table" value="movilidad-entrada" >
+                <input type="hidden" name="id" value="<%=data[i].ID%>" >
+                <button type="submit" class="btn btn-success edit">Validar</button>
+                </form>                             
                </td>
               </tr>
               <% }
@@ -153,8 +157,8 @@
                 <th width="col">Campus</th>
                 <th width="col">UnidadId</th>
                 <th width="col">Unidad</th>
-                <th width="col">VisitanteId</th>
-                <th width="col">Visitante</th>
+                <th width="col">EmpleadoId</th>
+                <th width="col">Empleado</th>
                 <th width="col">Autor</th>
               </tr>
             </thead>
@@ -178,11 +182,15 @@
                 <td><%= data2[i].CAMPUS_DESC%></td>
                 <td><%= data2[i].UNIDAD_ID%></td>
                 <td><%= data2[i].UNIDAD%></td>
-                <td><%= data2[i].ESTUDIANTE_ID%></td>
-                <td><%= data2[i].ESTUDIANTE_NOMBRE%></td>
+                <td><%= data2[i].EMPLEADO_ID%></td>
+                <td><%= data2[i].EMPLEADO_NOMBRE%></td>
                 <td><%= data2[i].AUTOR%></td>
                 <td>
-                <a class="btn btn-success edit" href="/movilidad-entrada?id=<%=data2[i].ID%>">Edit</a>                                            
+                <form action="/main" method="POST">
+                <input type="hidden" name="table" value="movilidad-salida" >
+                <input type="hidden" name="id" value="<%=data2[i].ID%>" >
+                <button type="submit" class="btn btn-success edit">Validar</button>
+                </form>                                            
                </td>
               </tr>
               <% }
@@ -235,7 +243,11 @@
                 <td><%= data3[i].ESTUDIANTE_NOMBRE%></td>
                 <td><%= data3[i].AUTOR%></td>
                 <td>
-                <a class="btn btn-success edit" href="/movilidad-entrada?id=<%=data3[i].ID%>">Edit</a>                                            
+                <form action="/main" method="POST">
+                <input type="hidden" name="table" value="intercambio-entrada" >
+                <input type="hidden" name="id" value="<%=data3[i].ID%>" >
+                <button type="submit" class="btn btn-success edit">Validar</button>
+                </form>                                            
                </td>
               </tr>
               <% }
@@ -288,7 +300,11 @@
                 <td><%= data4[i].ESTUDIANTE_NOMBRE%></td>
                 <td><%= data4[i].AUTOR%></td>
                 <td>
-                <a class="btn btn-success edit" href="/?id=<%=data4[i].ID%>">Edit</a>                                            
+                <form action="/main" method="POST">
+                <input type="hidden" name="table" value="intercambio-salida" >
+                <input type="hidden" name="id" value="<%=data4[i].ID%>" >
+                <button type="submit" class="btn btn-success edit">Validar</button>
+                </form>                                            
                </td>
               </tr>
               <% }
@@ -344,7 +360,7 @@
                 <form action="/main" method="POST">
                 <input type="hidden" name="table" value="convenios" >
                 <input type="hidden" name="id" value="<%=data5[i].ID%>" >
-                <button type="submit" class="btn btn-success edit">Edit</button>
+                <button type="submit" class="btn btn-success edit">Validar</button>
                 </form>
                </td>
               </tr>

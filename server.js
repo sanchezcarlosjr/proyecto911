@@ -97,7 +97,7 @@ router.get('/excel-convenios', exportData5);
 //formularios
 router.get('/movilidad-entrada',function(req,res){
   if(req.session.username){
-    res.render('views/movilidad-entrada.html',{name:req.session.username});
+    res.render('views/movilidad-entrada.html',{name:req.session.username,data:''});
   }else{
     res.redirect("/");
   }
@@ -105,7 +105,7 @@ router.get('/movilidad-entrada',function(req,res){
 
 router.get('/movilidad-salida',function(req,res){
   if(req.session.username){
-    res.render('views/movilidad-salida.html',{name:req.session.username});
+    res.render('views/movilidad-salida.html',{name:req.session.username,data:''});
   }else{
     res.redirect("/");
   }
@@ -113,7 +113,7 @@ router.get('/movilidad-salida',function(req,res){
 
 router.get('/intercambio-entrada',function(req,res){
   if(req.session.username){
-    res.render('views/intercambio-entrada.html',{name:req.session.username});
+    res.render('views/intercambio-entrada.html',{name:req.session.username,data:''});
   }else{
     res.redirect("/");
   }
@@ -121,7 +121,7 @@ router.get('/intercambio-entrada',function(req,res){
 
 router.get('/intercambio-salida',function(req,res){
   if(req.session.username){
-    res.render('views/intercambio-salida.html',{name:req.session.username});
+    res.render('views/intercambio-salida.html',{name:req.session.username,data:''});
   }else{
     res.redirect("/");
   }
@@ -156,6 +156,42 @@ app.post('/main',encoder, function(req, res) {
         throw error;
       }else{
         res.render('views/convenios.html',{name:req.session.username,data:row});
+      }
+    });
+  }else if(table== "movilidad-entrada"){
+    var con = require('./config');
+    con.query('SELECT * FROM movilidad_academica_entrada where ID='+ids,function(err,row)     {
+      if(err){
+        throw error;
+      }else{
+        res.render('views/movilidad-entrada.html',{name:req.session.username,data:row});
+      }
+    });
+  }else if(table== "movilidad-salida"){
+    var con = require('./config');
+    con.query('SELECT * FROM movilidad_academica_salida where ID='+ids,function(err,row)     {
+      if(err){
+        throw error;
+      }else{
+        res.render('views/movilidad-salida.html',{name:req.session.username,data:row});
+      }
+    });
+  }else if(table== "intercambio-entrada"){
+    var con = require('./config');
+    con.query('SELECT * FROM intercambio_estudiantil_entrada where ID='+ids,function(err,row)     {
+      if(err){
+        throw error;
+      }else{
+        res.render('views/intercambio-entrada.html',{name:req.session.username,data:row});
+      }
+    });
+  }else if(table== "intercambio-salida"){
+    var con = require('./config');
+    con.query('SELECT * FROM intercambio_estudiantil_salida where ID='+ids,function(err,row)     {
+      if(err){
+        throw error;
+      }else{
+        res.render('views/intercambio-salida.html',{name:req.session.username,data:row});
       }
     });
   }
@@ -260,8 +296,6 @@ app.post('/', encoder, function(req, res){
     console.log(req.body.periodo);
     res.redirect('/main');
   }else if(req.body.form == "movilidad-salida"){
-    con.connect(function(err) {
-      if (err) throw err;
       console.log("Connected!");
       var sql = "INSERT INTO movilidad_academica_salida (`PERIODO_ID`,`PERIODO`,`CAMPUS_ID`,`CAMPUS_DESC`,`UNIDAD_ID`,`UNIDAD`,"
       +"`EMPLEADO_ID`,`EMPLEADO_NOMBRE`,`EMPLEADO_APELLIDO1`,`EMPLEADO_APELLIDO2`,`SEXO_ID`,`SEXO`,"
@@ -300,7 +334,6 @@ app.post('/', encoder, function(req, res){
         if (err) throw err;
         console.log("Number of records inserted: " + result.affectedRows);
       });
-    });
     console.log(req.body.form);
     res.redirect('/main');
   }else if(req.body.form == "convenios"){
