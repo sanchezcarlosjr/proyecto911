@@ -80,6 +80,9 @@
         <!-- aqui ira el contenido que se muestre segun la opcion elegida----------------------->
         <!--justificar un row de contenido en el centro-->
         <h2 align="center">Intercambio Estudiantil de Salida</h2>
+        
+        <!--Aqui inicia conficional cuando vayamos a editar algun registro, si la data no existe es para ingresar-->
+        <%if (data == '') {%>
         <form style="margin-left:20px;" action="/" method="POST">
             <div class="row">
                 <div class="form-floating col-6">
@@ -250,6 +253,240 @@
                 </div>
             </div>
         </form>
+        <!--ELSE ---------ELSE ----------ELSE ---------ELSE --------ELSE   ----->
+        <%}else{%>
+        <form style="margin-left:20px;" action="/" method="POST">
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" name="periodoId" value="<%=data[0].PERIODO_ID%>" required>
+                  <label for="floatingInput">Periodo ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="periodo" value="<%=data[0].PERIODO%>" required>
+                  <label for="floatingInput">Periodo</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" name="campusId" value="<%=data[0].CAMPUS_ID%>" required>
+                  <label for="floatingInput">Campus ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="campus" value="<%=data[0].CAMPUS_DESC%>" required>
+                  <label for="floatingInput">Campus</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" name="unidadId" value="<%=data[0].UNIDAD_ID%>" required>
+                  <label for="floatingInput">Unidad ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="unidad" value="<%=data[0].UNIDAD%>" required>
+                  <label for="floatingInput">Unidad</label>
+                </div>
+            </div>
+            <div class="row">
+                <%if(data[0].NIVEL_ID== 1){
+                  var d1="selected";
+                  var d2="";
+                  var d3="";
+                  var d4="";
+                }else if(data[0].NIVEL_ID== 2){
+                  var d1="";
+                  var d2="selected";
+                  var d3="";
+                  var d4="";
+                }else if(data[0].NIVEL_ID== 3){
+                  var d1="";
+                  var d2="";
+                  var d3="selected";
+                  var d4="";
+                }else{
+                  var d1="";
+                  var d2="";
+                  var d3="";
+                  var d4="selected";
+                }%>
+                <div class="form-floating col-12">
+                  <select class="form-select" name="nivelId" aria-label="Floating label select example">
+                    <option <%=d1%> value="1">Licenciatura</option>
+                    <option <%=d2%> value="2">Especialidad</option>
+                    <option <%=d3%> value="3">Maestria</option>
+                    <option <%=d4%> value="4">Doctorado</option>
+                  </select>
+                  <label for="nivelId">Nivel de Estudios</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="programaId" value="<%=data[0].PROGRAMA_ID%>" required>
+                  <label for="floatingInput">Programa ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="programa" value="<%=data[0].PROGRAMA_DESC%>" required>
+                  <label for="floatingInput">Programa</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="areaId" value="<%=data[0].AREA_ID%>" required>
+                  <label for="floatingInput">Area ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="area" value="<%=data[0].AREA%>" required>
+                  <label for="floatingInput">Area</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" name="estudianteId" value="<%=data[0].ESTUDIANTE_ID%>" required>
+                  <label for="floatingInput">Estudiante ID</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="estudiante_nombre" value="<%=data[0].ESTUDIANTE_NOMBRE%>" required>
+                  <label for="floatingInput">Nombre Estudiante</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="apellido1" value="<%=data[0].ESTUDIANTE_APELLIDO1%>" required>
+                  <label for="floatingInput">Apellido Paterno</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="apellido2" value="<%=data[0].ESTUDIANTE_APELLIDO2%>" required>
+                  <label for="floatingInput">Apellido Materno</label>
+                </div>
+            </div>
+            <div class="row">
+                <%if(data[0].SEXO_ID== 1){
+                  var d1="selected";
+                  var d2="";
+                }else{
+                  var d1="";
+                  var d2="selected";
+                }%>
+                <div class="form-floating col-6">
+                  <select class="form-select" name="sexoId" aria-label="Floating label select example">
+                    <option <%=d1%> value="1">Femenino</option>
+                    <option <%=d2%> value="2">Masculino</option>
+                  </select>
+                  <label for="sexoId">Sexo</label>
+                </div>
+                <%if(data[0].DISCAPACIDAD== 1){
+                  var d1="selected";
+                  var d2="";
+                }else{
+                  var d1="";
+                  var d2="selected";
+                }%>
+                <div class="form-floating col-6">
+                  <select class="form-select" name="discapacidadId" aria-label="Floating label select example">
+                    <option <%=d1%> value="1">Si</option>
+                    <option <%=d2%> value="2">No</option>
+                  </select>
+                  <label for="discapacidadId">Discapacidad</label>
+                </div>
+            </div>
+            <div class="row">
+                <%if(data[0].ORIGEN_INDIGENA== 1){
+                  var d1="selected";
+                  var d2="";
+                }else{
+                  var d1="";
+                  var d2="selected";
+                }%>
+                <div class="form-floating col-sm">
+                  <select class="form-select" name="origenId" aria-label="Floating label select example">
+                    <option <%=d1%> value="1">Si</option>
+                    <option <%=d2%> value="2">No</option>
+                  </select>
+                  <label for="origenId">Origen Indigena</label>
+                </div>
+                <%if(data[0].HABLANTE_INDIGENA== 1){
+                  var d1="selected";
+                  var d2="";
+                }else{
+                  var d1="";
+                  var d2="selected";
+                }%>
+                <div class="form-floating col-6">
+                  <select class="form-select" name="hablanteId" aria-label="Floating label select example">
+                    <option <%=d1%> value="1">Si</option>
+                    <option <%=d2%> value="2">No</option>
+                  </select>
+                  <label for="hablanteId">Hablante indigena</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="ue" value="<%=data[0].UR%>" required>
+                  <label for="floatingInput">Unidad Emisora</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="uePais" value="<%=data[0].UR_PAIS%>" required>
+                  <label for="floatingInput">Pais de la Unidad Emisora</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="ueEntidad" value="<%=data[0].UR_ENTIDAD%>" required>
+                  <label for="floatingInput">Entidad de la Unidad Emisora</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="ueIdioma" value="<%=data[0].UR_IDIOMA%>" required>
+                  <label for="floatingInput">Idioma de la Unidad Emisora</label>
+                </div>
+            </div>
+            <div class="row">
+                <%if(data[0].FINAN_ID== 1){
+                  var d1="selected";
+                  var d2="";
+                }else{
+                  var d1="";
+                  var d2="selected";
+                }%>
+                <div class="form-floating col-sm">
+                  <select class="form-select" name="finanId" aria-label="Floating label select example">
+                    <option selected>Selecciona una opcion</option>
+                    <option value="1">Si</option>
+                    <option value="2">No</option>
+                  </select>
+                  <label for="origenId">¿Recibió financiamiento?</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" name="finan_val" value="<%=data[0].FINAN_VAL%>" required>
+                  <label for="floatingInput">Monto recibido</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" name="fechaInicio" value="<%=data[0].DATE_START%>" required>
+                  <label for="floatingInput">Fecha de inicio</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" name="fechaFinal" value="<%=data[0].DATE_END%>" required>
+                  <label for="floatingInput">Fecha de terminación</label>
+                </div>
+            </div>
+            <div class="row justify-content-end" style="margin-top:50px">
+                <input type="hidden" name="id" value="<%=data[0].ID%>" >
+                <input type="hidden" name="form" value="guardar">
+                <div class="col-sm-4">
+                    <button type="submit" class="btn btn-primary mb-3">Guardar y Validar</button>
+                </div>
+            </div>
+        </form>
+        <div class="row justify-content-end" style="margin-top:50px">
+            <div class="col-sm-4">
+            <form action="/convenios" method="POST">
+            <input type="hidden" name="form" value="validar">
+            <input type="hidden" name="id" value="<%=data[0].ID%>" >
+            <button type="submit" class="btn btn-primary mb-3">Validar</button>
+            </form>
+            </div>
+        </div>
+        <%}%>
         </div>
     </div>
   </div>
