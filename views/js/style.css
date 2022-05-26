@@ -52,7 +52,7 @@
 #loginBtn:hover,.form button:active,.form button:focus {
 	background: #819F6C;
 }
-#helpBtn:hover,.form button:active,.form button:focus {
+#helpBtn:hover, button:active {
 	background: #CEB978;
 }
 body {

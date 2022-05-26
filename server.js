@@ -138,6 +138,9 @@ router.get('/signout',function(req,res){
   req.session.destroy();
   res.redirect('/');
 });
+router.get('/ayuda',function(req,res){
+  res.render('views/ayuda.html');
+});
 
 
 //add the router
