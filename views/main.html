@@ -90,7 +90,7 @@
             <h4>Registros añadidos recientemente</h4>
             <br>
             <h6>Movilidad Academica Entrada</h6>
-            <table class="table">
+            <table class="table-sm">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -109,8 +109,10 @@
               <% 
               var tmp;
               if(data.length){
-             
-              for(var i = 0; i< data.length; i++) {
+              var len=10;
+              if(data.length <10)
+                len=data.length;
+              for(var i = 0; i < len; i++) {
               
               if(data[i].validar==0){
                 tmp="No";
@@ -145,9 +147,9 @@
                 <% } %>    
               
             </tbody>
-            </table>
+            </table><br><br>
             <h6>Movilidad Academica Salida</h6>
-            <table class="table">
+            <table class="table-sm">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -166,8 +168,10 @@
               <% 
               var tmp;
               if(data2.length){
-             
-              for(var i = 0; i< data2.length; i++) {
+              var len=10;
+              if(data2.length <10)
+                len=data2.length;
+              for(var i = 0; i < len; i++) {
               
               if(data2[i].validar==0){
                 tmp="No";
@@ -202,9 +206,9 @@
                 <% } %>    
               
             </tbody>
-            </table>
+            </table><br><br>
             <h6>Intercambio Estudiantil de Entrada</h6>
-            <table class="table">
+            <table class="table-sm">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -223,8 +227,10 @@
               <% 
               var tmp;
               if(data3.length){
-             
-              for(var i = 0; i< data3.length; i++) {
+              var len=10;
+              if(data3.length <10)
+                len=data3.length;
+              for(var i = 0; i < len; i++) {
               
               if(data3[i].validar==0){
                 tmp="No";
@@ -259,9 +265,9 @@
                 <% } %>    
               
             </tbody>
-            </table>
+            </table><br><br>
             <h6>Intercambio Estudiantil Salida</h6>
-            <table class="table">
+            <table class="table-sm">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -280,8 +286,10 @@
               <% 
               var tmp;
               if(data4.length){
-             
-              for(var i = 0; i< data4.length; i++) {
+              var len=10;
+              if(data4.length <10)
+                len=data4.length;
+              for(var i = 0; i < len; i++) {
               
               if(data4[i].validar==0){
                 tmp="No";
@@ -316,9 +324,9 @@
                 <% } %>    
               
             </tbody>
-            </table>
+            </table><br><br>
             <h6>Convenios</h6>
-            <table class="table">
+            <table class="table-sm">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -337,8 +345,10 @@
               <% 
               var tmp;
               if(data5.length){
-             
-              for(var i = 0; i< data5.length; i++) {
+              var len=10;
+              if(data5.length <10)
+                len=data5.length;
+              for(var i = 0; i < len; i++) {
               
               if(data5[i].validar==0){
                 tmp="No";
@@ -373,7 +383,7 @@
                 <% } %>    
               
             </tbody>
-            </table>
+            </table><br>
             <br>
             <%}%>
        </article>
