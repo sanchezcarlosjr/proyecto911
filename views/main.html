@@ -45,9 +45,11 @@
               <li><a class="dropdown-item" href="/intercambio-salida">Salida</a></li>
             </ul>
           </li>
+          <%if(tipo=='Coordinador'){%>
           <li class="nav-item">
             <a class="nav-link" href="/convenios">Convenios</a>
           </li>
+          <%}%>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Reportes</a>
             <ul class="dropdown-menu">
@@ -58,10 +60,17 @@
               <li><a class="dropdown-item" href="/excel-intercambio-entrada">Intercambio de entrada</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="/excel-intercambio-salida">Intercambio de salida</a></li>
+              <%if(tipo=='Coordinador'){%>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="/excel-convenios">Convenios</a></li>
+              <%}%>
             </ul>
           </li>
+          <%if(tipo=='Coordinador'){%>
+          <li class="nav-item">
+            <a class="nav-link" href="/usuarios">Administrar Usuarios</a>
+          </li>
+          <%}%>
           <li class="nav-item" style="margin-top:50px">
             <a class="nav-link" href="#">Ayuda</a>
           </li>
@@ -134,7 +143,7 @@
                 <form action="/main" method="POST">
                 <input type="hidden" name="table" value="movilidad-entrada" >
                 <input type="hidden" name="id" value="<%=data[i].ID%>" >
-                <button type="submit" class="btn btn-success edit">Validar</button>
+                <button type="submit" class="btn btn-success edit">Revisar</button>
                 </form>                             
                </td>
               </tr>
@@ -193,7 +202,7 @@
                 <form action="/main" method="POST">
                 <input type="hidden" name="table" value="movilidad-salida" >
                 <input type="hidden" name="id" value="<%=data2[i].ID%>" >
-                <button type="submit" class="btn btn-success edit">Validar</button>
+                <button type="submit" class="btn btn-success edit">Revisar</button>
                 </form>                                            
                </td>
               </tr>
@@ -252,7 +261,7 @@
                 <form action="/main" method="POST">
                 <input type="hidden" name="table" value="intercambio-entrada" >
                 <input type="hidden" name="id" value="<%=data3[i].ID%>" >
-                <button type="submit" class="btn btn-success edit">Validar</button>
+                <button type="submit" class="btn btn-success edit">Revisar</button>
                 </form>                                            
                </td>
               </tr>
@@ -311,7 +320,7 @@
                 <form action="/main" method="POST">
                 <input type="hidden" name="table" value="intercambio-salida" >
                 <input type="hidden" name="id" value="<%=data4[i].ID%>" >
-                <button type="submit" class="btn btn-success edit">Validar</button>
+                <button type="submit" class="btn btn-success edit">Revisar</button>
                 </form>                                            
                </td>
               </tr>
@@ -325,6 +334,7 @@
               
             </tbody>
             </table><br><br>
+            <%if(tipo == 'Coordinador'){%>
             <h6>Convenios</h6>
             <table class="table-sm">
             <thead>
@@ -370,7 +380,7 @@
                 <form action="/main" method="POST">
                 <input type="hidden" name="table" value="convenios" >
                 <input type="hidden" name="id" value="<%=data5[i].ID%>" >
-                <button type="submit" class="btn btn-success edit">Validar</button>
+                <button type="submit" class="btn btn-success edit">Revisar</button>
                 </form>
                </td>
               </tr>
@@ -384,6 +394,7 @@
               
             </tbody>
             </table><br>
+            <%}%>
             <br>
             <%}%>
        </article>

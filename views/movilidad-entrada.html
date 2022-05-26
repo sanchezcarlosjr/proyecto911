@@ -47,9 +47,6 @@
               <li><a class="dropdown-item" href="/intercambio-salida">Salida</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/convenios">Convenios</a>
-          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Reportes</a>
             <ul class="dropdown-menu">
@@ -60,8 +57,6 @@
               <li><a class="dropdown-item" href="/excel-intercambio-entrada">Intercambio de entrada</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="/excel-intercambio-salida">Intercambio de salida</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/excel-convenios">Convenios</a></li>
             </ul>
           </li>
           <li class="nav-item" style="margin-top:50px">
@@ -416,15 +411,6 @@
                 </div>
             </div>
         </form>
-        <div class="row justify-content-end" style="margin-top:50px">
-            <div class="col-sm-4">
-            <form action="/movilidad-entrada" method="POST">
-            <input type="hidden" name="form" value="validar">
-            <input type="hidden" name="id" value="<%=data[0].ID%>" >
-            <button type="submit" class="btn btn-primary mb-3">Validar</button>
-            </form>
-            </div>
-        </div>
         <%}%>
         </div>
     </div>

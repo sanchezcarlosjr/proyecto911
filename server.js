@@ -43,30 +43,30 @@ router.get('/main',function(req,res){
       var con = require('./config');
       con.query('SELECT * FROM movilidad_academica_entrada order by validar',function(err,rows)     {
         if(err){
-         throw error; 
+         throw err; 
          res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});   
         }else{
             con.query('SELECT * FROM movilidad_academica_salida order by validar',function(err,rows2)     {
               if(err){
-               throw error; 
+               throw err; 
                res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
               }else{
                 con.query('SELECT * FROM intercambio_estudiantil_entrada order by validar',function(err,rows3)     {
                   if(err){
-                   throw error; 
+                   throw err; 
                    res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
                   }else{
                     con.query('SELECT * FROM intercambio_estudiantil_salida order by validar',function(err,rows4)     {
                       if(err){
-                       throw error; 
+                       throw err; 
                        res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
                       }else{
                         con.query('SELECT * FROM convenios order by validar',function(err,rows5)     {
                           if(err){
-                           throw error; 
+                           throw err; 
                            res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
                           }else{
-                              res.render('views/main.html',{name:req.session.username,data:rows,data2:rows2,data3:rows3,data4:rows4,data5:rows5});
+                              res.render('views/main.html',{name:req.session.username,tipo:req.session.tipo,data:rows,data2:rows2,data3:rows3,data4:rows4,data5:rows5});
                           }
                         });
                       }
@@ -79,7 +79,44 @@ router.get('/main',function(req,res){
        });
     }else{
       //EL USUARIO NO ES COORDINADOR O ADMIN
-      res.render('views/main.html',{name:req.session.usename,data:'NoAuth'});
+      //res.render('views/main.html',{name:req.session.usename,data:'NoAuth'});
+      var con = require('./config');
+      con.query('SELECT * FROM movilidad_academica_entrada where AUTOR=? order by validar',req.session.username,function(err,rows)     {
+        if(err){
+         throw err; 
+         res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});   
+        }else{
+            con.query('SELECT * FROM movilidad_academica_salida where AUTOR=? order by validar',req.session.username,function(err,rows2)     {
+              if(err){
+               throw err; 
+               res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
+              }else{
+                con.query('SELECT * FROM intercambio_estudiantil_entrada where AUTOR=? order by validar',req.session.username,function(err,rows3)     {
+                  if(err){
+                   throw err; 
+                   res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
+                  }else{
+                    con.query('SELECT * FROM intercambio_estudiantil_salida where AUTOR=? order by validar',req.session.username,function(err,rows4)     {
+                      if(err){
+                       throw err; 
+                       res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
+                      }else{
+                        con.query('SELECT * FROM convenios where AUTOR=? order by validar',req.session.username,function(err,rows5)     {
+                          if(err){
+                           throw err; 
+                           res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
+                          }else{
+                              res.render('views/main.html',{name:req.session.username,tipo:req.session.tipo,data:rows,data2:rows2,data3:rows3,data4:rows4,data5:rows5});
+                          }
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+            });
+        }
+       });
     }
 
   }else{
@@ -206,20 +243,19 @@ app.post('/convenios',encoder,function(req,res){
     var sql = "UPDATE convenios SET PERIODO_ID=?,PERIODO=?,CONVENIO_VINCID=?,CONVENIO_VINC=?,FECHA=?,SECTOR_ID=?,SECTOR=?"
     +",ORIGEN_ID=?,ORIGEN=?,PAIS_VINC=?,INST_ORG=?,COOP=?,INVE=?,INTER=?,MOVI=?,validar=? WHERE ID="+req.body.id;
     
+    var vali=0;
+    if(req.session.tipo=='Coordinador'){
+      vali=1;}
+    
     var values=[parseInt(req.body.periodoId),req.body.periodo,parseInt(req.body.convenioVincId),
       req.body.convenioVinc,req.body.fecha,parseInt(req.body.sectorId),
       req.body.sector,parseInt(req.body.origenId),req.body.origen,
       req.body.paisVinc,req.body.instOrg,parseInt(req.body.coop),
-      parseInt(req.body.inve),parseInt(req.body.inter),parseInt(req.body.movi),1,parseInt(req.body.id)];
+      parseInt(req.body.inve),parseInt(req.body.inter),parseInt(req.body.movi),vali];
     
     con.query(sql, values, function (err, result) {
       if (err) throw err;
       console.log("Number of records updated: " + result.affectedRows);
-    });
-  }else if(req.body.form=="validar"){
-    con.query("update convenios set validar=1 where ID="+req.body.id,function(err,row){
-      if(err) throw err;
-      console.log("Number of record validated: " + row.affectedRows);
     });
   }
   res.redirect('/main');
@@ -233,6 +269,10 @@ app.post('/movilidad-entrada',encoder,function(req,res){
     +"HABLANTE_INDIGENA=?,ORIGEN_INDIGENA=?,UE=?,UE_PAIS=?,UE_ENTIDAD=?,UE_IDIOMA=?,TMA_ID=?,TMA=?,validar=? WHERE ID="+req.body.id;
     
     var sexo,nivel,tma;
+    
+    var vali=0;
+    if(req.session.tipo=='Coordinador')
+      vali=1;
     
     if(req.body.sexoId == 1)
       sexo="Femenino"
@@ -262,16 +302,11 @@ app.post('/movilidad-entrada',encoder,function(req,res){
       sexo,parseInt(req.body.nivelId),nivel,parseInt(req.body.discapacidadId),
       parseInt(req.body.hablanteId),parseInt(req.body.origenId),req.body.ue,
       req.body.uePais,req.body.ueEntidad,req.body.ueIdioma,
-      parseInt(req.body.tmaId),tma,1];
+      parseInt(req.body.tmaId),tma,vali];
     
     con.query(sql,values, function (err, result) {
       if (err) throw err;
       console.log("Number of records updated: " + result.affectedRows);
-    });
-  }else if(req.body.form=="validar"){
-    con.query("update movilidad_academica_entrada set validar=1 where ID="+req.body.id,function(err,row){
-      if(err) throw err;
-      console.log("Number of record validated: " + row.affectedRows);
     });
   }
   res.redirect('/main');
@@ -284,6 +319,9 @@ app.post('/movilidad-salida',encoder,function(req,res){
     +"EMPLEADO_ID=?,EMPLEADO_NOMBRE=?,EMPLEADO_APELLIDO1=?,EMPLEADO_APELLIDO2=?,SEXO_ID=?,SEXO=?,"
     +"UR=?,UR_PAIS=?,UR_ENTIDAD=?,UR_IDIOMA=?,TMA_ID=?,TMA=?,validar=? WHERE ID="+req.body.id;
     var tma,sexo,nivel;
+    var vali=0;
+    if(req.session.tipo=='Coordinador')
+      vali=1;
     
     if(req.body.sexoId == 1)
       sexo="Femenino"
@@ -310,15 +348,10 @@ app.post('/movilidad-salida',encoder,function(req,res){
       parseInt(req.body.empleadoId),req.body.empleado_nombre,
       req.body.apellido1,req.body.apellido2,parseInt(req.body.sexoId),
       sexo,req.body.ur,req.body.urPais,req.body.urEntidad,
-      req.body.urIdioma,parseInt(req.body.tmaId),tma,1];
+      req.body.urIdioma,parseInt(req.body.tmaId),tma,vali];
     con.query(sql, values, function (err, result) {
       if (err) throw err;
       console.log("Number of records updated: " + result.affectedRows);
-    });
-  }else if(req.body.form=="validar"){
-    con.query("update movilidad_academica_salida set validar=1 where ID="+req.body.id,function(err,row){
-      if(err) throw err;
-      console.log("Number of record validated: " + row.affectedRows);
     });
   }
   res.redirect('/main');
@@ -331,6 +364,9 @@ app.post('/intercambio-entrada',encoder,function(req,res){
     +"NIVEL_ID=?,NIVEL=?,PROGRAMA_ID=?,PROGRAMA_DESC=?,AREA_ID=?,AREA=?,ESTUDIANTE_ID=?,ESTUDIANTE_NOMBRE=?,ESTUDIANTE_APELLIDO1=?,ESTUDIANTE_APELLIDO2=?,SEXO_ID=?,SEXO=?,DISCAPACIDAD=?,"
     +"HABLANTE_INDIGENA=?,ORIGEN_INDIGENA=?,UR=?,UR_PAIS=?,UR_ENTIDAD=?,UR_IDIOMA=?,FINAN_ID=?,FINAN=?,FINAN_VAL=?,DATE_START=?,DATE_END=?,validar=? WHERE ID="+req.body.id;
     var nivel,sexo,finan;
+    var vali=0;
+    if(req.session.tipo=='Coordinador')
+      vali=1;
     
     if(req.body.sexoId == 1)
       sexo="Femenino"
@@ -355,16 +391,11 @@ app.post('/intercambio-entrada',encoder,function(req,res){
       parseInt(req.body.periodoId),req.body.periodo,parseInt(req.body.campusId),req.body.campus,parseInt(req.body.unidadId),req.body.unidad,
       parseInt(req.body.nivelId),nivel,parseInt(req.body.programaId),req.body.programa,parseInt(req.body.areaId),req.body.area,parseInt(req.body.estudianteId),
       req.body.estudiante_nombre,req.body.apellido1,req.body.apellido2,parseInt(req.body.sexoId),sexo,parseInt(req.body.discapacidadId),parseInt(req.body.hablanteId),parseInt(req.body.origenId),
-      req.body.ue,req.body.uePais,req.body.ueEntidad,req.body.ueIdioma,parseInt(req.body.finanId),finan,parseInt(req.body.finan_val),req.body.fechaInicio,req.body.fechaFinal,1
+      req.body.ue,req.body.uePais,req.body.ueEntidad,req.body.ueIdioma,parseInt(req.body.finanId),finan,parseInt(req.body.finan_val),req.body.fechaInicio,req.body.fechaFinal,vali
     ];
     con.query(sql, values, function (err, result) {
       if (err) throw err;
       console.log("Number of records updated: " + result.affectedRows);
-    });
-  }else if(req.body.form=="validar"){
-    con.query("update intercambio_estudiantil_entrada set validar=1 where ID="+req.body.id,function(err,row){
-      if(err) throw err;
-      console.log("Number of record validated: " + row.affectedRows);
     });
   }
   res.redirect('/main');
@@ -377,6 +408,9 @@ app.post('/intercambio-salida',encoder,function(req,res){
     +"NIVEL_ID=?,NIVEL=?,PROGRAMA_ID=?,PROGRAMA_DESC=?,AREA_ID=?,AREA=?,ESTUDIANTE_ID=?,ESTUDIANTE_NOMBRE=?,ESTUDIANTE_APELLIDO1=?,ESTUDIANTE_APELLIDO2=?,SEXO_ID=?,SEXO=?,DISCAPACIDAD=?,"
     +"HABLANTE_INDIGENA=?,ORIGEN_INDIGENA=?,UR=?,UR_PAIS=?,UR_ENTIDAD=?,UR_IDIOMA=?,FINAN_ID=?,FINAN=?,FINAN_VAL=?,DATE_START=?,DATE_END=?,validar=? WHERE ID="+req.body.id;
     var nivel,sexo,finan;
+    var vali=0;
+    if(req.session.tipo=='Coordinador')
+      vali=1;
     
     if(req.body.sexoId == 1)
       sexo="Femenino"
@@ -401,16 +435,11 @@ app.post('/intercambio-salida',encoder,function(req,res){
       parseInt(req.body.periodoId),req.body.periodo,parseInt(req.body.campusId),req.body.campus,parseInt(req.body.unidadId),req.body.unidad,
       parseInt(req.body.nivelId),nivel,parseInt(req.body.programaId),req.body.programa,parseInt(req.body.areaId),req.body.area,parseInt(req.body.estudianteId),
       req.body.estudiante_nombre,req.body.apellido1,req.body.apellido2,parseInt(req.body.sexoId),sexo,parseInt(req.body.discapacidadId),parseInt(req.body.hablanteId),parseInt(req.body.origenId),
-      req.body.ue,req.body.uePais,req.body.ueEntidad,req.body.ueIdioma,parseInt(req.body.finanId),finan,parseInt(req.body.finan_val),req.body.fechaInicio,req.body.fechaFinal,1
+      req.body.ue,req.body.uePais,req.body.ueEntidad,req.body.ueIdioma,parseInt(req.body.finanId),finan,parseInt(req.body.finan_val),req.body.fechaInicio,req.body.fechaFinal,vali
     ];
     con.query(sql, values, function (err, result) {
       if (err) throw err;
       console.log("Number of records updated: " + result.affectedRows);
-    });
-  }else if(req.body.form=="validar"){
-    con.query("update intercambio_estudiantil_salida set validar=1 where ID="+req.body.id,function(err,row){
-      if(err) throw err;
-      console.log("Number of record validated: " + row.affectedRows);
     });
   }
   res.redirect('/main');
