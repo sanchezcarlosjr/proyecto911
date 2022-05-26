@@ -255,7 +255,7 @@
         </form>
         <!--ELSE ---------ELSE ----------ELSE ---------ELSE --------ELSE   ----->
         <%}else{%>
-        <form style="margin-left:20px;" action="/" method="POST">
+        <form style="margin-left:20px;" action="/intercambio-entrada" method="POST">
             <div class="row">
                 <div class="form-floating col-6">
                   <input type="number" class="form-control" name="periodoId" value="<%=data[0].PERIODO_ID%>" required>
@@ -448,9 +448,8 @@
                 }%>
                 <div class="form-floating col-sm">
                   <select class="form-select" name="finanId" aria-label="Floating label select example">
-                    <option selected>Selecciona una opcion</option>
-                    <option value="1">Si</option>
-                    <option value="2">No</option>
+                    <option <%=d1%>value="1">Si</option>
+                    <option <%=d2%>value="2">No</option>
                   </select>
                   <label for="origenId">¿Recibió financiamiento?</label>
                 </div>
@@ -479,7 +478,7 @@
         </form>
         <div class="row justify-content-end" style="margin-top:50px">
             <div class="col-sm-4">
-            <form action="/convenios" method="POST">
+            <form action="/intercambio-entrada" method="POST">
             <input type="hidden" name="form" value="validar">
             <input type="hidden" name="id" value="<%=data[0].ID%>" >
             <button type="submit" class="btn btn-primary mb-3">Validar</button>

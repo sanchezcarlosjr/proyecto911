@@ -25,7 +25,7 @@ crear base 911db en sql
 
 importar usando mysql 911db < 911-db.sql
 
-npm install express express-session body-parser mysql exceljs ejs cookie-parser
+npm install express express-session body-parser mysql exceljs ejs cookie-parser forever
 
 
 para andar el servidor usar comando

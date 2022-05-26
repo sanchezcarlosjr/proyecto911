@@ -184,7 +184,7 @@
         </form>
         <!--ELSE ---------ELSE ----------ELSE ---------ELSE --------ELSE   ----->
         <%}else{%>
-        <form style="margin-left:20px;" action="/" method="POST">
+        <form style="margin-left:20px;" action="/movilidad-salida" method="POST">
             <div class="row">
                 <div class="form-floating col-6">
                   <input type="number" class="form-control" name="periodoId" value="<%=data[0].PERIODO_ID%>" required>
@@ -303,7 +303,7 @@
         </form>
         <div class="row justify-content-end" style="margin-top:50px">
             <div class="col-sm-4">
-            <form action="/convenios" method="POST">
+            <form action="/movilidad-salida" method="POST">
             <input type="hidden" name="form" value="validar">
             <input type="hidden" name="id" value="<%=data[0].ID%>" >
             <button type="submit" class="btn btn-primary mb-3">Validar</button>

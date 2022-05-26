@@ -78,11 +78,7 @@ const exportData = async (req, res) => {
     try {  
       var data = workbook.xlsx.writeFile( path + "/reporte-movilidad-salida.xlsx")
    .  then(() => {
-        res.send({
-          status: "success",
-          message: "file successfully downloaded",
-          path: path + "/reporte-movilidad-salida.xlsx",
-        });
+        res.download(path + "/reporte-movilidad-salida.xlsx");
      });
      }catch (err) {
        res.send({
