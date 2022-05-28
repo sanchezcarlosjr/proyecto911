@@ -14,6 +14,10 @@ var session = require('express-session');
 var mysql = require('mysql');
 
 
+//AQUI PUEDES CAMBIAR EL PUERTO
+var port= 4000;
+
+
 
 //para poder acceder a los recursos staticos como los js o los css o los htmls...
 app.use(express.static(__dirname+"/views"));
@@ -658,6 +662,6 @@ app.post('/', encoder, function(req, res){
   
 });
 
-app.listen(process.env.port || 4000);
+app.listen(process.env.port || port);
 
-console.log('Running at Port 4000');
+console.log('Running at Port '+port);
