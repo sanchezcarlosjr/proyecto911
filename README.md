@@ -6,6 +6,8 @@ Prerrequisitos para correr el servidor.
 
 
 nodejs 16.14.2 (LTS)
+(Por ejemplo en ubuntu el comando es sudo apt install nodejs)
+
 
 
 mysql
@@ -21,11 +23,11 @@ En consola correr:
 
 cd ../proyecto911/
 
-crear base 911db en sql
+npm install
+
+crear base 911db en mysql
 
 importar usando mysql 911db < 911-db.sql
-
-npm install express express-session body-parser mysql exceljs ejs cookie-parser forever
 
 
 para andar el servidor usar comando
