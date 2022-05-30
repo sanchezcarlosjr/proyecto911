@@ -14,10 +14,6 @@ var session = require('express-session');
 var mysql = require('mysql');
 
 
-//AQUI PUEDES CAMBIAR EL PUERTO
-var port= 4000;
-
-
 
 //para poder acceder a los recursos staticos como los js o los css o los htmls...
 app.use(express.static(__dirname+"/views"));
@@ -175,6 +171,19 @@ router.get('/convenios',function(req,res){
     res.redirect("/");
   }
 });
+
+router.get('/usuarios',function(req,res){
+  if(true){
+    res.render('views/usuarios.html',{name:req.session.username,data:'',tipo:req.session.tipo});
+  }else{
+    res.redirect("/");
+  }
+});
+
+router.get('/signup',function(req,res){
+  res.render('views/signup.html',{data:''});
+});
+
 router.get('/signout',function(req,res){
   req.session.destroy();
   res.redirect('/');
@@ -662,6 +671,6 @@ app.post('/', encoder, function(req, res){
   
 });
 
-app.listen(process.env.port || port);
+app.listen(process.env.port || 4000);
 
-console.log('Running at Port '+port);
+console.log('Running at Port 4000');

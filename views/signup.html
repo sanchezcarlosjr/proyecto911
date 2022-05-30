@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap resources-->    
+    <link href="bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+    
+    <!--color de los nav items-->
+    <link href="js/navitems.css" rel="stylesheet">
+    
+    <!--css de forms-->
+    <link href="js/form.css" rel="stylesheet">
+
+    <title>Convenios</title>
+  </head>
+  <body>
+  <div class="container">
+    <div class="row">
+    
+    
+        <div class="col-sm-3" style="background-color:#007141">
+        <!-- aqui ira el contenido que se muestre segun la opcion elegida----------------------->
+        <!--justificar un row de contenido en el centro-->
+        <h2 align="center">Registro</h2>
+        <!--Aqui inicia conficional cuando vayamos a editar algun registro, si la data no existe es para ingresar-->
+        <%if (data == '') {%>
+        <form style="margin-left:20px;" action="/" method="POST">
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" name="nombre" placeholder="" required>
+                  <label for="floatingInput">Nombre</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" class="form-control" name="apellido" placeholder="" required>
+                  <label for="floatingInput">Apellido</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-sm">
+                  <input type="date" class="form-control" name="fecha" placeholder="" required>
+                  <label for="floatingInput">Correo institucional</label>
+                </div>
+            </div>
+        <!-------ELSE--------------ELSE------ELSE--------ELSE--------ELSE-------->
+        <%}else{%>
+        <form style="margin-left:20px;" action="/signup" method="POST">
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="number" class="form-control" name="nombre" value="<%=data[0].NOMBRE%>" required>
+                  <label for="floatingInput">Nombre</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="apellido" value="<%=data[0].APELLIDO%>" required>
+                  <label for="floatingInput">Apellido</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating col-sm">
+                  <input type="text" class="form-control" name="usuario" value="<%=data[0].USUARIO%>" required>
+                  <label for="floatingInput">Correo institucional</label>
+                </div>
+            </div>
+        </form>
+        <!--FIN ELSE-->
+        <%}%>
+        </div>
+    </div>
+  </div>
+  </body>
+</html>
+
