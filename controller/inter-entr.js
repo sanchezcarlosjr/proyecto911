@@ -9,7 +9,7 @@ var con = mysql.createConnection({
 });
 
 async function get_info(callback){
-  con.query('SELECT * FROM intercambio_estudiantil_entrada', function(error, results, fields) {
+  con.query('SELECT * FROM intercambio_estudiantil_entrada where validar=1', function(error, results, fields) {
 		  if (results != null) {
 		    console.log("Reporte generado con exito");
 			  

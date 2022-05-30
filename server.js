@@ -235,7 +235,8 @@ app.post('/usuarios',encoder,function(req,res){
 app.post('/signup',encoder,function(req,res){
   var con = require('./config');
   var sql= "select * from usuarios where USUARIO=?";
-  con.query(sql,[req.body.usuario],function(req,row){
+  con.query(sql,[req.body.usuario],function(err,row){
+    if (err) throw err;
     if(!row.length){
       var sql="insert into usuarios values (?,?,?,?,upper(sha1(unhex(sha1(?)))),?,?,?)"
       var values=[req.body.usuario,req.body.nombre,req.body.apellido1,req.body.apellido2,req.body.password1,'Unidad',0,0];
