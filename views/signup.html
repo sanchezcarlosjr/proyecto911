@@ -17,6 +17,18 @@
     <link href="js/form.css" rel="stylesheet">
 
     <title>Convenios</title>
+    <script>
+	function checkPassword(form) {
+		password1 = form.password1.value;
+		password2 = form.password2.value;
+		if (password1 != password2) {
+			alert ("\nContraseñas deben coincidir")
+			return false;
+		}
+		else
+			return true;
+	}
+    </script>
   </head>
   <body>
   <div class="container">
@@ -29,7 +41,7 @@
         <h2 align="center">Registro</h2>
         <!--Aqui inicia conficional cuando vayamos a editar algun registro, si la data no existe es para ingresar-->
         <%if (data == '') {%>
-        <form style="margin-left:20px;" action="/" method="POST">
+        <form style="margin-left:20px;" onSubmit="return checkPassword(this)" action="/" method="POST">
             <div class="row">
                 <div class="form-floating col-6">
                   <input type="text" class="form-control" name="nombre" placeholder="" required>
@@ -42,16 +54,32 @@
             </div>
             <div class="row">
                 <div class="form-floating col-sm">
-                  <input type="date" class="form-control" name="fecha" placeholder="" required>
+                  <input type="text" class="form-control" name="usuario" placeholder="" required>
                   <label for="floatingInput">Correo institucional</label>
                 </div>
             </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="password" class="form-control" name="password1" placeholder="" required>
+                  <label for="floatingInput">Contraseña</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="password" class="form-control" name="password2" placeholder="" required>
+                  <label for="floatingInput">Confirma contraseña</label>
+                </div>
+            </div>
+	    <div class="row justify-content-end" style="margin-top:50px">
+	    	<div class="col-sm-4">
+			<button type="submit" class="btn btn-primary mb-3">Registrar</button>
+		</div>
+	    </div>
+	</form>
         <!-------ELSE--------------ELSE------ELSE--------ELSE--------ELSE-------->
         <%}else{%>
         <form style="margin-left:20px;" action="/signup" method="POST">
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" name="nombre" value="<%=data[0].NOMBRE%>" required>
+                  <input type="text" class="form-control" name="nombre" value="<%=data[0].NOMBRE%>" required>
                   <label for="floatingInput">Nombre</label>
                 </div>
                 <div class="form-floating col-6">
@@ -65,6 +93,19 @@
                   <label for="floatingInput">Correo institucional</label>
                 </div>
             </div>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="password" class="form-control" name="password1" value="<%=data[0].PASSWORD%>" required>
+                  <label for="floatingInput">Contraseña</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="text" style="text-transform: uppercase;" class="form-control" name="password2" value="<%=data[0].PASSWORD%>" required>
+                  <label for="floatingInput">Confirma contraseña</label>
+                </div>
+            </div>
+	    <div class="col-sm-4">
+	    	<button type="submit" class="btn btn-primary mb-3">Registrar</button>
+	    </div>
         </form>
         <!--FIN ELSE-->
         <%}%>
@@ -73,4 +114,3 @@
   </div>
   </body>
 </html>
-
