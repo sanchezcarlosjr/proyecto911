@@ -265,6 +265,9 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
   `USUARIO` varchar(20) NOT NULL,
+  `NOMBRE` varchar(50) NOT NULL,
+  `APELLIDO1` varchar(50) NOT NULL,
+  `APELLIDO2` varchar(50) NOT NULL,
   `PASSWORD` varchar(200) NOT NULL,
   `TIPO` varchar(50) NOT NULL,
   `APROBADO` tinyint(1) NOT NULL,
@@ -279,7 +282,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('jluna@uabc.edu.mx','AA1420F182E88B9E5F874F6FBE7459291E8F4601','Coordinador',1,0),('judith@uabc.edu.mx','AA1420F182E88B9E5F874F6FBE7459291E8F4601','Unidad',1,0);
+INSERT INTO `usuarios` VALUES ('jluna@uabc.edu.mx','Judith','Luna','Serrano','AA1420F182E88B9E5F874F6FBE7459291E8F4601','Coordinador',1,0),('judith@uabc.edu.mx','Judith','Luna','Serrano','AA1420F182E88B9E5F874F6FBE7459291E8F4601','Unidad',1,1),('jorge@uabc.edu.mx','Jorge','Marquez','Luna','AA1420F182E88B9E5F874F6FBE7459291E8F4601','Unidad',0,0);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -173,8 +173,23 @@ router.get('/convenios',function(req,res){
 });
 
 router.get('/usuarios',function(req,res){
-  if(true){
-    res.render('views/usuarios.html',{name:req.session.username,data:'',tipo:req.session.tipo});
+  if(req.session.tipo=='Coordinador'){
+    var con = require('./config');
+      con.query('SELECT * FROM usuarios where APROBADO=0',function(err,rows)     {
+        if(err){
+         throw err; 
+          res.render('views/usuarios.html',{name:req.session.username,tipo:req.session,data:'',data2:''});   
+        }else{
+            con.query('SELECT * FROM usuarios where NEWPASS=1',function(err,rows2)     {
+              if(err){
+               throw err; 
+               res.render('views/usuarios.html',{name:req.session.username,tipo:req.session.tipo,data:rows,data2:''});
+              }else{
+                res.render('views/usuarios.html',{name:req.session.username,tipo:req.session.tipo,data:rows,data2:rows2});
+              }
+            });
+        }
+      });
   }else{
     res.redirect("/");
   }
@@ -193,7 +208,7 @@ router.get('/ayuda',function(req,res){
 });
 
 
-//add the router
+//add the router, HERE FINISH ALL ROUTES GET PAGES ------------------------------
 app.use('/', router);
 
 //main post methods here, we get main request, specific when coordinador wants to edit/validate some row.
@@ -457,7 +472,7 @@ app.post('/intercambio-salida',encoder,function(req,res){
   }
   res.redirect('/main');
 });
-//formularios inputs ---------------------------------------------
+//formularios and login inputs ---------------------------------------------
 app.post('/', encoder, function(req, res){
   var con = require('./config');
 
@@ -470,7 +485,7 @@ app.post('/', encoder, function(req, res){
 	  /* login */
 	  var username = req.body.username;
 	  var password = req.body.password;
-	  con.query("select * from usuarios where USUARIO = ? and PASSWORD = UPPER(SHA1(UNHEX(SHA1(?))))", [username, password], function(error, results, fields) {
+	  con.query("select * from usuarios where USUARIO = ? and PASSWORD = UPPER(SHA1(UNHEX(SHA1(?)))) and APROBADO=1", [username, password], function(error, results, fields) {
 		  if (error) throw error;
 		  if (results  && results.length > 0) {
 		    req.session.tipo=results[0].TIPO;
