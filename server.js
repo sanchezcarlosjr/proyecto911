@@ -33,7 +33,7 @@ router.get('/',function(req,res){
   if(req.session.username){
     res.render('views/main.html',{name:req.session.username});
   }else{
-    res.render('views/index.html');
+    res.render('views/login.html',{data:''});
   }
 });
 
@@ -212,6 +212,46 @@ router.get('/ayuda',function(req,res){
 app.use('/', router);
 
 //main post methods here, we get main request, specific when coordinador wants to edit/validate some row.
+
+app.post('/usuarios',encoder,function(req,res){
+  var con = require('./config');
+  if(req.body.table=='aprobar'){
+    var sql="update usuarios set APROBADO=1 where USUARIO=?";
+    con.query(sql,[req.body.usuario],function(err,result){
+      if (err) throw err;
+      console.log("New user aproved");
+      res.redirect('/usuarios')
+    });
+  }else if (req.body.table=='newpass'){
+    var sql="update usuarios set PASSWORD=upper(sha1(unhex(sha1('qwerty')))) where USUARIO=?";
+    con.query(sql,[req.body.usuario],function(err,result){
+      if (err) throw err;
+      console.log("New pass reset");
+      res.redirect('/usuarios')
+    });
+  }
+});
+
+app.post('/signup',encoder,function(req,res){
+  var con = require('./config');
+  var sql= "select * from usuarios where USUARIO=?";
+  con.query(sql,[req.body.usuario],function(req,row){
+    if(!row.length){
+      var sql="insert into usuarios values (?,?,?,?,upper(sha1(unhex(sha1(?)))),?,?,?)"
+      var values=[req.body.usuario,req.body.nombre,req.body.apellido1,req.body.apellido2,req.body.password1,'Unidad',0,0];
+      
+      con.query(sql, values, function (err, result) {
+        if (err) throw err;
+        console.log("New user added");
+        res.render('views/login.html',{data:'Success'});
+      });
+    }else{
+      res.render('views/login.html',{data:'Email'});
+    }
+  });
+  
+  
+});
 
 app.post('/main',encoder, function(req, res) {
   var table = req.body.table;

@@ -67,9 +67,3 @@
 #helpBtn:hover, button:active {
 	background: #CEB978;
 }
-body {
-	background: #548235;
-	font-family: "Liberation Sans", sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;			
-}

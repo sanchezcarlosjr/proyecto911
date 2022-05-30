@@ -14,6 +14,15 @@
 		<div class="container-fluid">
 			<div class="form form-log">
 				<form class="login-form" action="/" method="POST">
+				  <%if(data=='Success'){%>
+					<div class="alert alert-primary" role="alert">
+            Solicitud Enviada.
+          </div>
+          <%}else if(data=='Email'){%>
+					<div class="alert alert-warning" role="alert">
+            Ese Correo Electronico ya esta en uso o ha sido registrado.
+          </div>
+          <%}%>
 					<img class="logo" src="imagenes/uabc.png" width="60" alt="">
 					<h2 style="color:#548235" align="center">UNIVERSIDAD AUTÓNOMA DE BAJA CALIFORNIA</h2>
 					<h2><b>Sistema 9/11</b></h2>
@@ -29,6 +38,7 @@
 					<p></p>
 					<a href='/ayuda' style="margin-bottom:10px;">¿Necesitas ayuda?</a>
 					<p></p>
+					
 				
 				
 			</div>
