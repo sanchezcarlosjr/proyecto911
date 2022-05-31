@@ -97,7 +97,7 @@
             <br>
             <br>
             <h4>Solicitudes de registro</h4>
-            <table class="table-sm">
+            <table class="table">
             <thead>
               <tr>
                 <th scope="col">Correo</th>
@@ -126,8 +126,15 @@
                 <form action="/usuarios" method="POST">
                 <input type="hidden" name="table" value="aprobar" >
                 <input type="hidden" name="usuario" value="<%=data[i].USUARIO%>" >
-                <button type="submit" class="btn btn-success edit">Aprobar</button>
-                </form>                             
+                <button type="submit" class="btn-sm btn-success edit">Aprobar</button>
+                </form>
+               </td>
+               <td>
+                <form action="/delete" method="POST">
+                <input type="hidden" name="table" value="usuarios" >
+                <input type="hidden" name="usuario" value="<%=data[i].USUARIO%>" >
+                <button type="submit" class="btn-sm btn-danger  edit">Eliminar</button>
+                </form>
                </td>
               </tr>
               <% }
@@ -142,7 +149,7 @@
             <%}%>
             </table><br><br>
             <h4>Solicitud de REINICIO DE CONTRASEÑA</h4>
-            <table class="table-sm">
+            <table class="table">
             <thead>
               <tr>
                 <th scope="col">Correo</th>

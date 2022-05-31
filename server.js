@@ -215,7 +215,14 @@ app.use('/', router);
 
 app.post('/delete',encoder,function(req,res){
   var con = require('./config');
-  if(req.body.table){
+  if(req.body.usuario){
+    var sql="delete from "+req.body.table+" where USUARIO='"+req.body.usuario+"'";
+    con.query(sql,function(err,result){
+      if(err)
+        throw err;
+      res.redirect('/usuarios');
+    });
+  }else if(req.body.table){
     var sql="delete from "+req.body.table+" where ID="+req.body.id;
     con.query(sql,function(err,result){
       if(err)
@@ -239,8 +246,12 @@ app.post('/usuarios',encoder,function(req,res){
     con.query(sql,[req.body.usuario],function(err,result){
       if (err) throw err;
       console.log("New pass reset");
-      res.redirect('/usuarios')
     });
+    sql="update usuarios set NEWPASS=0 where USUARIO=?";
+    con.query(sql,[req.body.usuario],function(err,result){
+      if (err) throw err;
+    });
+    res.redirect('/usuarios')
   }
 });
 
