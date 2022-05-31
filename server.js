@@ -213,6 +213,18 @@ app.use('/', router);
 
 //main post methods here, we get main request, specific when coordinador wants to edit/validate some row.
 
+app.post('/delete',encoder,function(req,res){
+  var con = require('./config');
+  if(req.body.table){
+    var sql="delete from "+req.body.table+" where ID="+req.body.id;
+    con.query(sql,function(err,result){
+      if(err)
+        throw err;
+      res.redirect('/main');
+    });
+  }
+});
+
 app.post('/usuarios',encoder,function(req,res){
   var con = require('./config');
   if(req.body.table=='aprobar'){

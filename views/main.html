@@ -99,18 +99,15 @@
             <h4>Registros añadidos recientemente</h4>
             <br>
             <h6>Movilidad Academica Entrada</h6>
-            <table class="table-sm">
+            <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
                 <th scope="col">Validado</th>
                 <th scope="col">Periodo</th>
-                <th width="col">CampusId</th>
                 <th width="col">Campus</th>
-                <th width="col">UnidadId</th>
                 <th width="col">Unidad</th>
-                <th width="col">VisitanteId</th>
-                <th width="col">Visitante</th>
+                <th width="col">Numero Visitante</th>
+                <th width="col">Visitante Nombre</th>
                 <th width="col">Autor</th>
               </tr>
             </thead>
@@ -129,12 +126,9 @@
                 tmp="Si";
               %>  
               <tr>
-                <th scope="row"><%= data[i].ID %></th>
-                <td><%= tmp%></td>
+                <th scope="row"><%= tmp %></th>
                 <td><%= data[i].PERIODO%></td>
-                <td><%= data[i].CAMPUS_ID%></td>
                 <td><%= data[i].CAMPUS_DESC%></td>
-                <td><%= data[i].UNIDAD_ID%></td>
                 <td><%= data[i].UNIDAD%></td>
                 <td><%= data[i].VISITANTE_ID%></td>
                 <td><%= data[i].VISITANTE_NOMBRE%></td>
@@ -143,8 +137,15 @@
                 <form action="/main" method="POST">
                 <input type="hidden" name="table" value="movilidad-entrada" >
                 <input type="hidden" name="id" value="<%=data[i].ID%>" >
-                <button type="submit" class="btn btn-success edit">Revisar</button>
+                <button type="submit" class="btn-sm btn-success edit">Revisar</button>
                 </form>                             
+               </td>
+               <td>
+                <form action="/delete" method="POST">
+                <input type="hidden" name="table" value="movilidad_academica_entrada" >
+                <input type="hidden" name="id" value="<%=data[i].ID%>" >
+                <button type="submit" class="btn-sm btn-danger edit">Eliminar</button>
+                </form>
                </td>
               </tr>
               <% }
@@ -158,18 +159,15 @@
             </tbody>
             </table><br><br>
             <h6>Movilidad Academica Salida</h6>
-            <table class="table-sm">
+            <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
                 <th scope="col">Validado</th>
                 <th scope="col">Periodo</th>
-                <th width="col">CampusId</th>
                 <th width="col">Campus</th>
-                <th width="col">UnidadId</th>
                 <th width="col">Unidad</th>
-                <th width="col">EmpleadoId</th>
-                <th width="col">Empleado</th>
+                <th width="col">Numero Empleado</th>
+                <th width="col">Nombre Empleado</th>
                 <th width="col">Autor</th>
               </tr>
             </thead>
@@ -188,12 +186,9 @@
                 tmp="Si";
               %>  
               <tr>
-                <th scope="row"><%= data2[i].ID %></th>
-                <td><%= tmp%></td>
+                <th scope="row"><%= tmp %></th>
                 <td><%= data2[i].PERIODO%></td>
-                <td><%= data2[i].CAMPUS_ID%></td>
                 <td><%= data2[i].CAMPUS_DESC%></td>
-                <td><%= data2[i].UNIDAD_ID%></td>
                 <td><%= data2[i].UNIDAD%></td>
                 <td><%= data2[i].EMPLEADO_ID%></td>
                 <td><%= data2[i].EMPLEADO_NOMBRE%></td>
@@ -202,8 +197,15 @@
                 <form action="/main" method="POST">
                 <input type="hidden" name="table" value="movilidad-salida" >
                 <input type="hidden" name="id" value="<%=data2[i].ID%>" >
-                <button type="submit" class="btn btn-success edit">Revisar</button>
-                </form>                                            
+                <button type="submit" class="btn-sm btn-success edit">Revisar</button>
+                </form>
+               </td>
+               <td>
+                <form action="/delete" method="POST">
+                <input type="hidden" name="table" value="movilidad_academica_salida" >
+                <input type="hidden" name="id" value="<%=data2[i].ID%>" >
+                <button type="submit" class="btn-sm btn-danger edit">Eliminar</button>
+                </form>
                </td>
               </tr>
               <% }
@@ -217,18 +219,15 @@
             </tbody>
             </table><br><br>
             <h6>Intercambio Estudiantil de Entrada</h6>
-            <table class="table-sm">
+            <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
                 <th scope="col">Validado</th>
                 <th scope="col">Periodo</th>
-                <th width="col">CampusId</th>
                 <th width="col">Campus</th>
-                <th width="col">UnidadId</th>
                 <th width="col">Unidad</th>
-                <th width="col">VisitanteId</th>
-                <th width="col">Visitante</th>
+                <th width="col">Matricula</th>
+                <th width="col">Estudiante Nombre</th>
                 <th width="col">Autor</th>
               </tr>
             </thead>
@@ -247,12 +246,9 @@
                 tmp="Si";
               %>  
               <tr>
-                <th scope="row"><%= data3[i].ID %></th>
-                <td><%= tmp%></td>
+                <th scope="row"><%= tmp%></th>
                 <td><%= data3[i].PERIODO%></td>
-                <td><%= data3[i].CAMPUS_ID%></td>
                 <td><%= data3[i].CAMPUS_DESC%></td>
-                <td><%= data3[i].UNIDAD_ID%></td>
                 <td><%= data3[i].UNIDAD%></td>
                 <td><%= data3[i].ESTUDIANTE_ID%></td>
                 <td><%= data3[i].ESTUDIANTE_NOMBRE%></td>
@@ -261,8 +257,15 @@
                 <form action="/main" method="POST">
                 <input type="hidden" name="table" value="intercambio-entrada" >
                 <input type="hidden" name="id" value="<%=data3[i].ID%>" >
-                <button type="submit" class="btn btn-success edit">Revisar</button>
+                <button type="submit" class="btn-sm btn-success edit">Revisar</button>
                 </form>                                            
+               </td>
+                <td>
+                <form action="/delete" method="POST">
+                <input type="hidden" name="table" value="intercambio_estudiantil_entrada" >
+                <input type="hidden" name="id" value="<%=data3[i].ID%>" >
+                <button type="submit" class="btn-sm btn-danger  edit">Eliminar</button>
+                </form>
                </td>
               </tr>
               <% }
@@ -276,18 +279,15 @@
             </tbody>
             </table><br><br>
             <h6>Intercambio Estudiantil Salida</h6>
-            <table class="table-sm">
+            <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
                 <th scope="col">Validado</th>
                 <th scope="col">Periodo</th>
-                <th width="col">CampusId</th>
                 <th width="col">Campus</th>
-                <th width="col">UnidadId</th>
                 <th width="col">Unidad</th>
-                <th width="col">VisitanteId</th>
-                <th width="col">Visitante</th>
+                <th width="col">Clave Visitante</th>
+                <th width="col">Nombre Visitante</th>
                 <th width="col">Autor</th>
               </tr>
             </thead>
@@ -306,12 +306,9 @@
                 tmp="Si";
               %>  
               <tr>
-                <th scope="row"><%= data4[i].ID %></th>
-                <td><%= tmp%></td>
+                <th scope="row"><%= tmp%></td>
                 <td><%= data4[i].PERIODO%></td>
-                <td><%= data4[i].CAMPUS_ID%></td>
                 <td><%= data4[i].CAMPUS_DESC%></td>
-                <td><%= data4[i].UNIDAD_ID%></td>
                 <td><%= data4[i].UNIDAD%></td>
                 <td><%= data4[i].ESTUDIANTE_ID%></td>
                 <td><%= data4[i].ESTUDIANTE_NOMBRE%></td>
@@ -320,8 +317,15 @@
                 <form action="/main" method="POST">
                 <input type="hidden" name="table" value="intercambio-salida" >
                 <input type="hidden" name="id" value="<%=data4[i].ID%>" >
-                <button type="submit" class="btn btn-success edit">Revisar</button>
+                <button type="submit" class="btn-sm btn-success edit">Revisar</button>
                 </form>                                            
+               </td>
+               <td>
+                <form action="/delete" method="POST">
+                <input type="hidden" name="table" value="intercambio_estudiantil_salida" >
+                <input type="hidden" name="id" value="<%=data4[i].ID%>" >
+                <button type="submit" class="btn-sm btn-danger  edit">Eliminar</button>
+                </form>
                </td>
               </tr>
               <% }
@@ -374,7 +378,14 @@
                 <form action="/main" method="POST">
                 <input type="hidden" name="table" value="convenios" >
                 <input type="hidden" name="id" value="<%=data5[i].ID%>" >
-                <button type="submit" class="btn btn-success edit">Revisar</button>
+                <button type="submit" class="btn-sm btn-success edit">Revisar</button>
+                </form>
+               </td>
+               <td>
+                <form action="/delete" method="POST">
+                <input type="hidden" name="table" value="convenios" >
+                <input type="hidden" name="id" value="<%=data5[i].ID%>" >
+                <button type="submit" class="btn-sm btn-danger  edit">Eliminar</button>
                 </form>
                </td>
               </tr>
