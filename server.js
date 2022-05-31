@@ -315,10 +315,23 @@ app.post('/convenios',encoder,function(req,res){
     var vali=0;
     if(req.session.tipo=='Coordinador'){
       vali=1;}
+    var sector,origen;
+    if(req.body.sectorId== 1){
+      sector="Publico";
+    }else if (req.body.sectorId==2){
+      sector="Social";
+    }else{
+      sector="Privado";
+    }
+    if(req.body.origenId==1){
+      origen="Nacional";
+    }else{
+      origen="Internacional";
+    }
     
     var values=[parseInt(req.body.periodoId),req.body.periodo,parseInt(req.body.convenioVincId),
       req.body.convenioVinc,req.body.fecha,parseInt(req.body.sectorId),
-      req.body.sector,parseInt(req.body.origenId),req.body.origen,
+      sector,parseInt(req.body.origenId),origen,
       req.body.paisVinc,req.body.instOrg,parseInt(req.body.coop),
       parseInt(req.body.inve),parseInt(req.body.inter),parseInt(req.body.movi),vali];
     
@@ -631,11 +644,24 @@ app.post('/', encoder, function(req, res){
     var sql = "INSERT INTO convenios (`PERIODO_ID`,`PERIODO`,`CONVENIO_VINCID`,`CONVENIO_VINC`,`FECHA`,`SECTOR_ID`,"
     +"`SECTOR`,`ORIGEN_ID`,`ORIGEN`,`PAIS_VINC`,`INST_ORG`,"
     +"`COOP`,`INVE`,`INTER`,`MOVI`,`validar`,`AUTOR`) VALUES ?";
+    var sector,origen;
+    if(req.body.sectorId== 1){
+      sector="Publico";
+    }else if (req.body.sectorId==2){
+      sector="Social";
+    }else{
+      sector="Privado";
+    }
+    if(req.body.origenId==1){
+      origen="Nacional";
+    }else{
+      origen="Internacional";
+    }
     
     var values = [
       [parseInt(req.body.periodoId),req.body.periodo,parseInt(req.body.convenioVincId),
       req.body.convenioVinc,req.body.fecha,parseInt(req.body.sectorId),
-      req.body.sector,parseInt(req.body.origenId),req.body.origen,
+      sector,parseInt(req.body.origenId),origen,
       req.body.paisVinc,req.body.instOrg,parseInt(req.body.coop),
       parseInt(req.body.inve),parseInt(req.body.inter),parseInt(req.body.movi),0,req.session.username]
     ];

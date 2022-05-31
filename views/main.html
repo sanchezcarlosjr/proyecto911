@@ -336,17 +336,14 @@
             </table><br><br>
             <%if(tipo == 'Coordinador'){%>
             <h6>Convenios</h6>
-            <table class="table-sm">
+            <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
                 <th scope="col">Validado</th>
-                <th scope="col">Periodo</th>
-                <th width="col">ConvenioId</th>
+                <th>Periodo</th>
                 <th width="col">Convenio</th>
                 <th width="col">Fecha</th>
                 <th width="col">Sector</th>
-                <th width="col">OrigenId</th>
                 <th width="col">Origen</th>
                 <th width="col">Autor</th>
               </tr>
@@ -366,14 +363,11 @@
                 tmp="Si";
               %>  
               <tr>
-                <th scope="row"><%= data5[i].ID %></th>
-                <td><%= tmp%></td>
+                <th scope="row"><%= tmp%></th>
                 <td><%= data5[i].PERIODO%></td>
-                <td><%= data5[i].CONVENIO_VINCID%></td>
                 <td><%= data5[i].CONVENIO_VINC%></td>
                 <td><%= data5[i].FECHA%></td>
                 <td><%= data5[i].SECTOR%></td>
-                <td><%= data5[i].ORIGEN_ID%></td>
                 <td><%= data5[i].ORIGEN%></td>
                 <td><%= data5[i].AUTOR%></td>
                 <td>

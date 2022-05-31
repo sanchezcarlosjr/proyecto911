@@ -111,8 +111,8 @@
             </div>
             <div class="row">
                 <div class="form-floating col-sm">
-                  <select class="form-select" name="nivelId" aria-label="Floating label select example">
-                    <option value="1" selected>Selecciona una opcion</option>
+                  <select class="form-select" name="nivelId" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opcion</option>
                     <option value="1">Licenciatura</option>
                     <option value="2">Especialidad</option>
                     <option value="3">Maestria</option>
@@ -163,16 +163,16 @@
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <select class="form-select" name="sexoId" aria-label="Floating label select example">
-                    <option value="2" selected>Selecciona una opcion</option>
+                  <select class="form-select" name="sexoId" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opcion</option>
                     <option value="1">Femenino</option>
                     <option value="2">Masculino</option>
                   </select>
                   <label for="sexoId">Sexo</label>
                 </div>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="discapacidadId" aria-label="Floating label select example">
-                    <option value="2" selected>Selecciona una opcion</option>
+                  <select class="form-select" name="discapacidadId" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opcion</option>
                     <option value="1">Si</option>
                     <option value="2">No</option>
                   </select>
@@ -181,16 +181,16 @@
             </div>
             <div class="row">
                 <div class="form-floating col-sm">
-                  <select class="form-select" name="origenId" aria-label="Floating label select example">
-                    <option value="2" selected>Selecciona una opcion</option>
+                  <select class="form-select" name="origenId" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opcion</option>
                     <option value="1">Si</option>
                     <option value="2">No</option>
                   </select>
                   <label for="origenId">Origen Indigena</label>
                 </div>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="hablanteId" aria-label="Floating label select example">
-                    <option value="2" selected>Selecciona una opcion</option>
+                  <select class="form-select" name="hablanteId" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opcion</option>
                     <option value="1">Si</option>
                     <option value="2">No</option>
                   </select>
@@ -219,8 +219,8 @@
             </div>
             <div class="row">
                 <div class="form-floating col-sm">
-                  <select class="form-select" name="finanId" aria-label="Floating label select example">
-                    <option value="2" selected>Selecciona una opcion</option>
+                  <select class="form-select" name="finanId" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opcion</option>
                     <option value="1">Si</option>
                     <option value="2">No</option>
                   </select>
@@ -304,7 +304,7 @@
                   var d4="selected";
                 }%>
                 <div class="form-floating col-12">
-                  <select class="form-select" name="nivelId" aria-label="Floating label select example">
+                  <select class="form-select" name="nivelId" aria-label="Floating label select example" required>
                     <option <%=d1%> value="1">Licenciatura</option>
                     <option <%=d2%> value="2">Especialidad</option>
                     <option <%=d3%> value="3">Maestria</option>
@@ -362,7 +362,7 @@
                   var d2="selected";
                 }%>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="sexoId" aria-label="Floating label select example">
+                  <select class="form-select" name="sexoId" aria-label="Floating label select example" required>
                     <option <%=d1%> value="1">Femenino</option>
                     <option <%=d2%> value="2">Masculino</option>
                   </select>
@@ -376,7 +376,7 @@
                   var d2="selected";
                 }%>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="discapacidadId" aria-label="Floating label select example">
+                  <select class="form-select" name="discapacidadId" aria-label="Floating label select example" required>
                     <option <%=d1%> value="1">Si</option>
                     <option <%=d2%> value="2">No</option>
                   </select>
@@ -392,7 +392,7 @@
                   var d2="selected";
                 }%>
                 <div class="form-floating col-sm">
-                  <select class="form-select" name="origenId" aria-label="Floating label select example">
+                  <select class="form-select" name="origenId" aria-label="Floating label select example" required>
                     <option <%=d1%> value="1">Si</option>
                     <option <%=d2%> value="2">No</option>
                   </select>
@@ -406,7 +406,7 @@
                   var d2="selected";
                 }%>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="hablanteId" aria-label="Floating label select example">
+                  <select class="form-select" name="hablanteId" aria-label="Floating label select example" required>
                     <option <%=d1%> value="1">Si</option>
                     <option <%=d2%> value="2">No</option>
                   </select>
@@ -442,7 +442,7 @@
                   var d2="selected";
                 }%>
                 <div class="form-floating col-sm">
-                  <select class="form-select" name="finanId" aria-label="Floating label select example">
+                  <select class="form-select" name="finanId" aria-label="Floating label select example" required>
                     <option <%=d1%> value="1">Si</option>
                     <option <%=d2%> value="2">No</option>
                   </select>

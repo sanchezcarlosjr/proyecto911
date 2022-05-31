@@ -97,11 +97,11 @@
             <div class="row">
                 <div class="form-floating col-6">
                   <input type="text" style="text-transform: uppercase;" class="form-control" name="convenioVincId" placeholder="" required>
-                  <label for="floatingInput">Convenio de vinculación ID</label>
+                  <label for="floatingInput">Clave del Convenio</label>
                 </div>
                 <div class="form-floating col-6">
                   <input type="text" style="text-transform: uppercase;" class="form-control" name="convenioVinc" placeholder="" required>
-                  <label for="floatingInput">Convenio de vinculación</label>
+                  <label for="floatingInput">Nombre del Convenios</label>
                 </div>
             </div>
             <div class="row">
@@ -112,22 +112,21 @@
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" name="sectorId" placeholder="" required>
-                  <label for="floatingInput">Sector ID</label>
+                  <select class="form-select" name="sectorId" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opción</option>
+                    <option value="1">Publico</option>
+                    <option value="2">Social</option>
+                    <option value="3">Urbano</option>
+                  </select>
+                  <label for="sectorId">Sector de la Institución</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" style="text-transform: uppercase;" class="form-control" name="sector" placeholder="" required>
-                  <label for="floatingInput">Sector</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-floating col-6">
-                  <input type="number" class="form-control" name="origenId" placeholder="" required>
-                  <label for="floatingInput">Origen ID</label>
-                </div>
-                <div class="form-floating col-6">
-                  <input type="text" style="text-transform: uppercase;" class="form-control" name="origen" placeholder="" required>
-                  <label for="floatingInput">Origen</label>
+                  <select class="form-select" name="origenId" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opción</option>
+                    <option value="1">Nacional</option>
+                    <option value="2">Internacional</option>
+                  </select>
+                  <label for="origenId">Origen de la Institución</label>
                 </div>
             </div>
             <div class="row">
@@ -142,16 +141,16 @@
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <select class="form-select" name="coop" aria-label="Floating label select example">
-                    <option value="2" selected>Selecciona una opción</option>
+                  <select class="form-select" name="coop" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opción</option>
                     <option value="1">Sí</option>
                     <option value="2">No</option>
                   </select>
                   <label for="coop">¿Es convenio de Cooperación académica?</label>
                 </div>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="inve" aria-label="Floating label select example">
-                    <option value="2" selected>Selecciona una opción</option>
+                  <select class="form-select" name="inve" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opción</option>
                     <option value="1">Sí</option>
                     <option value="2">No</option>
                   </select>
@@ -160,16 +159,16 @@
             </div>
             <div class="row">
                 <div class="form-floating col-6">
-                  <select class="form-select" name="inter" aria-label="Floating label select example">
-                    <option value="2" selected>Selecciona una opción</option>
+                  <select class="form-select" name="inter" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opción</option>
                     <option value="1">Sí</option>
                     <option value="2">No</option>
                   </select>
                   <label for="inter">¿Es convenio de intercambio estudiantil?</label>
                 </div>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="movi" aria-label="Floating label select example">
-                    <option value="2" selected>Selecciona una opción</option>
+                  <select class="form-select" name="movi" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opción</option>
                     <option value="1">Sí</option>
                     <option value="2">No</option>
                   </select>
@@ -199,11 +198,11 @@
             <div class="row">
                 <div class="form-floating col-6">
                   <input type="text" style="text-transform: uppercase;" class="form-control" name="convenioVincId" value="<%=data[0].CONVENIO_VINCID%>" required>
-                  <label for="floatingInput">Convenio de vinculación ID</label>
+                  <label for="floatingInput">Clave del Convenio</label>
                 </div>
                 <div class="form-floating col-6">
                   <input type="text" style="text-transform: uppercase;" class="form-control" name="convenioVinc" value="<%=data[0].CONVENIO_VINC%>" required>
-                  <label for="floatingInput">Convenio de vinculación</label>
+                  <label for="floatingInput">Nombre del convenios</label>
                 </div>
             </div>
             <div class="row">
@@ -213,23 +212,40 @@
                 </div>
             </div>
             <div class="row">
+                <%if(data[0].SECTOR_ID== 1){
+                  var d1="selected";
+                  var d2="";
+                  var d3="";
+                }else if (data[0].SECTOR_ID==2){
+                  var d1="";
+                  var d2="selected";
+                  var d3="";
+                }else{
+                  var d1="";
+                  var d2="";
+                  var d3="selected";
+                }%>
                 <div class="form-floating col-6">
-                  <input type="number" class="form-control" name="sectorId" value="<%=data[0].SECTOR_ID%>" required>
-                  <label for="floatingInput">Sector ID</label>
+                  <select class="form-select" name="sectorId" aria-label="Floating label select example" required>
+                    <option value="1" <%=d1%> >Publico</option>
+                    <option value="2" <%=d2%> >Social</option>
+                    <option value="3" <%=d3%> >Urbano</option>
+                  </select>
+                  <label for="sectorId">Sector de la Institución</label>
                 </div>
+                <%if(data[0].ORIGEN_ID== 1){
+                  var d1="selected";
+                  var d2="";
+                }else{
+                  var d1="";
+                  var d2="selected";
+                }%>
                 <div class="form-floating col-6">
-                  <input type="text" style="text-transform: uppercase;" class="form-control" name="sector" value="<%=data[0].SECTOR%>" required>
-                  <label for="floatingInput">Sector</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-floating col-6">
-                  <input type="number" class="form-control" name="origenId" value="<%=data[0].ORIGEN_ID%>" required>
-                  <label for="floatingInput">Origen ID</label>
-                </div>
-                <div class="form-floating col-6">
-                  <input type="text" style="text-transform: uppercase;" class="form-control" name="origen" value="<%=data[0].ORIGEN%>" required>
-                  <label for="floatingInput">Origen</label>
+                  <select class="form-select" name="origenId" aria-label="Floating label select example" required>
+                    <option value="1" <%=d1%>>Nacional</option>
+                    <option value="2" <%=d2%>>Internacional</option>
+                  </select>
+                  <label for="origenId">Origen de la Institución</label>
                 </div>
             </div>
             <div class="row">
@@ -245,7 +261,7 @@
             <div class="row">
                 <%if(data[0].COOP ==1){%>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="coop" aria-label="Floating label select example">
+                  <select class="form-select" name="coop" aria-label="Floating label select example" required>
                     <option selected value="1">Sí</option>
                     <option value="2">No</option>
                   </select>
@@ -253,7 +269,7 @@
                 </div>
                 <%}else{%>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="coop" aria-label="Floating label select example">
+                  <select class="form-select" name="coop" aria-label="Floating label select example" required>
                     <option value="1">Sí</option>
                     <option selected value="2">No</option>
                   </select>
@@ -262,7 +278,7 @@
                 <%}%>
                 <%if(data[0].INVE == 1){%>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="inve" aria-label="Floating label select example">
+                  <select class="form-select" name="inve" aria-label="Floating label select example" required>
                     <option selected value="1">Sí</option>
                     <option value="2">No</option>
                   </select>
@@ -270,7 +286,7 @@
                 </div>
                 <%}else{%>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="inve" aria-label="Floating label select example">
+                  <select class="form-select" name="inve" aria-label="Floating label select example" required>
                     <option value="1">Sí</option>
                     <option selected value="2">No</option>
                   </select>
@@ -281,7 +297,7 @@
             <div class="row">
                 <%if(data[0].INTER == 1){%>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="inter" aria-label="Floating label select example">
+                  <select class="form-select" name="inter" aria-label="Floating label select example" required>
                     <option selected value="1">Sí</option>
                     <option value="2">No</option>
                   </select>
@@ -289,7 +305,7 @@
                 </div>
                 <%}else{%>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="inter" aria-label="Floating label select example">
+                  <select class="form-select" name="inter" aria-label="Floating label select example" required>
                     <option value="1">Sí</option>
                     <option selected value="2">No</option>
                   </select>
@@ -304,7 +320,7 @@
                   var d2="selected";
                 }%>
                 <div class="form-floating col-6">
-                  <select class="form-select" name="movi" aria-label="Floating label select example">
+                  <select class="form-select" name="movi" aria-label="Floating label select example" required>
                     <option <%=d1%> value="1">Sí</option>
                     <option <%=d2%> value="2">No</option>
                   </select>
