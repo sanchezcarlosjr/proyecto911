@@ -9,12 +9,78 @@
     <link href="bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     
     <!--color de los nav items-->
     <link href="js/navitems.css" rel="stylesheet">
     
     <!--css de forms-->
     <link href="js/form.css" rel="stylesheet">
+    
+    <script>
+	  $(document).on('ready', function () {
+		  $('#campus').on('change', function () {
+			  var el = $(this);
+			  $('#unidad').empty();
+        
+			  if (el.val() == "Mexicali") {
+				  $("#unidad").append("<option>FAC. CS. ADMINISTRATIVAS</option>");
+				  $("#unidad").append("<option>FAC. CS. SOC. Y POLITICAS</option>");
+				  $("#unidad").append("<option>FAC. DE ARQUIT. Y DISENO</option>");
+				  $("#unidad").append("<option>FAC. DE CIENCIAS HUMANAS</option>");
+				  $("#unidad").append("<option>FAC. DE ODONTOLOGIA MXLI</option>");
+				  $("#unidad").append("<option>FAC. DE PEDAGOGIA E I. EDUC</option>");
+				  $("#unidad").append("<option>FACULTAD DE MEDICINA MXL</option>");
+				  $("#unidad").append("<option>FACLUTAD DE ARTES MEXICALI</option>");
+				  $("#unidad").append("<option>FACULTAD DE DEPORTES</option>");
+				  $("#unidad").append("<option>FACULTAD DE DERECHO MXLI</option>");
+				  $("#unidad").append("<option>FACULTAD DE ENFERMERIA</option>");
+				  $("#unidad").append("<option>FACULTAD DE IDIOMAS MXLI</option>");
+				  $("#unidad").append("<option>FACULTAD DE INGENIERIA MXLI</option>");
+				  $("#unidad").append("<option>INST. DE INV. SOCIALES</option>");
+				  $("#unidad").append("<option>INSTITUTO DE INGENIERA</option>");
+				  $("#unidad").append("<option>INSTITUTO INV. CULT.-MUSEO</option>");
+				  $("#unidad").append("<option>FAC. DE CS. ADMINIST. SAN FEL.</option>");
+				  $("#unidad").append("<option>FAC. DE ING. Y NEG. CD. GPE. V</option>");
+				  $("#unidad").append("<option>FAC. ING. YNEG. EXT. CD. MORELOS</option>");
+				  $("#unidad").append("<option>INST. DE CIENCIAS AGRICOLAS</option>");
+				  $("#unidad").append("<option>INST. INV. EN CS. VETERINARIAS</option>");
+			  } else if (el.val() == "Tijuana") {
+				  $("#unidad").append("<option>FAC. CS. DE LA ING Y TEC.</option>");
+				  $("#unidad").append("<option>FAC. CS. QUIM. E INGENIERIA</option>");
+				  $("#unidad").append("<option>FAC. DE CONT. Y ADMON. TIJ.</option>");
+				  $("#unidad").append("<option>FAC. DE CS. DE LA SALUD</option>");
+				  $("#unidad").append("<option>FAC. DE ECONOMIA Y REL. INT.</option>");
+				  $("#unidad").append("<option>FAC. DE HUM. Y CS. SOCIALES</option>");
+				  $("#unidad").append("<option>FAC. DE IDIOMAS TIJUANA</option>");
+				  $("#unidad").append("<option>FAC. DE ODONTOLOGIA TIJ.</option>");
+				  $("#unidad").append("<option>FAC. DE TURISMO Y MERC.</option>");
+				  $("#unidad").append("<option>FAC. MEDICINA Y PSICOLOGIA</option>");
+				  $("#unidad").append("<option>FACULTAD DE ARTES TIJUANA</option>");
+				  $("#unidad").append("<option>FACULTAD DE DEPORTES TIJ.</option>");
+				  $("#unidad").append("<option>FACULTAD DE DERECHO TIJUANA</option>");
+				  $("#unidad").append("<option>INST. DE INVEST. HISTORICAS</option>");
+			  } else if (el.val() == "Ensenada") {
+				  $("#unidad").append("<option>ESC. CIENCIAS DE LA SALUD</option>");
+				  $("#unidad").append("<option>FAC. DE CIENCIAS ADMVAS Y SOCIALES</option>");
+				  $("#unidad").append("<option>FAC. DE ENOLOGIA Y GASTRONOMIA</option>");
+				  $("#unidad").append("<option>FAC. INGEN. Y NEGOCIOS S.Q.</option>");
+				  $("#unidad").append("<option>FACULTAD CIENCIAS MARINAS</option>");
+				  $("#unidad").append("<option>FACULTAD DE ARTES ENSENADA</option>");
+				  $("#unidad").append("<option>FACULTAD DE CIENCIAS</option>");
+				  $("#unidad").append("<option>FACULTAD DE DEPORTES ENS</option>");
+				  $("#unidad").append("<option>FACULTAD DE IDIOMAS-ENS.</option>");
+				  $("#unidad").append("<option>FACULTAD DE INGENIERIA ENS</option>");
+				  $("#unidad").append("<option>INST. INV. OCEANOLOGICAS</option>");
+				  $("#unidad").append("<option>INST. INV. Y DES. EDUC. ENS</option>");
+			  } else if (el.val() == "Tecate") {
+				  $("#unidad").append("<option>FAC. CS. DE LA ING.ADM. Y S</option>");
+				  $("#unidad").append("<option>FACULTAD DE ARTES TECATE</option>");
+				  $("#unidad").append("<option>FACULTAD DE IDIOMAS TECATE</option>");
+			  }
+		  });
+	  });
+    </script>
 
     <title>Intercambio Estudiantil de Salida</title>
   </head>
@@ -95,8 +161,14 @@
                   <label for="floatingInput">Clave Campus</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" style="text-transform: uppercase;" class="form-control" name="campus" placeholder="" required>
-                  <label for="floatingInput">Campus</label>
+                  <select class="form-select campus" name="campus" id="campus" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opcion</option>
+                    <option>Ensenada</option>
+                    <option>Mexicali</option>
+                    <option>Tijuana</option>
+                    <option>Tecate</option>
+                  </select>
+                  <label for="campus">Campus</label>
                 </div>
             </div>
             <div class="row">
@@ -105,8 +177,9 @@
                   <label for="floatingInput">Clave Unidad</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" style="text-transform: uppercase;" class="form-control" name="unidad" placeholder="" required>
-                  <label for="floatingInput">Unidad</label>
+                  <select class="form-select" name="unidad" id="unidad" aria-label="Floating label select example" required>
+                  </select>
+                  <label for="unidad">Unidad Academica</label>
                 </div>
             </div>
             <div class="row">
@@ -266,9 +339,38 @@
                   <input type="number" class="form-control" name="campusId" value="<%=data[0].CAMPUS_ID%>" required>
                   <label for="floatingInput">Clave Campus</label>
                 </div>
+                <%
+                if(data[0].CAMPUS_DESC == "Ensenada"){
+                  var d1="selected";
+                  var d2="";
+                  var d3="";
+                  var d4="";
+                }else if(data[0].CAMPUS_DESC == "Mexicali"){
+                  var d1="";
+                  var d2="selected";
+                  var d3="";
+                  var d4="";
+                }else if(data[0].CAMPUS_DESC == "Tijuana"){
+                  var d1="";
+                  var d2="";
+                  var d3="selected";
+                  var d4="";
+                }else{
+                  var d1="";
+                  var d2="";
+                  var d3="";
+                  var d4="selected";
+                }
+                %>
                 <div class="form-floating col-6">
-                  <input type="text" style="text-transform: uppercase;" class="form-control" name="campus" value="<%=data[0].CAMPUS_DESC%>" required>
-                  <label for="floatingInput">Campus</label>
+                  <select class="form-select campus" name="campus" id="campus" aria-label="Floating label select example" required>
+                    <option value="" selected>Selecciona una opcion</option>
+                    <option <%=d1%>>Ensenada</option>
+                    <option <%=d2%>>Mexicali</option>
+                    <option <%=d3%>>Tijuana</option>
+                    <option <%=d4%>>Tecate</option>
+                  </select>
+                  <label for="campus">Campus</label>
                 </div>
             </div>
             <div class="row">
@@ -277,8 +379,10 @@
                   <label for="floatingInput">Clave Unidad</label>
                 </div>
                 <div class="form-floating col-6">
-                  <input type="text" style="text-transform: uppercase;" class="form-control" name="unidad" value="<%=data[0].UNIDAD%>" required>
-                  <label for="floatingInput">Unidad</label>
+                  <select class="form-select" name="unidad" id="unidad" aria-label="Floating label select example" required>
+                    <option><%=data[0].UNIDAD%></option>
+                  </select>
+                  <label for="unidad">Unidad Academica</label>
                 </div>
             </div>
             <div class="row">
