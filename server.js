@@ -352,7 +352,7 @@ app.post('/convenios',encoder,function(req,res){
       origen="Internacional";
     }
     
-    var values=[parseInt(req.body.periodoId),req.body.periodo,parseInt(req.body.convenioVincId),
+    var values=[parseInt(req.body.periodoId),req.body.periodo,req.body.convenioVincId,
       req.body.convenioVinc,req.body.fecha,parseInt(req.body.sectorId),
       sector,parseInt(req.body.origenId),origen,
       req.body.paisVinc,req.body.instOrg,parseInt(req.body.coop),
@@ -682,7 +682,7 @@ app.post('/', encoder, function(req, res){
     }
     
     var values = [
-      [parseInt(req.body.periodoId),req.body.periodo,parseInt(req.body.convenioVincId),
+      [parseInt(req.body.periodoId),req.body.periodo,req.body.convenioVincId,
       req.body.convenioVinc,req.body.fecha,parseInt(req.body.sectorId),
       sector,parseInt(req.body.origenId),origen,
       req.body.paisVinc,req.body.instOrg,parseInt(req.body.coop),
