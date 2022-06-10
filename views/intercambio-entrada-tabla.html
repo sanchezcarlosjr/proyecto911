@@ -12,11 +12,6 @@
     
     <!--color de los nav items-->
     <link href="js/navitems.css" rel="stylesheet">
-    <style>
-      input.right {
-        float: right;
-      }
-    </style>
 
     <title>Sistema 9/11</title>
   </head>
@@ -25,7 +20,7 @@
     <div class="row">
     
     
-        <div class="col-sm-4" style="background-color:#007141">
+        <div class="col-sm-3" style="background-color:#007141">
         <!--La barra de navegacion lateral va aqui-->
         <ul class="nav flex-column" style="background-color:#007141;">
         <li class="nav-item" style="margin-top:35px;">
@@ -105,7 +100,7 @@
         </div>
         
         <!-- aqui ira el contenido que se muestre segun la opcion elegida---------------------->
-        <div class="col-8">
+        <div class="col-9">
         <article>    
             <div class="text-center">
                  <img class="logo"  src="imagenes/uabc.png" width="60" alt="">
@@ -114,50 +109,56 @@
              <h class="fw-bold text-center py-2">Sistema 9/11</h>
             </div>
                         <!--AQUI INICIA TABLA DE REGISTROS SIN VALIDAR POR COORDINADOR JUDITH O QUIEN SEA   --------->
-            
             <br>
             <br>
-            <h4>Solicitudes de registro</h4> 
-            <form class="float-right" action="/usuarios" method="POST">
-              <input type="hidden" name="table" value="newcoor" >
-              <button type="submit" class="btn btn-success edit">Añadir usuario coordinador</button>
-            </form>
+            <h4>Registros añadidos recientemente</h4>
+            <br>
+            <h6>Intercambio Estudiantil de Entrada</h6>
             <table class="table">
             <thead>
               <tr>
-                <th scope="col">Correo</th>
-                <th scope="col">Nombre(s)</th>
-                <th scope="col">Apellido Paterno</th>
-                <th scope="col">Apellido Materno</th>
-                <th scope="col">Rol</th>
+                <th scope="col">Validado</th>
+                <th scope="col">Periodo</th>
+                <th width="col">Campus</th>
+                <th width="col">Unidad</th>
+                <th width="col">Matricula</th>
+                <th width="col">Estudiante Nombre</th>
+                <th width="col">Autor</th>
               </tr>
             </thead>
             <tbody>
-              <%if (data != '') {%>
               <% 
+              var tmp;
               if(data.length){
               var len=10;
               if(data.length <10)
                 len=data.length;
               for(var i = 0; i < len; i++) {
+              
+              if(data[i].validar==0){
+                tmp="No";
+              }else
+                tmp="Si";
               %>  
               <tr>
-                <th scope="row"><%= data[i].USUARIO %></th>
-                <td><%= data[i].NOMBRE%></td>
-                <td><%= data[i].APELLIDO1%></td>
-                <td><%= data[i].APELLIDO2%></td>
-                <td><%= data[i].TIPO%></td>
+                <th scope="row"><%= tmp%></th>
+                <td><%= data[i].PERIODO%></td>
+                <td><%= data[i].CAMPUS_DESC%></td>
+                <td><%= data[i].UNIDAD%></td>
+                <td><%= data[i].ESTUDIANTE_ID%></td>
+                <td><%= data[i].ESTUDIANTE_NOMBRE%></td>
+                <td><%= data[i].AUTOR%></td>
                 <td>
-                <form action="/usuarios" method="POST">
-                <input type="hidden" name="table" value="aprobar" >
-                <input type="hidden" name="usuario" value="<%=data[i].USUARIO%>" >
-                <button type="submit" class="btn-sm btn-success edit">Aprobar</button>
-                </form>
+                <form action="/main" method="POST">
+                <input type="hidden" name="table" value="intercambio-entrada" >
+                <input type="hidden" name="id" value="<%=data[i].ID%>" >
+                <button type="submit" class="btn-sm btn-success edit">Revisar</button>
+                </form>                                            
                </td>
-               <td>
+                <td>
                 <form action="/delete" method="POST">
-                <input type="hidden" name="table" value="usuarios" >
-                <input type="hidden" name="usuario" value="<%=data[i].USUARIO%>" >
+                <input type="hidden" name="table" value="intercambio_estudiantil_entrada" >
+                <input type="hidden" name="id" value="<%=data[i].ID%>" >
                 <button type="submit" class="btn-sm btn-danger  edit">Eliminar</button>
                 </form>
                </td>
@@ -171,55 +172,8 @@
                 <% } %>    
               
             </tbody>
-            <%}%>
-            
-            </table><br><br>
-            <h4>Solicitud de REINICIO DE CONTRASEÑA</h4>
-            <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Correo</th>
-                <th scope="col">Nombre(s)</th>
-                <th scope="col">Apellido Paterno</th>
-                <th scope="col">Apellido Materno</th>
-                <th scope="col">Rol</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%if (data2 != '') {%>
-              <% 
-              if(data2.length){
-              var len=10;
-              if(data2.length <10)
-                len=data2.length;
-              for(var i = 0; i < len; i++) {
-              %>  
-              <tr>
-                <th scope="row"><%= data2[i].USUARIO %></th>
-                <td><%= data2[i].NOMBRE%></td>
-                <td><%= data2[i].APELLIDO1%></td>
-                <td><%= data2[i].APELLIDO2%></td>
-                <td><%= data2[i].TIPO%></td>
-                <td>
-                <form action="/usuarios" method="POST">
-                <input type="hidden" name="table" value="newpass" >
-                <input type="hidden" name="usuario" value="<%=data2[i].USUARIO%>" >
-                <button type="submit" class="btn btn-success edit">Aprobar</button>
-                </form>                             
-               </td>
-              </tr>
-              <% }
-                       
-               }else{ %>
-                   <tr>
-                      <td colspan="3">Vacio</td>
-                   </tr>
-                <% } %>    
-              
-            </tbody>
             </table><br><br>
             <br>
-            <%}%>
        </article>
         </div>
     </div>

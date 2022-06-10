@@ -23,7 +23,7 @@
     <div class="row">
     
     
-        <div class="col-sm-3" style="background-color:#007141">
+        <div class="col-sm-4" style="background-color:#007141">
         <!--La barra de navegacion lateral va aqui-->
         <ul class="nav flex-column" style="background-color:#007141;">
         <li class="nav-item" style="margin-top:35px;">
@@ -48,9 +48,11 @@
               <li><a class="dropdown-item" href="/intercambio-salida">Salida</a></li>
             </ul>
           </li>
+          <%if(tipo=='Coordinador'){%>
           <li class="nav-item">
             <a class="nav-link" href="/convenios">Convenios</a>
           </li>
+          <%}%>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Reportes</a>
             <ul class="dropdown-menu">
@@ -61,8 +63,31 @@
               <li><a class="dropdown-item" href="/excel-intercambio-entrada">Intercambio de entrada</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="/excel-intercambio-salida">Intercambio de salida</a></li>
+              <%if(tipo=='Coordinador'){%>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="/excel-convenios">Convenios</a></li>
+              <%}%>
+            </ul>
+          </li>
+          <%if(tipo=='Coordinador'){%>
+          <li class="nav-item">
+            <a class="nav-link" href="/usuarios">Administrar Usuarios</a>
+          </li>
+          <%}%>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Validar y revisar</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/movilidad-entrada-tabla">Movilidad de entrada</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/movilidad-salida-tabla">Movilidad de salida</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/intercambio-entrada-tabla">Intercambio de entrada</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/intercambio-salida-tabla">Intercambio de salida</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <%if(tipo=='Coordinador'){%>
+              <li><a class="dropdown-item" href="/convenios-tabla">Convenios</a></li>
+              <%}%>
             </ul>
           </li>
           <li class="nav-item" style="margin-top:50px">

@@ -20,7 +20,7 @@
     <div class="row">
     
     
-        <div class="col-sm-3" style="background-color:#007141">
+        <div class="col-sm-4" style="background-color:#007141">
         <!--La barra de navegacion lateral va aqui-->
         <ul class="nav flex-column" style="background-color:#007141;">
         <li class="nav-item" style="margin-top:35px;">
@@ -71,6 +71,22 @@
             <a class="nav-link" href="/usuarios">Administrar Usuarios</a>
           </li>
           <%}%>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Validar y revisar</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/movilidad-entrada-tabla">Movilidad de entrada</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/movilidad-salida-tabla">Movilidad de salida</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/intercambio-entrada-tabla">Intercambio de entrada</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/intercambio-salida-tabla">Intercambio de salida</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <%if(tipo=='Coordinador'){%>
+              <li><a class="dropdown-item" href="/convenios-tabla">Convenios</a></li>
+              <%}%>
+            </ul>
+          </li>
           <li class="nav-item" style="margin-top:50px">
             <a class="nav-link" href="#">Ayuda</a>
           </li>
@@ -84,7 +100,7 @@
         </div>
         
         <!-- aqui ira el contenido que se muestre segun la opcion elegida---------------------->
-        <div class="col-9">
+        <div class="col-8">
         <article>    
             <div class="text-center">
                  <img class="logo"  src="imagenes/uabc.png" width="60" alt="">
@@ -93,315 +109,7 @@
              <h class="fw-bold text-center py-2">Sistema 9/11</h>
             </div>
                         <!--AQUI INICIA TABLA DE REGISTROS SIN VALIDAR POR COORDINADOR JUDITH O QUIEN SEA   --------->
-            <%if (data != 'NoAuth') {%>
-            <br>
-            <br>
-            <h4>Registros añadidos recientemente</h4>
-            <br>
-            <h6>Movilidad Academica Entrada</h6>
-            <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Validado</th>
-                <th scope="col">Periodo</th>
-                <th width="col">Campus</th>
-                <th width="col">Unidad</th>
-                <th width="col">Numero Visitante</th>
-                <th width="col">Visitante Nombre</th>
-                <th width="col">Autor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% 
-              var tmp;
-              if(data.length){
-              var len=10;
-              if(data.length <10)
-                len=data.length;
-              for(var i = 0; i < len; i++) {
-              
-              if(data[i].validar==0){
-                tmp="No";
-              }else
-                tmp="Si";
-              %>  
-              <tr>
-                <th scope="row"><%= tmp %></th>
-                <td><%= data[i].PERIODO%></td>
-                <td><%= data[i].CAMPUS_DESC%></td>
-                <td><%= data[i].UNIDAD%></td>
-                <td><%= data[i].VISITANTE_ID%></td>
-                <td><%= data[i].VISITANTE_NOMBRE%></td>
-                <td><%= data[i].AUTOR%></td>
-                <td>
-                <form action="/main" method="POST">
-                <input type="hidden" name="table" value="movilidad-entrada" >
-                <input type="hidden" name="id" value="<%=data[i].ID%>" >
-                <button type="submit" class="btn-sm btn-success edit">Revisar</button>
-                </form>                             
-               </td>
-               <td>
-                <form action="/delete" method="POST">
-                <input type="hidden" name="table" value="movilidad_academica_entrada" >
-                <input type="hidden" name="id" value="<%=data[i].ID%>" >
-                <button type="submit" class="btn-sm btn-danger edit">Eliminar</button>
-                </form>
-               </td>
-              </tr>
-              <% }
-                       
-               }else{ %>
-                   <tr>
-                      <td colspan="3">Vacio</td>
-                   </tr>
-                <% } %>    
-              
-            </tbody>
-            </table><br><br>
-            <h6>Movilidad Academica Salida</h6>
-            <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Validado</th>
-                <th scope="col">Periodo</th>
-                <th width="col">Campus</th>
-                <th width="col">Unidad</th>
-                <th width="col">Numero Empleado</th>
-                <th width="col">Nombre Empleado</th>
-                <th width="col">Autor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% 
-              var tmp;
-              if(data2.length){
-              var len=10;
-              if(data2.length <10)
-                len=data2.length;
-              for(var i = 0; i < len; i++) {
-              
-              if(data2[i].validar==0){
-                tmp="No";
-              }else
-                tmp="Si";
-              %>  
-              <tr>
-                <th scope="row"><%= tmp %></th>
-                <td><%= data2[i].PERIODO%></td>
-                <td><%= data2[i].CAMPUS_DESC%></td>
-                <td><%= data2[i].UNIDAD%></td>
-                <td><%= data2[i].EMPLEADO_ID%></td>
-                <td><%= data2[i].EMPLEADO_NOMBRE%></td>
-                <td><%= data2[i].AUTOR%></td>
-                <td>
-                <form action="/main" method="POST">
-                <input type="hidden" name="table" value="movilidad-salida" >
-                <input type="hidden" name="id" value="<%=data2[i].ID%>" >
-                <button type="submit" class="btn-sm btn-success edit">Revisar</button>
-                </form>
-               </td>
-               <td>
-                <form action="/delete" method="POST">
-                <input type="hidden" name="table" value="movilidad_academica_salida" >
-                <input type="hidden" name="id" value="<%=data2[i].ID%>" >
-                <button type="submit" class="btn-sm btn-danger edit">Eliminar</button>
-                </form>
-               </td>
-              </tr>
-              <% }
-                       
-               }else{ %>
-                   <tr>
-                      <td colspan="3">Vacio</td>
-                   </tr>
-                <% } %>    
-              
-            </tbody>
-            </table><br><br>
-            <h6>Intercambio Estudiantil de Entrada</h6>
-            <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Validado</th>
-                <th scope="col">Periodo</th>
-                <th width="col">Campus</th>
-                <th width="col">Unidad</th>
-                <th width="col">Matricula</th>
-                <th width="col">Estudiante Nombre</th>
-                <th width="col">Autor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% 
-              var tmp;
-              if(data3.length){
-              var len=10;
-              if(data3.length <10)
-                len=data3.length;
-              for(var i = 0; i < len; i++) {
-              
-              if(data3[i].validar==0){
-                tmp="No";
-              }else
-                tmp="Si";
-              %>  
-              <tr>
-                <th scope="row"><%= tmp%></th>
-                <td><%= data3[i].PERIODO%></td>
-                <td><%= data3[i].CAMPUS_DESC%></td>
-                <td><%= data3[i].UNIDAD%></td>
-                <td><%= data3[i].ESTUDIANTE_ID%></td>
-                <td><%= data3[i].ESTUDIANTE_NOMBRE%></td>
-                <td><%= data3[i].AUTOR%></td>
-                <td>
-                <form action="/main" method="POST">
-                <input type="hidden" name="table" value="intercambio-entrada" >
-                <input type="hidden" name="id" value="<%=data3[i].ID%>" >
-                <button type="submit" class="btn-sm btn-success edit">Revisar</button>
-                </form>                                            
-               </td>
-                <td>
-                <form action="/delete" method="POST">
-                <input type="hidden" name="table" value="intercambio_estudiantil_entrada" >
-                <input type="hidden" name="id" value="<%=data3[i].ID%>" >
-                <button type="submit" class="btn-sm btn-danger  edit">Eliminar</button>
-                </form>
-               </td>
-              </tr>
-              <% }
-                       
-               }else{ %>
-                   <tr>
-                      <td colspan="3">Vacio</td>
-                   </tr>
-                <% } %>    
-              
-            </tbody>
-            </table><br><br>
-            <h6>Intercambio Estudiantil Salida</h6>
-            <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Validado</th>
-                <th scope="col">Periodo</th>
-                <th width="col">Campus</th>
-                <th width="col">Unidad</th>
-                <th width="col">Clave Visitante</th>
-                <th width="col">Nombre Visitante</th>
-                <th width="col">Autor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% 
-              var tmp;
-              if(data4.length){
-              var len=10;
-              if(data4.length <10)
-                len=data4.length;
-              for(var i = 0; i < len; i++) {
-              
-              if(data4[i].validar==0){
-                tmp="No";
-              }else
-                tmp="Si";
-              %>  
-              <tr>
-                <th scope="row"><%= tmp%></td>
-                <td><%= data4[i].PERIODO%></td>
-                <td><%= data4[i].CAMPUS_DESC%></td>
-                <td><%= data4[i].UNIDAD%></td>
-                <td><%= data4[i].ESTUDIANTE_ID%></td>
-                <td><%= data4[i].ESTUDIANTE_NOMBRE%></td>
-                <td><%= data4[i].AUTOR%></td>
-                <td>
-                <form action="/main" method="POST">
-                <input type="hidden" name="table" value="intercambio-salida" >
-                <input type="hidden" name="id" value="<%=data4[i].ID%>" >
-                <button type="submit" class="btn-sm btn-success edit">Revisar</button>
-                </form>                                            
-               </td>
-               <td>
-                <form action="/delete" method="POST">
-                <input type="hidden" name="table" value="intercambio_estudiantil_salida" >
-                <input type="hidden" name="id" value="<%=data4[i].ID%>" >
-                <button type="submit" class="btn-sm btn-danger  edit">Eliminar</button>
-                </form>
-               </td>
-              </tr>
-              <% }
-                       
-               }else{ %>
-                   <tr>
-                      <td colspan="3">Vacio</td>
-                   </tr>
-                <% } %>    
-              
-            </tbody>
-            </table><br><br>
-            <%if(tipo == 'Coordinador'){%>
-            <h6>Convenios</h6>
-            <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Validado</th>
-                <th>Periodo</th>
-                <th width="col">Convenio</th>
-                <th width="col">Fecha</th>
-                <th width="col">Sector</th>
-                <th width="col">Origen</th>
-                <th width="col">Autor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% 
-              var tmp;
-              if(data5.length){
-              var len=10;
-              if(data5.length <10)
-                len=data5.length;
-              for(var i = 0; i < len; i++) {
-              
-              if(data5[i].validar==0){
-                tmp="No";
-              }else
-                tmp="Si";
-              %>  
-              <tr>
-                <th scope="row"><%= tmp%></th>
-                <td><%= data5[i].PERIODO%></td>
-                <td><%= data5[i].CONVENIO_VINC%></td>
-                <td><%= data5[i].FECHA%></td>
-                <td><%= data5[i].SECTOR%></td>
-                <td><%= data5[i].ORIGEN%></td>
-                <td><%= data5[i].AUTOR%></td>
-                <td>
-                <form action="/main" method="POST">
-                <input type="hidden" name="table" value="convenios" >
-                <input type="hidden" name="id" value="<%=data5[i].ID%>" >
-                <button type="submit" class="btn-sm btn-success edit">Revisar</button>
-                </form>
-               </td>
-               <td>
-                <form action="/delete" method="POST">
-                <input type="hidden" name="table" value="convenios" >
-                <input type="hidden" name="id" value="<%=data5[i].ID%>" >
-                <button type="submit" class="btn-sm btn-danger  edit">Eliminar</button>
-                </form>
-               </td>
-              </tr>
-              <% }
-                       
-               }else{ %>
-                   <tr>
-                      <td colspan="3">Vacio</td>
-                   </tr>
-                <% } %>    
-              
-            </tbody>
-            </table><br>
-            <%}%>
-            <br>
-            <%}%>
+            
        </article>
         </div>
     </div>

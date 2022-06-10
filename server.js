@@ -31,7 +31,7 @@ app.use(session({secret: "Shh, its a secret!"}));
 
 router.get('/',function(req,res){
   if(req.session.username){
-    res.render('views/main.html',{name:req.session.username});
+    res.render('views/main.html',{name:req.session.username,tipo:req.session.tipo});
   }else{
     res.render('views/login.html',{data:''});
   }
@@ -39,90 +39,145 @@ router.get('/',function(req,res){
 
 router.get('/main',function(req,res){
   if(req.session.username){
-    if(req.session.tipo=="Coordinador"){
-      var con = require('./config');
-      con.query('SELECT * FROM movilidad_academica_entrada order by validar',function(err,rows)     {
-        if(err){
-         throw err; 
-         res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});   
-        }else{
-            con.query('SELECT * FROM movilidad_academica_salida order by validar',function(err,rows2)     {
-              if(err){
-               throw err; 
-               res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
-              }else{
-                con.query('SELECT * FROM intercambio_estudiantil_entrada order by validar',function(err,rows3)     {
-                  if(err){
-                   throw err; 
-                   res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
-                  }else{
-                    con.query('SELECT * FROM intercambio_estudiantil_salida order by validar',function(err,rows4)     {
-                      if(err){
-                       throw err; 
-                       res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
-                      }else{
-                        con.query('SELECT * FROM convenios order by validar',function(err,rows5)     {
-                          if(err){
-                           throw err; 
-                           res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
-                          }else{
-                              res.render('views/main.html',{name:req.session.username,tipo:req.session.tipo,data:rows,data2:rows2,data3:rows3,data4:rows4,data5:rows5});
-                          }
-                        });
-                      }
-                    });
-                  }
-                });
-              }
-            });
-        }
-       });
-    }else{
-      //EL USUARIO NO ES COORDINADOR O ADMIN
-      //res.render('views/main.html',{name:req.session.usename,data:'NoAuth'});
-      var con = require('./config');
-      con.query('SELECT * FROM movilidad_academica_entrada where AUTOR=? order by validar',req.session.username,function(err,rows)     {
-        if(err){
-         throw err; 
-         res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});   
-        }else{
-            con.query('SELECT * FROM movilidad_academica_salida where AUTOR=? order by validar',req.session.username,function(err,rows2)     {
-              if(err){
-               throw err; 
-               res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
-              }else{
-                con.query('SELECT * FROM intercambio_estudiantil_entrada where AUTOR=? order by validar',req.session.username,function(err,rows3)     {
-                  if(err){
-                   throw err; 
-                   res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
-                  }else{
-                    con.query('SELECT * FROM intercambio_estudiantil_salida where AUTOR=? order by validar',req.session.username,function(err,rows4)     {
-                      if(err){
-                       throw err; 
-                       res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
-                      }else{
-                        con.query('SELECT * FROM convenios where AUTOR=? order by validar',req.session.username,function(err,rows5)     {
-                          if(err){
-                           throw err; 
-                           res.render('views/main.html',{name:req.session.username,data:'',data2:'',data3:'',data4:'',data5:''});
-                          }else{
-                              res.render('views/main.html',{name:req.session.username,tipo:req.session.tipo,data:rows,data2:rows2,data3:rows3,data4:rows4,data5:rows5});
-                          }
-                        });
-                      }
-                    });
-                  }
-                });
-              }
-            });
-        }
-       });
-    }
-
+    res.render('views/main.html',{name:req.session.username,tipo:req.session.tipo})
   }else{
     res.redirect("/");
   }
 });
+
+router.get('/movilidad-entrada-tabla',function(req,res){
+  var con = require('./config');
+  if(req.session.username){
+    if(req.session.tipo=="Coordinador"){
+      con.query('SELECT * FROM movilidad_academica_entrada order by validar',function(err,rows)     {
+        if(err){
+         throw err;
+         res.render('views/movilidad-entrada-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:''});
+         }else{
+          res.render('views/movilidad-entrada-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:rows});
+         }
+      });
+    }else{
+      con.query('SELECT * FROM movilidad_academica_entrada where AUTOR=? order by validar',req.session.username,function(err,rows)     {
+        if(err){
+         throw err; 
+         res.render('views/movilidad-entrada-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:''});
+        }else{
+          res.render('views/movilidad-entrada-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:rows});
+        }
+      });
+    }
+  }else{
+    res.redirect("/");
+  }
+});
+
+router.get('/movilidad-salida-tabla',function(req,res){
+  var con = require('./config');
+  if(req.session.username){
+    if(req.session.tipo=="Coordinador"){
+      con.query('SELECT * FROM movilidad_academica_salida order by validar',function(err,rows)     {
+        if(err){
+         res.render('views/movilidad-salida-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:''});
+         }else{
+          res.render('views/movilidad-salida-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:rows});
+         }
+      });
+    }else{
+      con.query('SELECT * FROM movilidad_academica_salida where AUTOR=? order by validar',req.session.username,function(err,rows)     {
+        if(err){
+         res.render('views/movilidad-salida-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:''});
+        }else{
+          res.render('views/movilidad-salida-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:rows});
+        }
+      });
+    }
+  }else{
+    res.redirect("/");
+  }
+});
+
+router.get('/intercambio-entrada-tabla',function(req,res){
+  var con = require('./config');
+  if(req.session.username){
+    if(req.session.tipo=="Coordinador"){
+      con.query('SELECT * FROM intercambio_estudiantil_entrada order by validar',function(err,rows)     {
+        if(err){
+         throw err;
+         res.render('views/intercambio-entrada-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:''});
+         }else{
+          res.render('views/intercambio-entrada-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:rows});
+         }
+      });
+    }else{
+      con.query('SELECT * FROM intercambio_academica_entrada where AUTOR=? order by validar',req.session.username,function(err,rows)     {
+        if(err){
+         throw err; 
+         res.render('views/intercambio-entrada-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:''});
+        }else{
+          res.render('views/intercambio-entrada-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:rows});
+        }
+      });
+    }
+  }else{
+    res.redirect("/");
+  }
+});
+
+router.get('/intercambio-salida-tabla',function(req,res){
+  var con = require('./config');
+  if(req.session.username){
+    if(req.session.tipo=="Coordinador"){
+      con.query('SELECT * FROM intercambio_estudiantil_salida order by validar',function(err,rows)     {
+        if(err){
+         throw err;
+         res.render('views/intercambio-salida-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:''});
+         }else{
+          res.render('views/intercambio-salida-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:rows});
+         }
+      });
+    }else{
+      con.query('SELECT * FROM intercambio_academica_salida where AUTOR=? order by validar',req.session.username,function(err,rows)     {
+        if(err){
+         throw err; 
+         res.render('views/intercambio-salida-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:''});
+        }else{
+          res.render('views/intercambio-salida-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:rows});
+        }
+      });
+    }
+  }else{
+    res.redirect("/");
+  }
+});
+
+router.get('/convenios-tabla',function(req,res){
+  var con = require('./config');
+  if(req.session.username && req.session.tipo=="Coordinador"){
+    if(req.session.tipo=="Coordinador"){
+      con.query('SELECT * FROM convenios order by validar',function(err,rows)     {
+        if(err){
+         throw err;
+         res.render('views/convenios-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:''});
+         }else{
+          res.render('views/convenios-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:rows});
+         }
+      });
+    }else{
+      con.query('SELECT * FROM intercambio_academica_entrada where AUTOR=? order by validar',req.session.username,function(err,rows)     {
+        if(err){
+         throw err; 
+         res.render('views/convenios-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:''});
+        }else{
+          res.render('views/convenios-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:rows});
+        }
+      });
+    }
+  }else{
+    res.redirect("/");
+  }
+});
+
 
 //aqui convertimos la data de la base de datos a excel y la exportamos
 router.get('/excel-movilidad-entrada', exportData);
@@ -134,7 +189,7 @@ router.get('/excel-convenios', exportData5);
 //formularios
 router.get('/movilidad-entrada',function(req,res){
   if(req.session.username){
-    res.render('views/movilidad-entrada.html',{name:req.session.username,data:''});
+    res.render('views/movilidad-entrada.html',{name:req.session.username,data:'',tipo:req.session.tipo});
   }else{
     res.redirect("/");
   }
@@ -142,7 +197,7 @@ router.get('/movilidad-entrada',function(req,res){
 
 router.get('/movilidad-salida',function(req,res){
   if(req.session.username){
-    res.render('views/movilidad-salida.html',{name:req.session.username,data:''});
+    res.render('views/movilidad-salida.html',{name:req.session.username,data:'',tipo:req.session.tipo});
   }else{
     res.redirect("/");
   }
@@ -150,7 +205,7 @@ router.get('/movilidad-salida',function(req,res){
 
 router.get('/intercambio-entrada',function(req,res){
   if(req.session.username){
-    res.render('views/intercambio-entrada.html',{name:req.session.username,data:''});
+    res.render('views/intercambio-entrada.html',{name:req.session.username,data:'',tipo:req.session.tipo});
   }else{
     res.redirect("/");
   }
@@ -158,7 +213,7 @@ router.get('/intercambio-entrada',function(req,res){
 
 router.get('/intercambio-salida',function(req,res){
   if(req.session.username){
-    res.render('views/intercambio-salida.html',{name:req.session.username,data:''});
+    res.render('views/intercambio-salida.html',{name:req.session.username,data:'',tipo:req.session.tipo});
   }else{
     res.redirect("/");
   }
@@ -166,7 +221,7 @@ router.get('/intercambio-salida',function(req,res){
 
 router.get('/convenios',function(req,res){
   if(req.session.username){
-    res.render('views/convenios.html',{name:req.session.username,data:''});
+    res.render('views/convenios.html',{name:req.session.username,data:'',tipo:req.session.tipo});
   }else{
     res.redirect("/");
   }
