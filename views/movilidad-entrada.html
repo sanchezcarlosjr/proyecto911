@@ -540,7 +540,11 @@
                 <input type="hidden" name="id" value="<%=data[0].ID%>" >
                 <input type="hidden" name="form" value="guardar">
                 <div class="col-sm-4">
+                    <%if(tipo=="Coordinador"){%>
                     <button type="submit" class="btn btn-primary mb-3">Guardar y Validar</button>
+                    <%}else{%>
+                    <button type="submit" class="btn btn-primary mb-3">Guardar cambios</button>
+                    <%}%>
                 </div>
             </div>
         </form>

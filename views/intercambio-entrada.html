@@ -646,8 +646,8 @@
                 }%>
                 <div class="form-floating col-sm">
                   <select class="form-select" name="finanId" aria-label="Floating label select example" required>
-                    <option <%=d1%>value="1">Si</option>
-                    <option <%=d2%>value="2">No</option>
+                    <option <%=d1%> value="1">Si</option>
+                    <option <%=d2%> value="2">No</option>
                   </select>
                   <label for="origenId">¿Recibió financiamiento?</label>
                 </div>
@@ -670,7 +670,11 @@
                 <input type="hidden" name="id" value="<%=data[0].ID%>" >
                 <input type="hidden" name="form" value="guardar">
                 <div class="col-sm-4">
+                    <%if(tipo=="Coordinador"){%>
                     <button type="submit" class="btn btn-primary mb-3">Guardar y Validar</button>
+                    <%}else{%>
+                    <button type="submit" class="btn btn-primary mb-3">Guardar cambios</button>
+                    <%}%>
                 </div>
             </div>
         </form>

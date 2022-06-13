@@ -110,7 +110,7 @@ router.get('/intercambio-entrada-tabla',function(req,res){
          }
       });
     }else{
-      con.query('SELECT * FROM intercambio_academica_entrada where AUTOR=? order by validar',req.session.username,function(err,rows)     {
+      con.query('SELECT * FROM intercambio_estudiantil_entrada where AUTOR=? order by validar',req.session.username,function(err,rows)     {
         if(err){
          throw err; 
          res.render('views/intercambio-entrada-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:''});
@@ -137,7 +137,7 @@ router.get('/intercambio-salida-tabla',function(req,res){
          }
       });
     }else{
-      con.query('SELECT * FROM intercambio_academica_salida where AUTOR=? order by validar',req.session.username,function(err,rows)     {
+      con.query('SELECT * FROM intercambio_estudiantil_salida where AUTOR=? order by validar',req.session.username,function(err,rows)     {
         if(err){
          throw err; 
          res.render('views/intercambio-salida-tabla.html',{name:req.session.username,tipo:req.session.tipo,data:''});
@@ -259,7 +259,7 @@ router.get('/signout',function(req,res){
   res.redirect('/');
 });
 router.get('/ayuda',function(req,res){
-  res.render('views/ayuda.html');
+  res.render('views/ayuda.html',{data:''});
 });
 
 
@@ -267,6 +267,16 @@ router.get('/ayuda',function(req,res){
 app.use('/', router);
 
 //main post methods here, we get main request, specific when coordinador wants to edit/validate some row.
+
+app.post('/ayuda',encoder,function(req,res){
+    var con = require('./config');
+    var sql="update usuarios set NEWPASS=1 where USUARIO=?";
+    sql="update usuarios set NEWPASS=1 where USUARIO=?";
+    con.query(sql,[req.body.usuario],function(err,result){
+      if (err) throw err;
+    });
+    res.render('views/ayuda.html',{data:'success'});
+});
 
 app.post('/delete',encoder,function(req,res){
   var con = require('./config');
@@ -282,7 +292,17 @@ app.post('/delete',encoder,function(req,res){
     con.query(sql,function(err,result){
       if(err)
         throw err;
-      res.redirect('/main');
+      if(req.body.table=="movilidad_academica_entrada"){
+        res.redirect('/movilidad-entrada-tabla');
+      }else if(req.body.table=="movilidad_academica_salida"){
+        res.redirect('/movilidad-salida-tabla');
+      }else if(req.body.table=="intercambio_estudiantil_entrada"){
+        res.redirect('/intercambio-entrada-tabla');
+      }else if(req.body.table=="intercambio_estudiantil_salida"){
+        res.redirect('/intercambio-salida-tabla');
+      }else if(req.body.table=="convenios"){
+        res.redirect('/convenios-tabla');
+      }
     });
   }
 });
@@ -342,7 +362,7 @@ app.post('/main',encoder, function(req, res) {
       if(err){
         throw error;
       }else{
-        res.render('views/convenios.html',{name:req.session.username,data:row});
+        res.render('views/convenios.html',{name:req.session.username,tipo:req.session.tipo,data:row});
       }
     });
   }else if(table== "movilidad-entrada"){
@@ -351,7 +371,7 @@ app.post('/main',encoder, function(req, res) {
       if(err){
         throw error;
       }else{
-        res.render('views/movilidad-entrada.html',{name:req.session.username,data:row});
+        res.render('views/movilidad-entrada.html',{name:req.session.username,tipo:req.session.tipo,data:row});
       }
     });
   }else if(table== "movilidad-salida"){
@@ -360,7 +380,7 @@ app.post('/main',encoder, function(req, res) {
       if(err){
         throw error;
       }else{
-        res.render('views/movilidad-salida.html',{name:req.session.username,data:row});
+        res.render('views/movilidad-salida.html',{name:req.session.username,tipo:req.session.tipo,data:row});
       }
     });
   }else if(table== "intercambio-entrada"){
@@ -369,7 +389,7 @@ app.post('/main',encoder, function(req, res) {
       if(err){
         throw error;
       }else{
-        res.render('views/intercambio-entrada.html',{name:req.session.username,data:row});
+        res.render('views/intercambio-entrada.html',{name:req.session.username,tipo:req.session.tipo,data:row});
       }
     });
   }else if(table== "intercambio-salida"){
@@ -378,7 +398,7 @@ app.post('/main',encoder, function(req, res) {
       if(err){
         throw error;
       }else{
-        res.render('views/intercambio-salida.html',{name:req.session.username,data:row});
+        res.render('views/intercambio-salida.html',{name:req.session.username,tipo:req.session.tipo,data:row});
       }
     });
   }
@@ -418,7 +438,7 @@ app.post('/convenios',encoder,function(req,res){
       console.log("Number of records updated: " + result.affectedRows);
     });
   }
-  res.redirect('/main');
+  res.redirect('/convenios-tabla');
 });
 
 app.post('/movilidad-entrada',encoder,function(req,res){
@@ -469,7 +489,7 @@ app.post('/movilidad-entrada',encoder,function(req,res){
       console.log("Number of records updated: " + result.affectedRows);
     });
   }
-  res.redirect('/main');
+  res.redirect('/movilidad-entrada-tabla');
 });
 
 app.post('/movilidad-salida',encoder,function(req,res){
@@ -514,7 +534,7 @@ app.post('/movilidad-salida',encoder,function(req,res){
       console.log("Number of records updated: " + result.affectedRows);
     });
   }
-  res.redirect('/main');
+  res.redirect('/movilidad-salida-tabla');
 });
 
 app.post('/intercambio-entrada',encoder,function(req,res){
@@ -558,7 +578,7 @@ app.post('/intercambio-entrada',encoder,function(req,res){
       console.log("Number of records updated: " + result.affectedRows);
     });
   }
-  res.redirect('/main');
+  res.redirect('/intercambio-entrada-tabla');
 });
 
 app.post('/intercambio-salida',encoder,function(req,res){
@@ -573,14 +593,14 @@ app.post('/intercambio-salida',encoder,function(req,res){
       vali=1;
     
     if(req.body.sexoId == 1)
-      sexo="Femenino"
+      sexo="Femenino";
     else
-      sexo="Masculino"
+      sexo="Masculino";
       
     if(req.body.finanId == 1)
-      finan="Si"
+      finan="Si";
     else
-      finan="No"
+      finan="No";
     
     if(req.body.nivelId == 1)
       nivel="Licenciatura"
@@ -602,7 +622,7 @@ app.post('/intercambio-salida',encoder,function(req,res){
       console.log("Number of records updated: " + result.affectedRows);
     });
   }
-  res.redirect('/main');
+  res.redirect('/intercambio-salida-tabla');
 });
 //formularios and login inputs ---------------------------------------------
 app.post('/', encoder, function(req, res){
