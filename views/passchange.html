@@ -12,7 +12,20 @@
     
     <!--color de los nav items-->
     <link href="js/navitems.css" rel="stylesheet">
-
+        <!--css de forms-->
+    <link href="js/form.css" rel="stylesheet">
+    <script>
+	function checkPassword(form) {
+		password1 = form.password1.value;
+		password2 = form.password2.value;
+		if (password1 != password2) {
+			alert ("\nContraseñas deben coincidir")
+			return false;
+		}
+		else
+			return true;
+	}
+    </script>
     <title>Sistema 9/11</title>
   </head>
   <body>
@@ -20,7 +33,7 @@
     <div class="row">
     
     
-        <div class="col-sm-3" style="background-color:#007141">
+        <div class="col-sm-4" style="background-color:#007141">
         <!--La barra de navegacion lateral va aqui-->
         <ul class="nav flex-column" style="background-color:#007141;">
         <li class="nav-item" style="margin-top:35px;">
@@ -103,7 +116,7 @@
         </div>
         
         <!-- aqui ira el contenido que se muestre segun la opcion elegida---------------------->
-        <div class="col-9">
+        <div class="col-8">
         <article>    
             <div class="text-center">
                  <img class="logo"  src="imagenes/uabc.png" width="60" alt="">
@@ -112,71 +125,40 @@
              <h class="fw-bold text-center py-2">Sistema 9/11</h>
             </div>
                         <!--AQUI INICIA TABLA DE REGISTROS SIN VALIDAR POR COORDINADOR JUDITH O QUIEN SEA   --------->
-            <br>
-            <br>
-            <h4>Registros añadidos recientemente</h4>
-            <br>
-            <h6>Convenios</h6>
-            <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Validado</th>
-                <th>Periodo</th>
-                <th width="col">Convenio</th>
-                <th width="col">Fecha</th>
-                <th width="col">Sector</th>
-                <th width="col">Origen</th>
-                <th width="col">Autor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% 
-              var tmp;
-              if(data.length){
-              var len=10;
-              if(data.length <10)
-                len=data.length;
-              for(var i = 0; i < len; i++) {
-              
-              if(data[i].validar==0){
-                tmp="No";
-              }else
-                tmp="Si";
-              %>  
-              <tr>
-                <th scope="row"><%= tmp%></th>
-                <td><%= data[i].PERIODO%></td>
-                <td><%= data[i].CONVENIO_VINC%></td>
-                <td><%= data[i].FECHA%></td>
-                <td><%= data[i].SECTOR%></td>
-                <td><%= data[i].ORIGEN%></td>
-                <td><%= data[i].AUTOR%></td>
-                <td>
-                <form action="/main" method="POST">
-                <input type="hidden" name="table" value="convenios" >
-                <input type="hidden" name="id" value="<%=data[i].ID%>" >
-                <button type="submit" class="btn-sm btn-success edit">Revisar</button>
-                </form>
-               </td>
-               <td>
-                <form action="/delete" method="POST">
-                <input type="hidden" name="table" value="convenios" >
-                <input type="hidden" name="id" value="<%=data[i].ID%>" >
-                <button type="submit" class="btn-sm btn-danger  edit">Eliminar</button>
-                </form>
-               </td>
-              </tr>
-              <% }
-                       
-               }else{ %>
-                   <tr>
-                      <td colspan="3">Vacio</td>
-                   </tr>
-                <% } %>    
-              
-            </tbody>
-            </table><br>
-            <br>
+            <form style="margin-left:20px; margin-top:50px;" onSubmit="return checkPassword(this)" action="/passchange" method="POST">
+            <%if(data=='Success'){%>
+				    <div class="alert alert-primary" role="alert">
+              Contraseña cambiada.
+            </div>
+            <%}else if(data=='Error'){%>
+				    <div class="alert alert-warning" role="alert">
+              Contraseña incorrecta.
+            </div>
+            <%}%>
+            <div class="row">
+                <div class="form-floating col-6">
+                  <input type="password" class="form-control" name="password" placeholder="" required>
+                  <label for="floatingInput">Contraseña actual</label>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+                <div class="form-floating col-6">
+                  <input type="password" class="form-control" name="password1" placeholder="" required>
+                  <label for="floatingInput">Contraseña nueva</label>
+                </div>
+                <div class="form-floating col-6">
+                  <input type="password" class="form-control" name="password2" placeholder="" required>
+                  <label for="floatingInput">Confirma contraseña</label>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+                <div class="form-floating col-6">
+                </div>
+                <div class="form-floating col-6">
+                <button type="submit" class="btn btn-success mb-3">Guardar</button>
+                </div>
+            </div>
+            </form>
        </article>
         </div>
     </div>

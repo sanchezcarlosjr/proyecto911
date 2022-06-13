@@ -227,6 +227,14 @@ router.get('/convenios',function(req,res){
   }
 });
 
+router.get('/passchange',function(req,res){
+  if(req.session.username){
+    res.render('views/passchange.html',{name:req.session.username,data:'',tipo:req.session.tipo});
+  }else{
+    res.redirect("/");
+  }
+});
+
 router.get('/usuarios',function(req,res){
   if(req.session.tipo=='Coordinador'){
     var con = require('./config');
@@ -267,6 +275,27 @@ router.get('/ayuda',function(req,res){
 app.use('/', router);
 
 //main post methods here, we get main request, specific when coordinador wants to edit/validate some row.
+
+app.post('/passchange',encoder,function(req,res){
+  var con = require('./config');
+  var username = req.session.username;
+  var password = req.body.password;
+  con.query("select * from usuarios where USUARIO = ? and PASSWORD = UPPER(SHA1(UNHEX(SHA1(?)))) and APROBADO=1", [username, password], function(error, results, fields){
+	  if (error) throw error;
+	  if (results && results.length > 0) {
+	    var sql="update usuarios set PASSWORD=upper(sha1(unhex(sha1(?)))) where USUARIO=?"
+      var values=[req.body.password1,username];
+      
+      con.query(sql, values, function (err, result) {
+        if (err) throw err;
+        console.log("Passchange");
+        res.render('views/passchange.html',{name:req.session.username,tipo:req.session.tipo,data:'Success'});
+      });
+	  }else{
+	    res.render('views/passchange.html',{name:req.session.username,tipo:req.session.tipo,data:'Error'});
+	  }
+  });
+});
 
 app.post('/ayuda',encoder,function(req,res){
     var con = require('./config');
