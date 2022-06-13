@@ -12,11 +12,6 @@
     
     <!--color de los nav items-->
     <link href="js/navitems.css" rel="stylesheet">
-    <style>
-      input.right {
-        float: right;
-      }
-    </style>
 
     <title>Sistema 9/11</title>
   </head>
@@ -117,111 +112,30 @@
              <h class="fw-bold text-center py-2">Sistema 9/11</h>
             </div>
                         <!--AQUI INICIA TABLA DE REGISTROS SIN VALIDAR POR COORDINADOR JUDITH O QUIEN SEA   --------->
-            
-            <br>
-            <br>
-            <h4>Solicitudes de registro</h4> 
-            <a href="/newcor">
-            <button type="submit" class="btn btn-success edit">Añadir usuario coordinador</button>
-            </a>
-            <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Correo</th>
-                <th scope="col">Nombre(s)</th>
-                <th scope="col">Apellido Paterno</th>
-                <th scope="col">Apellido Materno</th>
-                <th scope="col">Rol</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%if (data != '' & data.length != 0) {%>
-              <% 
-              if(data.length){
-              var len=10;
-              if(data.length <10)
-                len=data.length;
-              for(var i = 0; i < len; i++) {
-              %>  
-              <tr>
-                <th scope="row"><%= data[i].USUARIO %></th>
-                <td><%= data[i].NOMBRE%></td>
-                <td><%= data[i].APELLIDO1%></td>
-                <td><%= data[i].APELLIDO2%></td>
-                <td><%= data[i].TIPO%></td>
-                <td>
-                <form action="/usuarios" method="POST">
-                <input type="hidden" name="table" value="aprobar" >
-                <input type="hidden" name="usuario" value="<%=data[i].USUARIO%>" >
-                <button type="submit" class="btn-sm btn-success edit">Aprobar</button>
-                </form>
-               </td>
-               <td>
-                <form action="/delete" method="POST">
-                <input type="hidden" name="table" value="usuarios" >
-                <input type="hidden" name="usuario" value="<%=data[i].USUARIO%>" >
-                <button type="submit" class="btn-sm btn-danger  edit">Eliminar</button>
-                </form>
-               </td>
-              </tr>
-              <% }
-                       
-               }else{ %>
-                   <tr>
-                      <td colspan="3">Vacio</td>
-                   </tr>
-                <% } %>    
-              
-            </tbody>
+            <form style="margin-left:20px; margin-top:50px;" action="/newcor" method="POST">
+            <%if(data=='Success'){%>
+				    <div class="alert alert-primary" role="alert">
+              Nuevo coordinador agregado.
+            </div>
+            <%}else if(data=='Error'){%>
+				    <div class="alert alert-warning" role="alert">
+              Usuario no encontrado.
+            </div>
             <%}%>
-            
-            </table><br><br>
-            <h4>Solicitud de REINICIO DE CONTRASEÑA</h4>
-            <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Correo</th>
-                <th scope="col">Nombre(s)</th>
-                <th scope="col">Apellido Paterno</th>
-                <th scope="col">Apellido Materno</th>
-                <th scope="col">Rol</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%if (data2 != '') {%>
-              <% 
-              if(data2.length){
-              var len=10;
-              if(data2.length <10)
-                len=data2.length;
-              for(var i = 0; i < len; i++) {
-              %>  
-              <tr>
-                <th scope="row"><%= data2[i].USUARIO %></th>
-                <td><%= data2[i].NOMBRE%></td>
-                <td><%= data2[i].APELLIDO1%></td>
-                <td><%= data2[i].APELLIDO2%></td>
-                <td><%= data2[i].TIPO%></td>
-                <td>
-                <form action="/usuarios" method="POST">
-                <input type="hidden" name="table" value="newpass" >
-                <input type="hidden" name="usuario" value="<%=data2[i].USUARIO%>" >
-                <button type="submit" class="btn btn-success edit">Aprobar</button>
-                </form>                             
-               </td>
-              </tr>
-              <% }
-                       
-               }else{ %>
-                   <tr>
-                      <td colspan="3">Vacio</td>
-                   </tr>
-                <% } %>    
-              
-            </tbody>
-            </table><br><br>
-            <br>
-            <%}%>
+            <div class="row">
+                <div class="form-floating col-12">
+                  <input type="text" pattern=".+@uabc\.edu\.mx" class="form-control" name="username" required>
+                  <label for="floatingInput">Correo del nuevo coordinador</label>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+                <div class="form-floating col-6">
+                </div>
+                <div class="form-floating col-6">
+                <button type="submit" class="btn btn-success mb-3">Guardar</button>
+                </div>
+            </div>
+            </form>
        </article>
         </div>
     </div>

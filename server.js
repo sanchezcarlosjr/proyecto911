@@ -235,6 +235,14 @@ router.get('/passchange',function(req,res){
   }
 });
 
+router.get('/newcor',function(req,res){
+  if(req.session.username && req.session.tipo=="Coordinador"){
+    res.render('views/newcor.html',{name:req.session.username,data:'',tipo:req.session.tipo});
+  }else{
+    res.redirect("/");
+  }
+});
+
 router.get('/usuarios',function(req,res){
   if(req.session.tipo=='Coordinador'){
     var con = require('./config');
@@ -293,6 +301,26 @@ app.post('/passchange',encoder,function(req,res){
       });
 	  }else{
 	    res.render('views/passchange.html',{name:req.session.username,tipo:req.session.tipo,data:'Error'});
+	  }
+  });
+});
+
+app.post('/newcor',encoder,function(req,res){
+  var con = require('./config');
+  var username = req.body.username;
+  con.query("select * from usuarios where USUARIO = ? and APROBADO=1", [username], function(error, results, fields){
+	  if (error) throw error;
+	  if (results && results.length > 0) {
+	    var sql="update usuarios set TIPO='Coordinador' where USUARIO=?"
+      var values=[username];
+      
+      con.query(sql, values, function (err, result) {
+        if (err) throw err;
+        console.log("newcor");
+        res.render('views/newcor.html',{name:req.session.username,tipo:req.session.tipo,data:'Success'});
+      });
+	  }else{
+	    res.render('views/newcor.html',{name:req.session.username,tipo:req.session.tipo,data:'Error'});
 	  }
   });
 });
@@ -675,7 +703,7 @@ app.post('/', encoder, function(req, res){
 			  res.redirect("/main");
 		  } else {
 		    console.log("LOGIN INCORRECTO: "+ results)
-			  res.redirect("/");
+			  res.render('views/login.html',{data:'loginbad'});
 		  }
 	  })
 	  /* falta probar y probablemente arreglar el query */
