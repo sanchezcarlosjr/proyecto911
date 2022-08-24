@@ -12,7 +12,7 @@ https://sanchezcarlosjr.github.io/proyecto911/
 * mysql
 * npm 8.5.0
 
-# Instrucciones
+# Instalacin
 
 
 ```
