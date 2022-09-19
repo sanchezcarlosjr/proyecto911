@@ -6,13 +6,13 @@ https://sanchezcarlosjr.notion.site/Formato-911-de-la-SEP-UABC-3cb154ee123647f6a
 
 https://sanchezcarlosjr.github.io/proyecto911/
 
-# Requisitos para correr el servidor.
+# Requisitos para correr el servidor
 
 * nodejs 16.14.2 (LTS)
 * mysql
 * npm 8.5.0
 
-# Instalacin
+# Instalación
 
 
 ```
@@ -23,11 +23,10 @@ cd ../proyecto911/
 npm install
 ```
 
-crear base 911db en mysql
+Crear base de datos
 
 
-importar usando mysql 911db < 911-db.sql
-
-
-para andar el servidor usar comando
-node server.js
+Para empezar el servidor usar
+```
+npm start
+```
