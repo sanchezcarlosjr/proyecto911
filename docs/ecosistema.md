@@ -6,6 +6,7 @@ Nuestro ecosistema es el siguiente:
 
 ```plantuml:md-ecosistema
 @startwbs
+@startwbs
 * Ecosistema
 ** Control de versiones
 *** Git
@@ -26,9 +27,9 @@ Nuestro ecosistema es el siguiente:
 *** Pruebas manuales del servicio web
 **** Postman
 *** Tecnologías
-**** JavaScript/TypeScript/NodeJS
-****** Express
-****** Moongose
+**** JavaScript,TypeScript,NodeJS
+***** Express
+***** Moongose
 ** Capa de datos
 *** Excel (.xlx)
 *** MongoDB
@@ -46,6 +47,7 @@ Nuestro ecosistema es el siguiente:
 *** Desarrollo de preproducción
 **** Computadora proporcionada por la profesora Judith
 @endwbs
+
 ```
 
 ![](./md-ecosistema.svg)
