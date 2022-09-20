@@ -6,7 +6,6 @@ Nuestro ecosistema es el siguiente:
 
 ```plantuml:md-ecosistema
 @startwbs
-@startwbs
 * Ecosistema
 ** Control de versiones
 *** Git
