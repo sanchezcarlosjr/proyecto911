@@ -10,21 +10,24 @@ Nuestro ecosistema es el siguiente:
 ** Control de versiones
 *** Git
 *** GitHub
-** Pruebas unitarias
-*** Jest
+** Pruebas
+*** Pruebas unitarias
+**** Jest
+*** Pruebas de integración
+**** Selenium
 ** Modelado
 *** MermaidJS (por defecto en notion).
 *** PlantUML (cuando MermaidJS no permita modelar, usamos este).
 ** Capa de presentación
 *** JavaScript
 **** React
-** Capa de negocio/dominio
-*** Tipo y características
-**** Servicio web
-**** JSON
-**** API REST
-*** Pruebas manuales del servicio web
+** Interfaces de comunicación
+*** Servicio web
+*** JSON
+*** API REST
+*** Pruebas manuales
 **** Postman
+** Capa de negocio/dominio 
 *** Tecnologías
 **** JavaScript,TypeScript,NodeJS
 ***** Express
@@ -46,7 +49,6 @@ Nuestro ecosistema es el siguiente:
 *** Desarrollo de preproducción
 **** Computadora proporcionada por la profesora Judith
 @endwbs
-
 ```
 
 ![](./md-ecosistema.svg)
