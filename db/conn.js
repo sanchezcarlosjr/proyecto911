@@ -1,6 +1,11 @@
 const { MongoClient } = require("mongodb");
+
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 const connectionString = process.env.URI;
-const client = new MongoClient("mongodb://localhost:27017/", {
+
+const client = new MongoClient(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

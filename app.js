@@ -49,6 +49,10 @@ app.get("/", (req, res) => {
 app.use("/", users);
 
 if (!module.parent) {
+  if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+  }
+
   app.listen(process.env.PORT || 4000);
   dbo.connectToServer((err) => {
     if (err) throw err;
