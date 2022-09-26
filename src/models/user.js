@@ -7,8 +7,25 @@ const userSchema = new mongoose.Schema(
       unique: true,
       required: true,
     },
+    salt: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    hash: {
+      type: String,
+      unique: true,
+      required: true,
+    },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    statics: {
+      findByEmail(email) {
+        return this.find({ email: new RegExp(email, "i") });
+      },
+    },
+  }
 );
 
 const User = mongoose.model("User", userSchema);

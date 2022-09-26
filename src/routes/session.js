@@ -1,4 +1,6 @@
 import { Router } from "express";
+import sessionController from "../controllers/session";
+
 const router = Router();
 
 router.get("/:token", (req, res) => {
@@ -6,7 +8,8 @@ router.get("/:token", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  return res.status(201).send();
+  const token = sessionController.getToken(req.body.email, req.body.password);
+  return res.status(401).json(token);
 });
 
 router.delete("/logout", (req, res) => {
