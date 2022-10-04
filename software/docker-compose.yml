@@ -1,13 +1,15 @@
 version: "3.5"
 
 services:
-  app4:
+  app20:
     depends_on:
       - mongo
     build: .
     restart: unless-stopped
     ports:
-      - 3000:3000
+      - "0.0.0.0:3000:3000"
+    networks:
+      - MONGO
   mongo:
     image: mongo:latest
     container_name: mongo
