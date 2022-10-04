@@ -10,23 +10,32 @@ Nuestro ecosistema es el siguiente:
 ** Control de versiones
 *** Git
 *** GitHub
-** Pruebas unitarias
-*** Jest
+** Pruebas
+*** Pruebas unitarias
+**** Jest
+*** Pruebas de integración
+**** Selenium
 ** Modelado
-*** PlantUML
+*** MermaidJS (por defecto en notion).
+*** PlantUML (cuando MermaidJS no permita modelar, usamos este).
 ** Capa de presentación
 *** JavaScript
 **** React
-***** ReactAdmin
-** Capa de negocio/dominio
-*** JavaScript
-**** NodeJS
-***** Express?
-***** GraphQL?
-***** Moongose?
+** Interfaces de comunicación
+*** Servicio web
+*** JSON
+*** API REST
+*** Pruebas manuales
+**** Postman
+** Capa de negocio/dominio 
+*** Tecnologías
+**** JavaScript,TypeScript,NodeJS
+***** Express
+***** Moongose
 ** Capa de datos
 *** Excel (.xlx)
 *** MongoDB
+*** API Cimarrón
 ** Documentación
 *** Referente a gestión
 **** Notion
@@ -36,10 +45,13 @@ Nuestro ecosistema es el siguiente:
 *** Continua integracion/despliegue
 **** GitHub Action
 *** Servidor de producción
-**** A?
-*** Desarrollo local
-**** B?
+**** Mexicali?
+*** Desarrollo de preproducción
+**** Computadora proporcionada por la profesora Judith
 @endwbs
 ```
 
 ![](./md-ecosistema.svg)
+
+Consideraciones
+* ¿Por qué seleccionamos un ecosistema JS? Permite un rápido desarrollo, no necesitamos más poder computacional. 
