@@ -2,6 +2,7 @@ version: "3.5"
 
 services:
   app:
+    container_name: app
     depends_on:
       - mongo
     build: .
@@ -36,7 +37,7 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_MONGODB_PORT: "27017"
     ports:
-      - "0.0.0.0:8081:8081"
+      - "0.0.0.0:8082:8081"
     networks:
       - MONGO
     depends_on:
