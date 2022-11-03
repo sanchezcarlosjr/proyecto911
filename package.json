@@ -9,11 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@blackbox-vision/ra-language-spanish": "github:blackboxvision/ra-language-spanish",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.4",
     "next": "12.3.1",
     "pbkdf2-password": "^1.2.1",
+    "ra-data-json-server": "^4.5.0",
+    "ra-data-simple-rest": "^4.5.0",
     "react": "18.2.0",
+    "react-admin": "^4.5.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
