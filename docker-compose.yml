@@ -7,8 +7,11 @@ services:
       - mongo
     build: .
     restart: unless-stopped
+    volumes:
+      - ./admin:/usr/src/app/admin
+      - ./pages:/usr/src/app/pages
     ports:
-      - "0.0.0.0:3000:3000"
+      - "0.0.0.0:3001:3000"
     networks:
       - MONGO
   mongo:
@@ -37,7 +40,7 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_MONGODB_PORT: "27017"
     ports:
-      - "0.0.0.0:8082:8081"
+      - "0.0.0.0:8084:8081"
     networks:
       - MONGO
     depends_on:

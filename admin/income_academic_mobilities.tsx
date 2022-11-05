@@ -1,25 +1,25 @@
 import * as React from 'react';
-import { Create, Edit, SimpleForm, SelectField, BooleanField, TextInput, DateInput, required } from 'react-admin';
+import { Create, Edit, SimpleForm, SelectInput, BooleanInput, TextInput, required } from 'react-admin';
 
 const IncomeAcademicMobility = <SimpleForm>
     <TextInput source="id" validate={[required()]} fullWidth />
     <TextInput source="periodo" fullWidth />
     <TextInput source="campus_que_visita" fullWidth />
-    <TextInput source="unidad_academica_que_visita" fullWidth />
-    <TextInput source="nombre" label="Nombre" fullWidth />
+    <TextInput source="unidad_académica_que_visita" fullWidth />
+    <TextInput source="nombre" fullWidth />
     <TextInput source="apellido_paterno" fullWidth />
-    <SelectField source="sexo" choices={[
-        { id: 'Femenino', name: 'Femenino' },
+    <SelectInput source="sexo" choices={[
         { id: 'Masculino', name: 'Masculino' },
-    ]} fullWidth />
+        { id: 'Femenino', name: 'Femenino' },
+    ]}  fullWidth />
     <TextInput source="nivel" fullWidth />
-    <BooleanField source="discapacidad" fullWidth/>
-    <BooleanField source="habliante_indigena" fullWidth/>
-    <BooleanField source="origen_indigena" fullWidth/>
+    <BooleanInput source="discapacidad" fullWidth/>
+    <BooleanInput source="hablante_indígena" fullWidth/>
+    <BooleanInput source="origen_indígena" fullWidth/>
     <TextInput source="unidad_emisora" fullWidth />
-    <TextInput source="pais_de_la_unidad_emisora" fullWidth />
+    <TextInput source="país_de_la_unidad_emisora" fullWidth />
     <TextInput source="entidad_de_la_unidad_emisora" fullWidth />
-    <SelectField source="tipo_de_movilidad_academica" choices={[
+    <SelectInput source="tipo_de_movilidad_académica" choices={[
         { id: 'Docente', name: 'Docente' }
     ]} fullWidth />
 </SimpleForm>;

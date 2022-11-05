@@ -12,6 +12,7 @@
     "@blackbox-vision/ra-language-spanish": "github:blackboxvision/ra-language-spanish",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.4",
+    "mongoose-paginate-v2": "^1.7.1",
     "next": "12.3.1",
     "pbkdf2-password": "^1.2.1",
     "ra-data-json-server": "^4.5.0",
