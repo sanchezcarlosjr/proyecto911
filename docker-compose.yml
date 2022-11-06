@@ -10,6 +10,7 @@ services:
     volumes:
       - ./admin:/usr/src/app/admin
       - ./pages:/usr/src/app/pages
+      - ./lib:/usr/src/app/lib
     ports:
       - "0.0.0.0:3001:3000"
     networks:

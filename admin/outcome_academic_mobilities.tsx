@@ -19,11 +19,11 @@ import {
 import {ListActions} from "./list_actions";
 import {Filter} from "./filter";
 
-const IncomeAcademicMobility = <SimpleForm>
+const OutcomeAcademicMobility = <SimpleForm>
     <TextInput source="id" validate={[required()]} fullWidth />
     <TextInput source="periodo" fullWidth />
     <ReferenceInput source="campus_id" reference="campus">
-        <SelectInput optionText="nombre" optionValue="id" fullWidth label="Campus que visita" />
+        <SelectInput optionText="nombre" optionValue="id" fullWidth label="Campus" />
     </ReferenceInput>
     <ReferenceInput source="academic_unit_id" reference="academic_unit" >
         <AutocompleteInput optionText="nombre" optionValue="id" label="Unidad académica" fullWidth />
@@ -41,12 +41,10 @@ const IncomeAcademicMobility = <SimpleForm>
         { id: 'Maestría', name: 'Maestría' },
         { id: 'Doctorado', name: 'Doctorado' }
     ]} fullWidth />
-    <BooleanInput source="discapacidad" fullWidth/>
-    <BooleanInput source="hablante_indígena" fullWidth/>
-    <BooleanInput source="origen_indígena" fullWidth/>
-    <TextInput source="unidad_emisora" fullWidth />
-    <TextInput source="país_de_la_unidad_emisora" fullWidth />
-    <TextInput source="entidad_de_la_unidad_emisora" fullWidth />
+    <TextInput source="unidad_receptora" fullWidth />
+    <TextInput source="país_de_la_unidad_receptora" fullWidth />
+    <TextInput source="entidad_de_la_unidad_receptora" fullWidth />
+    <TextInput source="idioma_de_la_unidad_receptora" fullWidth />
     <SelectInput source="tipo_de_movilidad_académica" choices={[
         { id: 'Docencia', name: 'Docencia' },
         { id: 'Estancias sabáticas', name: 'Estancias sabáticas' },
@@ -54,7 +52,7 @@ const IncomeAcademicMobility = <SimpleForm>
     ]} fullWidth />
 </SimpleForm>;
 
-export const IncomeAcademicMobilityList = () => (
+export const OutcomeAcademicMobilityList = () => (
     <List filters={Filter} actions={<ListActions/>}>
         <Datagrid rowClick="edit">
             <TextField source="id"/>
@@ -63,41 +61,39 @@ export const IncomeAcademicMobilityList = () => (
             <TextField source="apellido_paterno"/>
             <TextField source="apellido_materno"/>
             <TextField source="nivel_de_estudios"/>
-            <BooleanField source="discapacidad"/>
-            <BooleanField source="hablante_indígena"/>
-            <BooleanField source="origen_indígena"/>
             <ReferenceField source="campus_id" reference="campus"  label={"Campus"}>
                 <TextField source="nombre" />
             </ReferenceField>
             <ReferenceField source="academic_unit_id" reference="academic_unit"  label={"Unidad Académica"}>
                 <TextField source="nombre" />
             </ReferenceField>
-            <TextField source="unidad_emisora"/>
-            <TextField source="país_de_la_unidad_emisora"/>
-            <TextField source="entidad_de_la_unidad_emisora"/>
+            <TextField source="unidad_receptora"/>
+            <TextField source="país_de_la_unidad_receptora"/>
+            <TextField source="entidad_de_la_unidad_receptora"/>
+            <TextField source="idioma_de_la_unidad_receptora"/>
             <TextField source="tipo_de_movilidad_académica"/>
         </Datagrid>
     </List>
 );
 
-export const IncomeAcademicMobilityCreate = () => (
+export const OutcomeAcademicMobilityCreate = () => (
     <Create>
-        {IncomeAcademicMobility}
+        {OutcomeAcademicMobility}
     </Create>
 );
 
-export const IncomeAcademicMobilityEdit = () => (
+export const OutcomeAcademicMobilityEdit = () => (
     <Edit>
-        {IncomeAcademicMobility}
+        {OutcomeAcademicMobility}
     </Edit>
 );
 
 
 export default {
     options: {
-        label: "Movilidad A. de entrada"
+        label: "Movilidad A. de salida"
     },
-    edit: IncomeAcademicMobilityEdit,
-    list: IncomeAcademicMobilityList,
-    create: IncomeAcademicMobilityCreate
+    edit: OutcomeAcademicMobilityEdit,
+    list: OutcomeAcademicMobilityList,
+    create: OutcomeAcademicMobilityCreate
 }
