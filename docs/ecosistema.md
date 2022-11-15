@@ -35,6 +35,7 @@ Nuestro ecosistema es el siguiente:
 ** Capa de datos
 *** Excel (.xlx)
 *** MongoDB
+*** mongo-express (interactuar con MongoDB con UI)
 *** API Cimarrón
 ** Documentación
 *** Referente a gestión
