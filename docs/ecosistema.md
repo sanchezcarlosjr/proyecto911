@@ -19,7 +19,7 @@ Nuestro ecosistema es el siguiente:
 *** MermaidJS (por defecto en notion).
 *** PlantUML (cuando MermaidJS no permita modelar, usamos este).
 ** Capa de presentación
-*** JavaScript
+*** JavaScript-NPM-Node
 **** ReactAdmin
 ** Interfaces de comunicación
 *** Servicio web
