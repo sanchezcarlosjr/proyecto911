@@ -1,21 +1,7 @@
 import User from "../models/user";
-const hasher = require("pbkdf2-password")();
-import jwt from 'jsonwebtoken';
+import {sign} from "../lib/sign";
 
-const sign = (body: Object) => {
-  return new Promise((resolve, reject) => {
-    jwt.sign(
-      body,
-      process.env.JWT_SECRET || "secret",
-      {
-        expiresIn: '1h'
-      },
-      (err, token) => {
-         resolve(token); 
-      }
-    );
-  });
-}
+const hasher = require("pbkdf2-password")();
 
 export default {
   getToken: async (email: string, password: string) => {

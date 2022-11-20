@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import dbConnect from '../../lib/dbConnect';
 
 
 interface LogoutResponse {
@@ -17,7 +16,6 @@ export default async function handler(
     try {
         switch (req.method) {
             case 'DELETE':
-                await dbConnect();
                 return res.status(401).json({response: "logout"});
             default:
                 throw new Error('Method not allowed');
