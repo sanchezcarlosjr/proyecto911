@@ -19,8 +19,8 @@ Nuestro ecosistema es el siguiente:
 *** MermaidJS (por defecto en notion).
 *** PlantUML (cuando MermaidJS no permita modelar, usamos este).
 ** Capa de presentación
-*** JavaScript
-**** React
+*** JavaScript-NPM-Node
+**** ReactAdmin
 ** Interfaces de comunicación
 *** Servicio web
 *** JSON
@@ -30,11 +30,12 @@ Nuestro ecosistema es el siguiente:
 ** Capa de negocio/dominio 
 *** Tecnologías
 **** JavaScript,TypeScript,NodeJS
-***** Express
+***** NextJS
 ***** Moongose
 ** Capa de datos
 *** Excel (.xlx)
 *** MongoDB
+*** mongo-express (interactuar con MongoDB con UI)
 *** API Cimarrón
 ** Documentación
 *** Referente a gestión
