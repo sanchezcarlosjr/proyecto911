@@ -11,8 +11,8 @@ import {
 } from 'react-admin';
 import simpleRestProvider from 'ra-data-simple-rest';
 import {theme} from "./Theme";
-import Income_academic_mobility from "./income_academic_mobilities";
-import Outcome_academic_mobility from "./outcome_academic_mobilities";
+import income_academic_mobility from "./income_academic_mobilities";
+import outcome_academic_mobility from "./outcome_academic_mobilities";
 import outcome_exchange_student from "./outcome_exchange_student";
 import income_exchange_student from "./income_exchange_student";
 import agreements from "./agreements";
@@ -30,8 +30,8 @@ const dataProvider = simpleRestProvider('/api', httpClient, 'Content-Range');
 
 const App = () => (
     <Admin authProvider={authProvider} theme={theme} dataProvider={dataProvider} i18nProvider={i18nProvider} requireAuth disableTelemetry>
-        <Resource name="income_academic_mobilities" {...Income_academic_mobility}/>
-        <Resource name="outcome_academic_mobility" {...Outcome_academic_mobility}/>
+        <Resource name="income_academic_mobilities" {...income_academic_mobility}/>
+        <Resource name="outcome_academic_mobility" {...outcome_academic_mobility}/>
         <Resource name="outcome_exchange_student" {...outcome_exchange_student}/>
         <Resource name="income_exchange_student" {...income_exchange_student}/>
         <Resource name="agreements" {...agreements}/>

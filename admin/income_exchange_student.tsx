@@ -22,7 +22,7 @@ import {
 import {ListActions} from "./list_actions";
 import {Filter} from "./filter";
 
-const OutcomeExchangeStudent = <SimpleForm>
+const IncomeExchangeStudent = <SimpleForm>
     <TextInput source="id" validate={[required()]} fullWidth/>
     <TextInput source="periodo" fullWidth/>
     <ReferenceInput source="campus_id" reference="campus">
@@ -49,17 +49,17 @@ const OutcomeExchangeStudent = <SimpleForm>
     <BooleanInput source="discapacidad"/>
     <BooleanInput source="hablante_indígena"/>
     <BooleanInput source="origen_indígena"/>
-    <TextInput source="unidad_receptora" fullWidth/>
-    <TextInput source="país_de_la_unidad_receptora" fullWidth/>
-    <TextInput source="entidad_de_la_unidad_receptora" fullWidth/>
-    <TextInput source="idioma_de_la_unidad_receptora" fullWidth/>
+    <TextInput source="unidad_emisora" fullWidth/>
+    <TextInput source="país_de_la_unidad_emisora" fullWidth/>
+    <TextInput source="entidad_de_la_unidad_emisora" fullWidth/>
+    <TextInput source="idioma_de_la_unidad_emisora" fullWidth/>
     <BooleanInput source="recibio_finacimiento"/>
     <NumberInput source="monto_recibido" fullWidth defaultValue={0}/>
     <DateInput source="fecha_de_inicio_de_intercambio" fullWidth/>
     <DateInput source="fecha_de_término_de_intercambio" fullWidth/>
 </SimpleForm>;
 
-export const OutcomeExchangeStudentList = () => (
+export const IncomeExchangeStudentList = () => (
     <List filters={Filter} actions={<ListActions/>}>
         <Datagrid rowClick="edit">
             <TextField source="id"/>
@@ -79,10 +79,10 @@ export const OutcomeExchangeStudentList = () => (
             <BooleanField source="discapacidad"/>
             <BooleanField source="hablante_indígena"/>
             <BooleanField source="origen_indígena"/>
-            <TextField source="unidad_receptora"/>
-            <TextField source="país_de_la_unidad_receptora"/>
-            <TextField source="entidad_de_la_unidad_receptora"/>
-            <TextField source="idioma_de_la_unidad_receptora"/>
+            <TextField source="unidad_emisora"/>
+            <TextField source="país_de_la_unidad_emisora"/>
+            <TextField source="entidad_de_la_unidad_emisora"/>
+            <TextField source="idioma_de_la_unidad_emisora"/>
             <TextField source="recibio_finacimiento"/>
             <BooleanField source="monto_recibido" />
             <DateField source="fecha_de_inicio_de_intercambio" fullWidth/>
@@ -91,15 +91,15 @@ export const OutcomeExchangeStudentList = () => (
     </List>
 );
 
-export const OutcomeExchangeStudentCreate = () => (
+export const IncomeExchangeStudentCreate = () => (
     <Create>
-        {OutcomeExchangeStudent}
+        {IncomeExchangeStudent}
     </Create>
 );
 
-export const OutcomeExchangeStudentEdit = () => (
+export const IncomeExchangeStudentEdit = () => (
     <Edit>
-        {OutcomeExchangeStudent}
+        {IncomeExchangeStudent}
     </Edit>
 );
 
@@ -108,7 +108,7 @@ export default {
     options: {
         label: "Intercambio estudiantil entrada"
     },
-    edit: OutcomeExchangeStudentEdit,
-    list: OutcomeExchangeStudentList,
-    create: OutcomeExchangeStudentCreate
+    edit: IncomeExchangeStudentEdit,
+    list: IncomeExchangeStudentList,
+    create: IncomeExchangeStudentCreate
 }

@@ -35,10 +35,9 @@ services:
   app:
     container_name: app
     network_mode: "service:gluetun"
-    build: ./Dockerfile-production
+    build: .
     depends_on:
       - mongo
-    build: .
     restart: unless-stopped
   
 volumes:

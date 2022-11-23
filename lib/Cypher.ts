@@ -13,7 +13,6 @@ export class Cypher {
         return this.encodeBase64(this.xor(this.encode(str)));
     }
     xor(input: any) {
-	console.log(process.env.CYPHER_KEY);
         const output = new Int32Array(input.length);
         const secret = this.encode(process.env.CYPHER_KEY);
         let spos = 0;

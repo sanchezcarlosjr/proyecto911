@@ -1,5 +1,4 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
-import dbConnect from "../../../lib/ dbConnect";
 
 interface ErrorResponse {
     error: string;
@@ -10,7 +9,6 @@ export default async function handler(
     res: NextApiResponse<any[] | ErrorResponse>
 ) {
     try {
-        await dbConnect();
         switch (req.method) {
             case 'GET':
                 const response = await fetch(`${process.env.API}/escolar/catalogos/campus`, {
