@@ -1,0 +1,6 @@
+#!/bin/sh
+
+curl -s 'localhost:3001/api/campus' | jq -r '.[] | .id' | xargs -I {} echo "localhost:3001/api/academic_unit/{}" | xargs curl -s | jq -s add  | jq -r '[.[] | {_id: .id, nombre: .nombre}]' > academic_units.json
+#mongoimport --uri $MONGODB_URI --collection='AcademicUnit' --file='academic_units.json'
+#rm academic_units.json
+# mongoimport --collection='Agreement' --file=agreements.csv --type=csv

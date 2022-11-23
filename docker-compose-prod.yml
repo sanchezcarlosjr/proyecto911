@@ -23,9 +23,11 @@ services:
     container_name: mongo
     network_mode: "service:gluetun"
     environment:
+      - "MONGODB_URI: ${MONGODB_URI}"
       - "MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}"
       - "MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}"
     volumes:
+      - ./database:/data
       - type: volume
         source: MONGO_DATA
         target: /data/db
