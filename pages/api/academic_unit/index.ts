@@ -2,16 +2,19 @@ import type {NextApiRequest, NextApiResponse} from 'next'
 import dbConnect from "../../../lib/ dbConnect";
 import AcademicUnit from "../../../models/academic_unit";
 import {getList} from "../../../lib/getList";
+import jwt from "jsonwebtoken";
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<any>
 ) {
     try {
+        jwt.verify(req.headers.authorization as string, process.env.JWT_SECRET || "secret");
         await dbConnect();
         switch (req.method) {
             case 'GET':
                 const result = await getList(req, AcademicUnit);
+	        // @ts-ignore
                 return res.status(200).setHeader('Content-Range', `${req.query.range.join("-")}/${result.totalDocs}`).json(result.docs);
             default:
                 throw new Error('Method not allowed');

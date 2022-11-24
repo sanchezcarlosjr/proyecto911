@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from '../../lib/ dbConnect';
 import sessionController from "../../controllers/session";
+import {Cypher} from "../../lib/Cypher";
+import {sign} from "../../lib/sign";
 
 interface LoginResponse {
     token: string;
@@ -17,8 +19,18 @@ export default async function handler(
     try {
         switch (req.method) {
             case 'POST':
-                await dbConnect();
-                const token = await sessionController.getToken(req.body.email, req.body.password);
+                const cypher = new Cypher();
+                const resource = `${process.env.API}/escolar/alumno/auth?json={ "usuario": "${req.body.username}", "contrasena": "${cypher.encrypt(req.body.password)}" }`;
+                const response = await fetch(resource, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': process.env.API_AUTHORIZATION ?? ""
+                    }
+                }).then(response => response.text());
+                if (response === "false") {
+                    throw new Error('user is not authorized');
+                }
+                const token = await sign({email: `${req.body.username}@uabc.edu.mx`}) as string;
                 return res.status(401).json({ token });
             default:
                 throw new Error('Method not allowed');

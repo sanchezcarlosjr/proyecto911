@@ -25,13 +25,13 @@ const Agreement = <SimpleForm>
     <TextInput source="nombre_de_la_institución_u_organización" fullWidth />
     <DateInput source="inicio_de_convenio" fullWidth />
     <SelectInput source="sector_de_la_institución_u_organización" choices={[
-        { id: 'Público', name: 'Público' },
-        { id: 'Social', name: 'Social' },
-        { id: 'Privado', name: 'Privado' }
+        { id: 'PUBLICO', name: 'PUBLICO' },
+        { id: 'SOCIAL', name: 'SOCIAL' },
+        { id: 'PRIVADO', name: 'PRIVADO' }
     ]} fullWidth />
     <SelectInput source="tipo_de_institución_u_organización" choices={[
-        { id: 'Nacional', name: 'Nacional' },
-        { id: 'Internacional', name: 'Internacional' }
+        { id: 'NACIONAL', name: 'NACIONAL' },
+        { id: 'INTERNACIONAL', name: 'INTERNACIONAL' }
     ]} fullWidth />
     <TextInput source="país_de_la_institución_u_organización" fullWidth />
     <BooleanInput source="es_convenio_académico"/>

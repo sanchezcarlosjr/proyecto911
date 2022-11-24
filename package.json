@@ -1,12 +1,13 @@
 {
-  "name": "software",
-  "version": "0.1.0",
+  "name": "proyecto911",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest ./tests"
   },
   "dependencies": {
     "@blackbox-vision/ra-language-spanish": "github:blackboxvision/ra-language-spanish",
@@ -22,12 +23,12 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^8.5.9",
-    "@types/node": "18.8.1",
+    "@types/jsonwebtoken": "8.5.9",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
+    "jest": "29.2.2",
     "typescript": "4.8.4"
   }
 }

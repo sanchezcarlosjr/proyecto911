@@ -2,6 +2,7 @@ import {NextApiRequest, NextApiResponse} from "next";
 import dbConnect from "./ dbConnect";
 import {saveOne} from "./saveOne";
 import {getList} from "./getList";
+import jwt from "jsonwebtoken";
 
 interface ErrorResponse {
     error: string;
@@ -14,6 +15,7 @@ export default class Handler {
     async handle_index(req: NextApiRequest,
                        res: NextApiResponse<any | ErrorResponse>) {
         try {
+            jwt.verify(req.headers.authorization as string, process.env.JWT_SECRET || "secret");
             await dbConnect();
             switch (req.method) {
                 case 'POST':
@@ -21,6 +23,7 @@ export default class Handler {
                     return res.status(200).json(req.body);
                 case 'GET':
                     const result = await getList(req, this.model);
+		    // @ts-ignore
                     return res.status(200).setHeader('Content-Range', `${req.query.range.join("-")}/${result.totalDocs}`).json(result.docs);
                 default:
                     throw new Error('Method not allowed');
@@ -33,6 +36,7 @@ export default class Handler {
     async handle_id(req: NextApiRequest,
                     res: NextApiResponse<any | ErrorResponse>) {
         try {
+            jwt.verify(req.headers.authorization as string, process.env.JWT_SECRET || "secret");
             await dbConnect();
             switch (req.method) {
                 case 'PUT':

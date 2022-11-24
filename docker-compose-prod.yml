@@ -6,9 +6,8 @@ services:
     cap_add:
       - NET_ADMIN
     ports:
-      - 3001:3000/tcp
-      - 27017:27017/tcp
-      - 8084:8081/tcp
+      - 3001:3000/tcp # App
+      - 27017:27017/tcp # Mongo
     volumes:
       - ./vpn/client.conf:/gluetun/client.conf:ro
       - ./vpn/ca.crt:/gluetun/ca.crt
@@ -19,42 +18,29 @@ services:
       - OPENVPN_CUSTOM_CONFIG=/gluetun/client.conf
       - "OPENVPN_USER=${OPENVPN_USER}"
       - "OPENVPN_PASSWORD=${OPENVPN_PASSWORD}"
-  app:
-    container_name: app
-    network_mode: "service:gluetun"
-    depends_on:
-      - mongo
-    build: .
-    restart: unless-stopped
-    volumes:
-      - ./admin:/usr/src/app/admin
-      - ./pages:/usr/src/app/pages
-      - ./lib:/usr/src/app/lib
   mongo:
     image: mongo:latest
     container_name: mongo
     network_mode: "service:gluetun"
     environment:
+      - "MONGODB_URI: ${MONGODB_URI}"
       - "MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}"
       - "MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}"
     volumes:
+      - ./database:/data
       - type: volume
         source: MONGO_DATA
         target: /data/db
       - type: volume
         source: MONGO_CONFIG
         target: /data/configdb
-  mongo-express:
-    image: mongo-express:latest
+  app:
+    container_name: app
     network_mode: "service:gluetun"
-    container_name: mongo-express
-    environment:
-       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-       ME_CONFIG_MONGODB_ADMINPASSWORD: admin
-       ME_CONFIG_MONGODB_SERVER: localhost
-       ME_CONFIG_MONGODB_PORT: "27017"
+    build: .
     depends_on:
       - mongo
+    restart: unless-stopped
   
 volumes:
   MONGO_DATA:
