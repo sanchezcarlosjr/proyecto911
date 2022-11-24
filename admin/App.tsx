@@ -8,6 +8,7 @@ import income_exchange_student from "./income_exchange_student";
 import agreements from "./agreements";
 
 import { i18nProvider } from './i18nProvider';
+import { login_page } from './login_page';
 
 const httpClient = (url: string, options: any = {}) => {
     options.headers = new Headers({ Accept: 'application/json', 'Authorization': '' });
@@ -19,7 +20,7 @@ const dataProvider = simpleRestProvider('/api', httpClient, 'Content-Range');
 
 
 const App = () => (
-  <Admin theme={theme} dataProvider={dataProvider} i18nProvider={i18nProvider}>
+  <Admin theme={theme} dataProvider={dataProvider} i18nProvider={i18nProvider} layout={login_page}>
       <Resource name="income_academic_mobilities" {...Income_academic_mobility}/>
       <Resource name="outcome_academic_mobility" {...Outcome_academic_mobility}/>
       <Resource name="outcome_exchange_student" {...outcome_exchange_student}/>
