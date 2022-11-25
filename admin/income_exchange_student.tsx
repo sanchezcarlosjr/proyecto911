@@ -5,10 +5,9 @@ import {
     BooleanInput,
     Create,
     Datagrid,
-    Edit,
     DateField,
     DateInput,
-    FormDataConsumer,
+    Edit,
     List,
     NumberInput,
     ReferenceField,
@@ -17,19 +16,19 @@ import {
     SelectInput,
     SimpleForm,
     TextField,
-    TextInput, NumberField
+    TextInput
 } from 'react-admin';
 import {ListActions} from "./list_actions";
 import {Filter} from "./filter";
 
 const IncomeExchangeStudent = <SimpleForm>
-    <TextInput source="id" validate={[required()]} fullWidth/>
+    <TextInput source="id" validate={[required()]} fullWidth helperText={"Pasaporte si es internacional. INE si es nacional."}/>
     <TextInput source="periodo" fullWidth/>
     <ReferenceInput source="campus_id" reference="campus">
         <SelectInput optionText="nombre" optionValue="id" fullWidth label="Campus"/>
     </ReferenceInput>
-    <ReferenceInput source="academic_unit_id" reference="academic_unit" >
-        <AutocompleteInput optionText="nombre" optionValue="id" label="Unidad académica" fullWidth />
+    <ReferenceInput source="academic_unit_id" reference="academic_unit">
+        <AutocompleteInput optionText="nombre" optionValue="id" label="Unidad académica" fullWidth/>
     </ReferenceInput>
     <SelectInput source="nivel_de_estudios" choices={[
         {id: 'Licenciatura', name: 'Licenciatura'},
@@ -84,7 +83,7 @@ export const IncomeExchangeStudentList = () => (
             <TextField source="entidad_de_la_unidad_emisora"/>
             <TextField source="idioma_de_la_unidad_emisora"/>
             <TextField source="recibio_finacimiento"/>
-            <BooleanField source="monto_recibido" />
+            <BooleanField source="monto_recibido"/>
             <DateField source="fecha_de_inicio_de_intercambio" fullWidth/>
             <DateField source="fecha_de_término_de_intercambio" fullWidth/>
         </Datagrid>

@@ -20,7 +20,7 @@ import {ListActions} from "./list_actions";
 import {Filter} from "./filter";
 
 const IncomeAcademicMobility = <SimpleForm>
-    <TextInput source="id" validate={[required()]} fullWidth />
+    <TextInput source="id" validate={[required()]} fullWidth helperText={"Pasaporte si es internacional. INE si es nacional."} />
     <TextInput source="periodo" fullWidth />
     <ReferenceInput source="campus_id" reference="campus">
         <SelectInput optionText="nombre" optionValue="id" fullWidth label="Campus que visita" />
