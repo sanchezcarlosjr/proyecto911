@@ -38,6 +38,7 @@ const Agreement = <SimpleForm>
     <BooleanInput source="es_convenio_investigación"/>
     <BooleanInput source="es_convenio_de_intercambio_estudiantil"/>
     <BooleanInput source="es_convenio_de_movilidad_académica"/>
+    <BooleanInput source="es_convenio_de_doble_grado"  />
 </SimpleForm>;
 
 export const AgreementList = () => (
@@ -55,6 +56,7 @@ export const AgreementList = () => (
             <BooleanField source="es_convenio_investigación"/>
             <BooleanField source="es_convenio_de_intercambio_estudiantil"/>
             <BooleanField source="es_convenio_de_movilidad_académica"/>
+            <BooleanField source="es_convenio_de_doble_grado"/>
         </Datagrid>
     </List>
 );
