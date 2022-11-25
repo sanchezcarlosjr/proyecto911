@@ -20,9 +20,6 @@ export const theme = {
         },
         info: {
             main: '#20419A',
-        },
-        background: {
-            default: '#fcfcfe',
         }
     },
     components: {
