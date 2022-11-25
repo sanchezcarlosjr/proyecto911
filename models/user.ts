@@ -18,8 +18,9 @@ const userSchema = new mongoose.Schema(
             required: true,
         },
         role: {
-            type: String,
-            required: false,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Role",
+            required: true,
         }
     },
     {
@@ -29,6 +30,18 @@ const userSchema = new mongoose.Schema(
                 return this.find({ email: new RegExp(email, "i") });
             },
         },
+        methods: {
+            can(permission: string) {
+                this.populate({
+                    path: "role",
+                    populate: {
+                        path: "permissions",
+                        model: "Permission",
+                    },
+                });
+                return (this as any).permissions.some((p: any) => p.name === permission);
+            },
+        }
     }
 );
 

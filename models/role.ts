@@ -7,12 +7,13 @@ const roleSchema = new mongoose.Schema(
             unique: true,
             required: true,
         },
-        permissions: {
-            type: [String],
-            required: false,
-        }
+        permissions: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Permission",
+            }
+        ]
     },
-    {}
 );
 
-export default mongoose.models.Role || mongoose.model('User', roleSchema);
+export default mongoose.models.Role || mongoose.model('Role', roleSchema);
