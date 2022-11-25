@@ -21,40 +21,38 @@ import {
 } from 'react-admin';
 import {ListActions} from "./list_actions";
 import {Filter} from "./filter";
+import {
+    AcademicUnitAutocompleteInput,
+    CurrencyInput,
+    DegreeLevelInput,
+    KindOfExchangeStudent,
+    SexInput
+} from "./common_inputs";
 
 const OutcomeExchangeStudent = <SimpleForm>
-    <TextInput source="id" validate={[required()]} fullWidth/>
+    <TextInput source="id" validate={[required()]} fullWidth label={"Matrícula del estudiante"} />
+    <TextInput source="nombre" fullWidth/>
+    <TextInput source="apellido_paterno" fullWidth/>
+    <TextInput source="apellido_materno" fullWidth/>
+    {SexInput}
+    {DegreeLevelInput}
     <TextInput source="periodo" fullWidth/>
     <ReferenceInput source="campus_id" reference="campus">
         <SelectInput optionText="nombre" optionValue="id" fullWidth label="Campus"/>
     </ReferenceInput>
-    <ReferenceInput source="academic_unit_id" reference="academic_unit" >
-        <AutocompleteInput optionText="nombre" optionValue="id" label="Unidad académica" fullWidth />
-    </ReferenceInput>
-    <SelectInput source="nivel_de_estudios" choices={[
-        {id: 'Licenciatura', name: 'Licenciatura'},
-        {id: 'Especialidad', name: 'Especialidad'},
-        {id: 'Maestría', name: 'Maestría'},
-        {id: 'Doctorado', name: 'Doctorado'}
-    ]} fullWidth/>
+    {AcademicUnitAutocompleteInput}
     <TextInput source="programa_educativo" fullWidth/>
     <TextInput source="área_de_conocimiento" fullWidth/>
-    <TextInput source="nombre" fullWidth/>
-    <TextInput source="apellido_paterno" fullWidth/>
-    <TextInput source="apellido_materno" fullWidth/>
-    <SelectInput source="sexo" choices={[
-        {id: 'Masculino', name: 'Masculino'},
-        {id: 'Femenino', name: 'Femenino'},
-    ]} fullWidth/>
+    {KindOfExchangeStudent}
     <BooleanInput source="discapacidad"/>
     <BooleanInput source="hablante_indígena"/>
     <BooleanInput source="origen_indígena"/>
     <TextInput source="unidad_receptora" fullWidth/>
     <TextInput source="país_de_la_unidad_receptora" fullWidth/>
-    <TextInput source="entidad_de_la_unidad_receptora" fullWidth/>
+    <TextInput source="entidad_de_la_unidad_receptora" fullWidth helperText={"Estado, comunidad, departamento. Ejemplo: Baja California, Madrid, Bógota."} />
     <TextInput source="idioma_de_la_unidad_receptora" fullWidth/>
     <BooleanInput source="recibio_finacimiento"/>
-    <NumberInput source="monto_recibido" fullWidth defaultValue={0}/>
+    {CurrencyInput}
     <DateInput source="fecha_de_inicio_de_intercambio" fullWidth/>
     <DateInput source="fecha_de_término_de_intercambio" fullWidth/>
 </SimpleForm>;
@@ -62,18 +60,20 @@ const OutcomeExchangeStudent = <SimpleForm>
 export const OutcomeExchangeStudentList = () => (
     <List filters={Filter} actions={<ListActions/>}>
         <Datagrid rowClick="edit">
-            <TextField source="id"/>
+            <TextField source="id" label={"Matrícula del estudiante"} />
             <TextField source="periodo"/>
             <TextField source="nombre"/>
             <TextField source="apellido_paterno"/>
             <TextField source="apellido_materno"/>
+            <TextField source="sexo" />
             <TextField source="nivel_de_estudios"/>
             <TextField source="programa_educativo"/>
             <TextField source="área_de_conocimiento"/>
-            <ReferenceField source="campus_id" reference="campus" label={"Campus"}>
+            <TextField source="tipo_de_intercambio_estudiantil" />
+            <ReferenceField source="campus_id" reference="campus">
                 <TextField source="nombre"/>
             </ReferenceField>
-            <ReferenceField source="academic_unit_id" reference="academic_unit" label={"Unidad Académica"}>
+            <ReferenceField source="unidad_académica_id" reference="academic_unit" >
                 <TextField source="nombre"/>
             </ReferenceField>
             <BooleanField source="discapacidad"/>
@@ -85,8 +85,8 @@ export const OutcomeExchangeStudentList = () => (
             <TextField source="idioma_de_la_unidad_receptora"/>
             <BooleanField source="recibio_finacimiento"/>
             <NumberField source="monto_recibido" />
-            <DateField source="fecha_de_inicio_de_intercambio" fullWidth/>
-            <DateField source="fecha_de_término_de_intercambio" fullWidth/>
+            <DateField source="fecha_de_inicio_de_intercambio"/>
+            <DateField source="fecha_de_término_de_intercambio"/>
         </Datagrid>
     </List>
 );

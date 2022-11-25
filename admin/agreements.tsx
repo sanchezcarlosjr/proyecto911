@@ -56,7 +56,7 @@ export const AgreementList = () => (
             <BooleanField source="es_convenio_investigación"/>
             <BooleanField source="es_convenio_de_intercambio_estudiantil"/>
             <BooleanField source="es_convenio_de_movilidad_académica"/>
-            <BooleanField source="es_convenio_de_doble_grado"/>
+            <BooleanField source="es_convenio_de_doble_grado" />
         </Datagrid>
     </List>
 );

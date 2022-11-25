@@ -1,12 +1,10 @@
 import * as React from 'react';
 import {
-    AutocompleteInput,
     BooleanField,
     BooleanInput,
     Create,
     Datagrid,
     Edit,
-    FormDataConsumer,
     List,
     ReferenceField,
     ReferenceInput,
@@ -14,68 +12,56 @@ import {
     SelectInput,
     SimpleForm,
     TextField,
-    TextInput, useRecordContext, useGetOne
+    TextInput
 } from 'react-admin';
 import {ListActions} from "./list_actions";
 import {Filter} from "./filter";
+import {AcademicUnitAutocompleteInput, DegreeLevelInput, KindOfAcademicMobilityInput, SexInput} from "./common_inputs";
 
 const IncomeAcademicMobility = <SimpleForm>
-    <TextInput source="id" validate={[required()]} fullWidth helperText={"Pasaporte si es internacional. INE si es nacional."} />
-    <TextInput source="periodo" fullWidth />
+    <TextInput source="id" validate={[required()]} fullWidth helperText={"Pasaporte si es internacional. INE si es nacional."}/>
+    <TextInput source="nombre" fullWidth/>
+    <TextInput source="apellido_paterno" fullWidth/>
+    <TextInput source="apellido_materno" fullWidth/>
+    {SexInput}
+    {DegreeLevelInput}
+    <TextInput source="periodo" fullWidth/>
     <ReferenceInput source="campus_id" reference="campus">
-        <SelectInput optionText="nombre" optionValue="id" fullWidth label="Campus que visita" />
+        <SelectInput optionText="nombre" optionValue="id" fullWidth label="Campus que visita"/>
     </ReferenceInput>
-    <ReferenceInput source="academic_unit_id" reference="academic_unit" >
-        <AutocompleteInput optionText="nombre" optionValue="id" label="Unidad académica" fullWidth />
-    </ReferenceInput>
-    <TextInput source="nombre" fullWidth />
-    <TextInput source="apellido_paterno" fullWidth />
-    <TextInput source="apellido_materno" fullWidth />
-    <SelectInput source="sexo" choices={[
-        { id: 'Masculino', name: 'Masculino' },
-        { id: 'Femenino', name: 'Femenino' },
-    ]}  fullWidth />
-    <SelectInput source="nivel_de_estudios" choices={[
-        { id: 'Licenciatura', name: 'Licenciatura' },
-        { id: 'Especialidad', name: 'Especialidad' },
-        { id: 'Maestría', name: 'Maestría' },
-        { id: 'Doctorado', name: 'Doctorado' }
-    ]} fullWidth />
+    {AcademicUnitAutocompleteInput}
+    <TextInput source="unidad_emisora" fullWidth/>
+    <TextInput source="país_de_la_unidad_emisora" fullWidth/>
+    <TextInput source="entidad_de_la_unidad_emisora" fullWidth helperText={"Estado, comunidad, departamento. Ejemplo: Baja California, Madrid, Bógota."} />
+    {KindOfAcademicMobilityInput}
     <BooleanInput source="discapacidad" fullWidth/>
-    <BooleanInput source="hablante_indígena" fullWidth/>
+    <BooleanInput source="hablante_indígena" fullWidth />
     <BooleanInput source="origen_indígena" fullWidth/>
-    <TextInput source="unidad_emisora" fullWidth />
-    <TextInput source="país_de_la_unidad_emisora" fullWidth />
-    <TextInput source="entidad_de_la_unidad_emisora" fullWidth />
-    <SelectInput source="tipo_de_movilidad_académica" choices={[
-        { id: 'Docencia', name: 'Docencia' },
-        { id: 'Estancias sabáticas', name: 'Estancias sabáticas' },
-        { id: 'Estancias de investigación', name: 'Estancias de investigación' },
-    ]} fullWidth />
 </SimpleForm>;
 
 export const IncomeAcademicMobilityList = () => (
     <List filters={Filter} actions={<ListActions/>}>
         <Datagrid rowClick="edit">
-            <TextField source="id"/>
+            <TextField source="id" />
             <TextField source="periodo"/>
             <TextField source="nombre"/>
             <TextField source="apellido_paterno"/>
             <TextField source="apellido_materno"/>
+            <TextField source="sexo" />
             <TextField source="nivel_de_estudios"/>
+            <TextField source="tipo_de_movilidad_académica"/>
             <BooleanField source="discapacidad"/>
             <BooleanField source="hablante_indígena"/>
             <BooleanField source="origen_indígena"/>
-            <ReferenceField source="campus_id" reference="campus"  label={"Campus"}>
-                <TextField source="nombre" />
+            <ReferenceField source="campus_id" reference="campus">
+                <TextField source="nombre"/>
             </ReferenceField>
-            <ReferenceField source="academic_unit_id" reference="academic_unit"  label={"Unidad Académica"}>
-                <TextField source="nombre" />
+            <ReferenceField source="unidad_académica_id" reference="academic_unit" >
+                <TextField source="nombre"/>
             </ReferenceField>
             <TextField source="unidad_emisora"/>
             <TextField source="país_de_la_unidad_emisora"/>
-            <TextField source="entidad_de_la_unidad_emisora"/>
-            <TextField source="tipo_de_movilidad_académica"/>
+            <TextField source="entidad_de_la_unidad_emisora" />
         </Datagrid>
     </List>
 );
