@@ -161,6 +161,23 @@ const spanishMessages: TranslationMessages = {
             oneOf: "Debe ser uno de: %{options}",
             regex: "Debe coincidir con un formato específico (regexp): %{pattern}",
             required: "Requerido"
+        },
+        configurable: {
+            customize: "",
+            configureMode: "",
+            Datagrid: {
+                unlabeled: "",
+            },
+            inspector: {
+                title: "",
+                content: "",
+                reset: "",
+            },
+            SimpleList: {
+                primaryText: "",
+                secondaryText: "",
+                tertiaryText: "",
+            }
         }
     }
 };
