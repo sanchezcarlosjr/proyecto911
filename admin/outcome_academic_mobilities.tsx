@@ -6,7 +6,6 @@ import {
     List,
     ReferenceField,
     ReferenceInput,
-    required,
     SelectInput,
     SimpleForm,
     TextField,
@@ -14,25 +13,32 @@ import {
 } from 'react-admin';
 import {ListActions} from "./list_actions";
 import {Filter} from "./filter";
-import {AcademicUnitAutocompleteInput, DegreeLevelInput, KindOfAcademicMobilityInput, SexInput} from "./common_inputs";
+import {
+    AcademicUnitAutocompleteInput,
+    DegreeLevelInput,
+    IdInputValidator,
+    InputValidator,
+    KindOfAcademicMobilityInput,
+    SexInput
+} from "./common_inputs";
 
 const OutcomeAcademicMobility = <SimpleForm>
-    <TextInput source="id" validate={[required()]} fullWidth label={"Número de empleado"}/>
-    <TextInput source="nombre" fullWidth/>
-    <TextInput source="apellido_paterno" fullWidth/>
-    <TextInput source="apellido_materno" fullWidth/>
+    <TextInput validate={IdInputValidator} source="id" fullWidth label={"Número de empleado"}/>
+    <TextInput validate={InputValidator} source="nombre" fullWidth/>
+    <TextInput validate={InputValidator} source="apellido_paterno" fullWidth/>
+    <TextInput validate={InputValidator} source="apellido_materno" fullWidth/>
     {SexInput}
     {DegreeLevelInput}
-    <TextInput source="periodo" fullWidth/>
+    <TextInput validate={InputValidator} source="periodo" fullWidth/>
     <ReferenceInput source="campus_id" reference="campus">
         <SelectInput optionText="nombre" optionValue="id" fullWidth label="Campus"/>
     </ReferenceInput>
     {AcademicUnitAutocompleteInput}
-    <TextInput source="unidad_receptora" fullWidth/>
-    <TextInput source="país_de_la_unidad_receptora" fullWidth/>
-    <TextInput source="entidad_de_la_unidad_receptora" fullWidth
+    <TextInput validate={InputValidator} source="unidad_receptora" fullWidth/>
+    <TextInput validate={InputValidator} source="país_de_la_unidad_receptora" fullWidth/>
+    <TextInput validate={InputValidator} source="entidad_de_la_unidad_receptora" fullWidth
                helperText={"Estado, comunidad, departamento. Ejemplo: Baja California, Madrid, Bógota."}/>
-    <TextInput source="idioma_de_la_unidad_receptora" fullWidth/>
+    <TextInput validate={InputValidator} source="idioma_de_la_unidad_receptora" fullWidth/>
     {KindOfAcademicMobilityInput}
 </SimpleForm>;
 

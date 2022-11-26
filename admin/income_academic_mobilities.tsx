@@ -8,7 +8,6 @@ import {
     List,
     ReferenceField,
     ReferenceInput,
-    required,
     SelectInput,
     SimpleForm,
     TextField,
@@ -16,38 +15,47 @@ import {
 } from 'react-admin';
 import {ListActions} from "./list_actions";
 import {Filter} from "./filter";
-import {AcademicUnitAutocompleteInput, DegreeLevelInput, KindOfAcademicMobilityInput, SexInput} from "./common_inputs";
+import {
+    AcademicUnitAutocompleteInput,
+    DegreeLevelInput,
+    IdInputValidator,
+    InputValidator,
+    KindOfAcademicMobilityInput,
+    SexInput
+} from "./common_inputs";
 
 const IncomeAcademicMobility = <SimpleForm>
-    <TextInput source="id" validate={[required()]} fullWidth helperText={"Pasaporte si es internacional. INE si es nacional."}/>
-    <TextInput source="nombre" fullWidth/>
-    <TextInput source="apellido_paterno" fullWidth/>
-    <TextInput source="apellido_materno" fullWidth/>
+    <TextInput validate={IdInputValidator} source="id" fullWidth
+               helperText={"Pasaporte si es internacional. INE si es nacional."}/>
+    <TextInput validate={InputValidator} source="nombre" fullWidth/>
+    <TextInput validate={InputValidator} source="apellido_paterno" fullWidth/>
+    <TextInput validate={InputValidator} source="apellido_materno" fullWidth/>
     {SexInput}
     {DegreeLevelInput}
-    <TextInput source="periodo" fullWidth/>
+    <TextInput validate={InputValidator} source="periodo" fullWidth/>
     <ReferenceInput source="campus_id" reference="campus">
         <SelectInput optionText="nombre" optionValue="id" fullWidth label="Campus que visita"/>
     </ReferenceInput>
     {AcademicUnitAutocompleteInput}
-    <TextInput source="unidad_emisora" fullWidth/>
-    <TextInput source="país_de_la_unidad_emisora" fullWidth/>
-    <TextInput source="entidad_de_la_unidad_emisora" fullWidth helperText={"Estado, comunidad, departamento. Ejemplo: Baja California, Madrid, Bógota."} />
+    <TextInput validate={InputValidator} source="unidad_emisora" fullWidth/>
+    <TextInput validate={InputValidator} source="país_de_la_unidad_emisora" fullWidth/>
+    <TextInput validate={InputValidator} source="entidad_de_la_unidad_emisora" fullWidth
+               helperText={"Estado, comunidad, departamento. Ejemplo: Baja California, Madrid, Bógota."}/>
     {KindOfAcademicMobilityInput}
     <BooleanInput source="discapacidad" fullWidth/>
-    <BooleanInput source="hablante_indígena" fullWidth />
+    <BooleanInput source="hablante_indígena" fullWidth/>
     <BooleanInput source="origen_indígena" fullWidth/>
 </SimpleForm>;
 
 export const IncomeAcademicMobilityList = () => (
     <List filters={Filter} actions={<ListActions/>}>
         <Datagrid rowClick="edit">
-            <TextField source="id" />
+            <TextField source="id"/>
             <TextField source="periodo"/>
             <TextField source="nombre"/>
             <TextField source="apellido_paterno"/>
             <TextField source="apellido_materno"/>
-            <TextField source="sexo" />
+            <TextField source="sexo"/>
             <TextField source="nivel_de_estudios"/>
             <TextField source="tipo_de_movilidad_académica"/>
             <BooleanField source="discapacidad"/>
@@ -56,12 +64,12 @@ export const IncomeAcademicMobilityList = () => (
             <ReferenceField source="campus_id" reference="campus">
                 <TextField source="nombre"/>
             </ReferenceField>
-            <ReferenceField source="unidad_académica_id" reference="academic_unit" >
+            <ReferenceField source="unidad_académica_id" reference="academic_unit">
                 <TextField source="nombre"/>
             </ReferenceField>
             <TextField source="unidad_emisora"/>
             <TextField source="país_de_la_unidad_emisora"/>
-            <TextField source="entidad_de_la_unidad_emisora" />
+            <TextField source="entidad_de_la_unidad_emisora"/>
         </Datagrid>
     </List>
 );

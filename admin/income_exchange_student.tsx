@@ -21,33 +21,33 @@ import {Filter} from "./filter";
 import {
     AcademicUnitAutocompleteInput,
     CurrencyInput,
-    DegreeLevelInput,
-    KindOfExchangeStudent,
+    DegreeLevelInput, IdInputValidator, InputValidator,
+    KindOfExchangeStudent, PeriodInput,
     SexInput
 } from "./common_inputs";
 
 const IncomeExchangeStudent = <SimpleForm>
-    <TextInput source="id" validate={[required()]} fullWidth helperText={"Pasaporte si es internacional. INE si es nacional."}/>
-    <TextInput source="nombre" fullWidth/>
-    <TextInput source="apellido_paterno" fullWidth/>
-    <TextInput source="apellido_materno" fullWidth/>
+    <TextInput source="id" validate={IdInputValidator} fullWidth helperText={"Pasaporte si es internacional. INE si es nacional."}/>
+    <TextInput source="nombre" fullWidth validate={InputValidator} />
+    <TextInput source="apellido_paterno" fullWidth validate={InputValidator}/>
+    <TextInput source="apellido_materno" fullWidth validate={InputValidator}/>
     {SexInput}
     {DegreeLevelInput}
-    <TextInput source="periodo" fullWidth/>
+    {PeriodInput}
     <ReferenceInput source="campus_id" reference="campus">
         <SelectInput optionText="nombre" optionValue="id" fullWidth label="Campus"/>
     </ReferenceInput>
     {AcademicUnitAutocompleteInput}
-    <TextInput source="programa_educativo" fullWidth/>
-    <TextInput source="área_de_conocimiento" fullWidth/>
+    <TextInput source="programa_educativo" fullWidth validate={InputValidator}/>
+    <TextInput source="área_de_conocimiento" fullWidth validate={InputValidator}/>
     {KindOfExchangeStudent}
     <BooleanInput source="discapacidad"/>
     <BooleanInput source="hablante_indígena"/>
     <BooleanInput source="origen_indígena"/>
-    <TextInput source="unidad_emisora" fullWidth/>
-    <TextInput source="país_de_la_unidad_emisora" fullWidth/>
-    <TextInput source="entidad_de_la_unidad_emisora" fullWidth  helperText={"Estado, comunidad, departamento. Ejemplo: Baja California, Madrid, Bógota."}/>
-    <TextInput source="idioma_de_la_unidad_emisora" fullWidth/>
+    <TextInput source="unidad_emisora" fullWidth validate={InputValidator}/>
+    <TextInput source="país_de_la_unidad_emisora" fullWidth validate={InputValidator}/>
+    <TextInput source="entidad_de_la_unidad_emisora" fullWidth  validate={InputValidator} helperText={"Estado, comunidad, departamento. Ejemplo: Baja California, Madrid, Bógota."}/>
+    <TextInput source="idioma_de_la_unidad_emisora" fullWidth validate={InputValidator}/>
     <BooleanInput source="recibio_financiamiento"/>
     {CurrencyInput}
     <DateInput source="fecha_de_inicio_de_intercambio" fullWidth/>

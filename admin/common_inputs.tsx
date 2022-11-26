@@ -1,6 +1,9 @@
-import {AutocompleteInput, NumberInput, ReferenceInput, SelectInput} from "react-admin";
+import {AutocompleteInput, NumberInput, ReferenceInput, regex, required, SelectInput, TextInput} from "react-admin";
 import * as React from "react";
 import {InputAdornment} from "@mui/material";
+
+export const InputValidator = [required(), regex(/^[A-Z]+$/, 'Solo mayúsculas ASCII. Sin acentos u otro símbolos.')];
+export const IdInputValidator = [required(), regex(/^[A-Z0-9]+$/, 'Solo números o mayúsculas ASCII. Sin acentos u otro símbolos.')];
 
 export const DegreeLevelInput = <SelectInput source="nivel_de_estudios"
                                              choices={[{id: 'LICENCIATURA', name: 'LICENCIATURA'}, {
@@ -15,6 +18,8 @@ export const SexInput = <SelectInput source="sexo" choices={[{id: 'MASCULINO', n
     id: 'FEMENINO',
     name: 'FEMENINO'
 },]} fullWidth/>
+
+export const PeriodInput = <TextInput source="periodo" fullWidth helperText={"El periodo debe estar en formato AAAA-P. Ejemplo: 2022-2"} validate={[required(), regex(/^\d\d\d\d-\d$/, 'El periodo debe estar en formato AAAA-P. Ejemplo: 2022-2')]}/>
 
 export const CurrencyInput = <NumberInput source="monto_recibido" fullWidth defaultValue={0}
                                           helperText={"Solo se acepta moneda nacional (pesos mexicanos). Convierta al cambio actual."}
