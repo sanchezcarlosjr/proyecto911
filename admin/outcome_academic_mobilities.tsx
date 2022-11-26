@@ -18,7 +18,7 @@ import {
     DegreeLevelInput,
     IdInputValidator,
     InputValidator,
-    KindOfAcademicMobilityInput,
+    KindOfAcademicMobilityInput, PeriodInput,
     SexInput
 } from "./common_inputs";
 
@@ -29,7 +29,7 @@ const OutcomeAcademicMobility = <SimpleForm>
     <TextInput validate={InputValidator} source="apellido_materno" fullWidth/>
     {SexInput}
     {DegreeLevelInput}
-    <TextInput validate={InputValidator} source="periodo" fullWidth/>
+    {PeriodInput}
     <ReferenceInput source="campus_id" reference="campus">
         <SelectInput optionText="nombre" optionValue="id" fullWidth label="Campus"/>
     </ReferenceInput>
@@ -46,7 +46,7 @@ export const OutcomeAcademicMobilityList = () => (
     <List filters={Filter} actions={<ListActions/>}>
         <Datagrid rowClick="edit">
             <TextField source="id" label={"Número de empleado"}/>
-            <TextField source="periodo"/>
+            {PeriodInput}
             <TextField source="nombre"/>
             <TextField source="apellido_paterno"/>
             <TextField source="apellido_materno"/>

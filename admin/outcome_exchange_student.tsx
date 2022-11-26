@@ -24,7 +24,7 @@ import {
     DegreeLevelInput,
     IdInputValidator,
     InputValidator,
-    KindOfExchangeStudent,
+    KindOfExchangeStudent, PeriodInput,
     SexInput
 } from "./common_inputs";
 
@@ -35,7 +35,7 @@ const OutcomeExchangeStudent = <SimpleForm>
     <TextInput validate={InputValidator} source="apellido_materno" fullWidth/>
     {SexInput}
     {DegreeLevelInput}
-    <TextInput validate={InputValidator} source="periodo" fullWidth/>
+    {PeriodInput}
     <ReferenceInput source="campus_id" reference="campus">
         <SelectInput optionText="nombre" optionValue="id" fullWidth label="Campus"/>
     </ReferenceInput>
