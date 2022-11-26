@@ -9,7 +9,6 @@ export default async function handler(
     res: NextApiResponse<any>
 ) {
     try {
-        jwt.verify(req.headers.authorization as string, process.env.JWT_SECRET || "secret");
         await dbConnect();
         switch (req.method) {
             case 'GET':
