@@ -12,8 +12,8 @@ export const DegreeLevelInput = <SelectInput source="nivel_de_estudios"
                                              }]} fullWidth/>;
 
 export const SexInput = <SelectInput source="sexo" choices={[{id: 'MASCULINO', name: 'MASCULINO'}, {
-    id: 'FEMININO',
-    name: 'FEMININO'
+    id: 'FEMENINO',
+    name: 'FEMENINO'
 },]} fullWidth/>
 
 export const CurrencyInput = <NumberInput source="monto_recibido" fullWidth defaultValue={0}
@@ -25,6 +25,7 @@ export const CurrencyInput = <NumberInput source="monto_recibido" fullWidth defa
                                                   MXN
                                               </InputAdornment>)
                                           }}/>
+
 export const KindOfAcademicMobilityInput = <SelectInput source="tipo_de_movilidad_académica" choices={[{
     id: 'DOCENCIA',
     name: 'DOCENCIA'
@@ -36,7 +37,9 @@ export const KindOfAcademicMobilityInput = <SelectInput source="tipo_de_movilida
 
 export const KindOfExchangeStudent =     <SelectInput source="tipo_de_intercambio_estudiantil" choices={[
     { id: 'PASANTIA', name: 'PASANTIA' },
-    { id: 'CURSO DE GRADO ESTUDIANTIL', name: 'CURSO DE GRADO ESTUDIANTIL' }
+    { id: 'CURSO DE GRADO ESTUDIANTIL', name: 'CURSO DE GRADO ESTUDIANTIL' },
+    { id: 'PRACTICAS PROFESIONALES', name: 'PRACTICAS PROFESIONALES' },
+    { id: 'ESTANCIA DE DOBLE GRADO', name: 'ESTANCIA DE DOBLE GRADO' }
 ]} fullWidth />
 
 export const AcademicUnitAutocompleteInput = <ReferenceInput source="unidad_académica_id" reference="academic_unit">

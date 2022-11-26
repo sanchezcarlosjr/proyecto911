@@ -51,7 +51,7 @@ const OutcomeExchangeStudent = <SimpleForm>
     <TextInput source="país_de_la_unidad_receptora" fullWidth/>
     <TextInput source="entidad_de_la_unidad_receptora" fullWidth helperText={"Estado, comunidad, departamento. Ejemplo: Baja California, Madrid, Bógota."} />
     <TextInput source="idioma_de_la_unidad_receptora" fullWidth/>
-    <BooleanInput source="recibio_finacimiento"/>
+    <BooleanInput source="recibio_financiamiento"/>
     {CurrencyInput}
     <DateInput source="fecha_de_inicio_de_intercambio" fullWidth/>
     <DateInput source="fecha_de_término_de_intercambio" fullWidth/>
@@ -83,7 +83,7 @@ export const OutcomeExchangeStudentList = () => (
             <TextField source="país_de_la_unidad_receptora"/>
             <TextField source="entidad_de_la_unidad_receptora"/>
             <TextField source="idioma_de_la_unidad_receptora"/>
-            <BooleanField source="recibio_finacimiento"/>
+            <BooleanField source="recibio_financiamiento"/>
             <NumberField source="monto_recibido" />
             <DateField source="fecha_de_inicio_de_intercambio"/>
             <DateField source="fecha_de_término_de_intercambio"/>
