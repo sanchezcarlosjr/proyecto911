@@ -29,7 +29,7 @@ export default class Handler {
             switch (req.method) {
                 case 'POST':
                     await saveOne(req, this.model);
-                    return res.status(200).json(req.body);
+                    return res.status(201).json(req.body);
                 case 'GET':
                     const result = await getList(req, this.model, this.fListQuery);
                     // @ts-ignore

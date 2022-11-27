@@ -18,13 +18,13 @@ export default async function handler(
                 }).then(response => response.json());
                 let campus = response['campus'].map((campus: { idCampus: string, nombreCampus: string }) => (
                     {
-                        id: campus['idCampus'],
+                        id: String(campus['idCampus']),
                         nombre: campus['nombreCampus']
                     }
                 ));
                 const id = req.query.filter === undefined ? "" : JSON.parse(req.query.filter as string)['id'];
                 if (id) {
-                    campus = campus.filter((campus: {id: number}) => campus.id === id[0]);
+                    campus = campus.filter((campus: {id: string}) => campus.id === id[0]);
                 }
                 const total = campus.length;
                 return res.status(200).setHeader('Content-Range', `0-${total - 1}/${total}`).json(campus);
