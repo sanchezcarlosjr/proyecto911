@@ -18,7 +18,7 @@ export const authProvider: AuthProvider = {
             return Promise.reject();
         }
     },
-    checkError: error => Promise.reject(/* ... */),
+    checkError: error =>  Promise.resolve(),
     checkAuth: async params => {
         try {
             if (localStorage.getItem('token') === null) {

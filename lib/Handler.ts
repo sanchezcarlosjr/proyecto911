@@ -14,14 +14,16 @@ export default class Handler {
 
     async handle_index(req: NextApiRequest, res: NextApiResponse<any | ErrorResponse>) {
         try {
-            jwt.verify(req.headers.authorization as string, process.env.JWT_SECRET || "secret");
+            // @ts-ignore
+            const token = req.headers.authorization.substr(7);
+            jwt.verify(token, process.env.JWT_SECRET || "secret");
         } catch {
-            return res.status(401).json({"error": "User is not authorized"});
+            return res.status(401).json({"message": "User is not authorized"});
         }
         try {
             await dbConnect();
         } catch (e) {
-            return res.status(500).json({"error": "Service is not available."});
+            return res.status(500).json({"message": "Service is not available."});
         }
         try {
             switch (req.method) {
@@ -33,23 +35,25 @@ export default class Handler {
                     // @ts-ignore
                     return res.status(200).setHeader('Content-Range', `${req.query.range.join("-")}/${result.totalDocs}`).json(result.docs);
                 default:
-                    return res.status(406).json({"error": "Method is not allowed."});
+                    return res.status(406).json({"message": "Method is not allowed."});
             }
         } catch (error) {
-            return res.status(400).json({"error": (error as any).message});
+            return res.status(400).json({"message": (error as any).message});
         }
     }
 
     async handle_id(req: NextApiRequest, res: NextApiResponse<any | ErrorResponse>) {
         try {
-            jwt.verify(req.headers.authorization as string, process.env.JWT_SECRET || "secret");
+            // @ts-ignore
+            const token = req.headers.authorization.substr(7);
+            jwt.verify(token, process.env.JWT_SECRET || "secret");
         } catch {
-            return res.status(401).json({"error": "User is not authorized"});
+            return res.status(401).json({"message": "User is not authorized"});
         }
         try {
             await dbConnect();
         } catch (e) {
-            return res.status(500).json({"error": "Service is not available."});
+            return res.status(500).json({"message": "Service is not available."});
         }
         try {
             switch (req.method) {
@@ -63,10 +67,10 @@ export default class Handler {
                     const collection = await this.model.findById(req.query.id);
                     return res.status(200).json(collection);
                 default:
-                    return res.status(406).json({"error": "Method is not allowed."});
+                    return res.status(406).json({"message": "Method is not allowed."});
             }
         } catch (error) {
-            return res.status(400).json({"error": (error as any).message});
+            return res.status(400).json({"message": (error as any).message});
         }
     }
 

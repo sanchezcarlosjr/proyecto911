@@ -1,7 +1,7 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
 
 interface ErrorResponse {
-    error: string;
+    message: string;
 }
 
 export default async function handler(
@@ -28,6 +28,6 @@ export default async function handler(
                 throw new Error('Method not allowed');
         }
     } catch (error) {
-        return res.status(500).json({"error": (error as any).message});
+        return res.status(500).json({"message": (error as any).message});
     }
 }

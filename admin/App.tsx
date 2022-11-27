@@ -14,7 +14,7 @@ import {authProvider} from "./auth_provider";
 import {CssBaseline} from "@mui/material";
 
 const httpClient = (url: string, options: any = {}) => {
-    options.headers = new Headers({Accept: 'application/json', 'Authorization': localStorage.getItem('token') ?? ""});
+    options.headers = new Headers({Accept: 'application/json', 'Authorization': "Bearer "+ (localStorage.getItem('token') ?? "")});
     return fetchUtils.fetchJson(url, options);
 };
 
