@@ -2,7 +2,7 @@ import {AutocompleteInput, NumberInput, ReferenceInput, regex, required, SelectI
 import * as React from "react";
 import {InputAdornment} from "@mui/material";
 
-export const InputValidator = [required(), regex(/^[A-Z]+$/, 'Solo mayúsculas ASCII. Sin acentos u otro símbolos.')];
+export const InputValidator = [required(), regex(/^[A-Z ]+$/, 'Solo mayúsculas ASCII o espacios en blanco. Sin acentos, eñes u otro símbolos.')];
 export const IdInputValidator = [required(), regex(/^[A-Z0-9]+$/, 'Solo números o mayúsculas ASCII. Sin acentos u otro símbolos.')];
 
 export const DegreeLevelInput = <SelectInput source="nivel_de_estudios"

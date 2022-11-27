@@ -33,7 +33,7 @@ export default async function handler(
                 const token = await sign({email: `${req.body.username}@uabc.edu.mx`}) as string;
                 return res.status(401).json({ token });
             default:
-                throw new Error('Method not allowed');
+                return res.status(406).json({"error": "Method is not allowed."});
         }
     } catch (error) {
         return res.status(500).json({ "error": (error as any).message });
