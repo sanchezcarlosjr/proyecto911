@@ -28,7 +28,7 @@ export default async function handler(
                 }).then(response => response.text());
                 const user = await userController.getUser(req.body.username);
                 const authorized = !!response && user.can('login');
-                if (authorized === false) {
+                if (!authorized) {
                     throw new Error('user is not authorized');
                 }
                 const token = await sign({ email: `${req.body.username}@uabc.edu.mx` }) as string;
