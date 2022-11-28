@@ -23,6 +23,9 @@ export default {
     },
     deletePermission: async (id: string) => {
         const permission = await Permission.findById(id);
+        if (!permission) {
+            throw new Error("Permission not found");
+        }
         await permission.remove();
         return permission;
     },

@@ -1,18 +1,21 @@
-import mongoose from "mongoose";
+import { Document, Model, Schema, Types, HydratedDocument, model } from "mongoose";
 
-interface IUser extends mongoose.Document {
+interface IUser extends Document {
     email: string;
     salt: string;
     hash: string;
-    role: mongoose.Types.ObjectId;
+    role: Types.ObjectId;
 }
 
-interface UserModel extends mongoose.Model<IUser> {
-    findByEmail: (email: string) => Promise<IUser>;
+interface IUserMethods {
     can: (action: string) => boolean;
 }
 
-const userSchema = new mongoose.Schema(
+interface UserModel extends Model<IUser, {}, IUserMethods> {
+    findByEmail: (email: string) => Promise<HydratedDocument<IUser, IUserMethods>>;
+}
+
+const userSchema = new Schema(
     {
         email: {
             type: String,
@@ -30,7 +33,7 @@ const userSchema = new mongoose.Schema(
             required: true,
         },
         role: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: "Role",
             required: true,
         }
@@ -57,4 +60,4 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-export default mongoose.model<IUser, UserModel>('User', userSchema);
+export default model<IUser, UserModel>('User', userSchema);

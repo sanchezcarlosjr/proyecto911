@@ -17,12 +17,15 @@ export default {
     });
   },
   getUser: async (email: string) => {
-    const user = await User.findByEmail(email);
+    const user = await User.findByEmail(email) as any;
     return user;
   },
   deleteUser: async (id: string) => {
     const user = await User.findById(id);
-    await user?.remove();
+    if (!user) {
+      throw new Error("User not found");
+    }
+    await user.remove();
     return user;
   },
   getRole: async (email: string) => {

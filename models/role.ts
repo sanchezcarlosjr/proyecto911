@@ -1,15 +1,15 @@
-import mongoose from "mongoose";
+import { Document, Model, Schema, Types, model } from "mongoose";
 
-interface IRole extends mongoose.Document {
+interface IRole extends Document {
     name: string;
-    permissions: mongoose.Types.ObjectId[];
+    permissions: Types.ObjectId[];
 }
 
-interface RoleModel extends mongoose.Model<IRole> {
+interface RoleModel extends Model<IRole> {
     findByName(name: string): Promise<IRole>;
 }
 
-const roleSchema = new mongoose.Schema(
+const roleSchema = new Schema(
     {
         name: {
             type: String,
@@ -18,7 +18,7 @@ const roleSchema = new mongoose.Schema(
         },
         permissions: [
             {
-                type: mongoose.Schema.Types.ObjectId,
+                type: Schema.Types.ObjectId,
                 ref: "Permission",
                 default: [],
             }
@@ -33,4 +33,4 @@ const roleSchema = new mongoose.Schema(
     }
 );
 
-export default mongoose.model<IRole, RoleModel>('Role', roleSchema);
+export default model<IRole, RoleModel>('Role', roleSchema);
