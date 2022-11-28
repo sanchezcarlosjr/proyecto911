@@ -1,4 +1,5 @@
 import Role from "../models/role";
+import Permission from "../models/permission";
 
 export default {
     createRole: async (name: string, permissions: string[]) => {
@@ -10,22 +11,24 @@ export default {
         return role;
     },
     getRole: async (name: string) => {
-        const role = await (Role as any).findByName(name);
+        const role = await Role.findByName(name);
         return role;
     },
     getPermissions: async (name: string) => {
-        const role = await (Role as any).findByName(name);
+        const role = await Role.findByName(name);
         return role.permissions;
     },
-    addPermission: async (name: string, permission: string) => {
-        const role = await (Role as any).findByName(name);
-        role.permissions.push(permission);
+    addPermission: async (name: string, permissionName: string) => {
+        const role = await Role.findByName(name);
+        const permission = await Permission.findByName(permissionName);
+        role.permissions.push(permission._id);
         await role.save();
         return role;
     },
-    removePermission: async (name: string, permission: string) => {
-        const role = await (Role as any).findByName(name);
-        role.permissions = role.permissions.filter((p: string) => p !== permission);
+    removePermission: async (name: string, permissionName: string) => {
+        const role = await Role.findByName(name);
+        const permission = await Permission.findByName(permissionName);
+        role.permissions = role.permissions.filter((p) => p !== permission._id);
         await role.save();
         return role;
     },

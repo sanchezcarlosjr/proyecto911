@@ -1,4 +1,5 @@
 import User from "../models/user";
+import Role from "../models/role";
 const hasher = require("pbkdf2-password")();
 
 export default {
@@ -16,27 +17,28 @@ export default {
     });
   },
   getUser: async (email: string) => {
-    const user = await (User as any).findByEmail(email);
+    const user = await User.findByEmail(email);
     return user;
   },
   deleteUser: async (id: string) => {
     const user = await User.findById(id);
-    await user.remove();
+    await user?.remove();
     return user;
   },
   getRole: async (email: string) => {
-    const user = await (User as any).findByEmail(email);
+    const user = await User.findByEmail(email);
     return user.role;
   },
-  addRole: async (email: string, role: string) => {
-    const user = await (User as any).findByEmail(email);
-    user.role = role;
+  addRole: async (email: string, roleName: string) => {
+    const user = await User.findByEmail(email);
+    const role = await Role.findByName(roleName);
+    user.role = role._id;
     await user.save();
     return user;
   },
   removeRole: async (email: string) => {
-    const user = await (User as any).findByEmail(email);
-    user.role = null;
+    const user = await User.findByEmail(email);
+    user.update({ $unset: { role: 1 } });
     await user.save();
     return user;
   },

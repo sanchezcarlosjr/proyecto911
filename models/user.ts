@@ -1,5 +1,17 @@
 import mongoose from "mongoose";
 
+interface IUser extends mongoose.Document {
+    email: string;
+    salt: string;
+    hash: string;
+    role: mongoose.Types.ObjectId;
+}
+
+interface UserModel extends mongoose.Model<IUser> {
+    findByEmail: (email: string) => Promise<IUser>;
+    can: (action: string) => boolean;
+}
+
 const userSchema = new mongoose.Schema(
     {
         email: {
@@ -45,4 +57,4 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-export default mongoose.models.User || mongoose.model('User', userSchema);
+export default mongoose.model<IUser, UserModel>('User', userSchema);
