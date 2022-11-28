@@ -18,4 +18,4 @@ https://sanchezcarlosjr.notion.site/Formato-911-de-la-SEP-UABC-3cb154ee123647f6a
 
 # Cloud workspace
 
-You can also run and work on the project using (GitHub Codespaces)[https://github.com/features/codespaces] or (Gitpod)[https://www.gitpod.io/].
+You can also run and work on the project using [GitHub Codespaces](https://github.com/features/codespaces) or [Gitpod](https://www.gitpod.io/).
