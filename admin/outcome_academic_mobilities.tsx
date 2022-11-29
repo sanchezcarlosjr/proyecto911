@@ -46,7 +46,7 @@ export const OutcomeAcademicMobilityList = () => (
     <List filters={Filter} actions={<ListActions/>}>
         <Datagrid rowClick="edit">
             <TextField source="id" label={"Número de empleado"}/>
-            {PeriodInput}
+            <TextField source="periodo" />
             <TextField source="nombre"/>
             <TextField source="apellido_paterno"/>
             <TextField source="apellido_materno"/>
