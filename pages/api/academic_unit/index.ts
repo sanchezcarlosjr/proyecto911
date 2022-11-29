@@ -10,7 +10,7 @@ export default async function handler(
     try {
         await dbConnect();
     } catch (e) {
-        return res.status(500).json({"error": "Service is not available."});
+        return res.status(503).json({"message": "ra.notification.http_error"});
     }
     switch (req.method) {
         case 'GET':
@@ -26,9 +26,10 @@ export default async function handler(
                 // @ts-ignore
                 return res.status(200).setHeader('Content-Range', `${req.query.range.join("-")}/${result.totalDocs}`).json(result.docs);
             } catch (error) {
-                return res.status(400).json({"error": (error as any).message});
+                console.warn(error);
+                return res.status(503).json({"message": "ra.notification.http_error"});
             }
         default:
-            return res.status(401).json({"error": "Method is not allowed."});
+            return res.status(401).json({"message": "Method is not allowed."});
     }
 }

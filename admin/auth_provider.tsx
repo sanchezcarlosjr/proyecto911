@@ -1,4 +1,4 @@
-import {AuthProvider} from 'react-admin';
+import {AuthProvider, fetchUtils} from 'react-admin';
 
 export const authProvider: AuthProvider = {
     login: async params => {
@@ -18,22 +18,31 @@ export const authProvider: AuthProvider = {
             return Promise.reject();
         }
     },
-    checkError: error =>  Promise.resolve(),
+    checkError: error =>  {
+        if (error.status === 401 || error.status === 403) {
+            localStorage.clear();
+            return Promise.reject('ra.auth.auth_check_error');
+        }
+        return Promise.resolve();
+    },
     checkAuth: async params => {
+        if (localStorage.getItem('token') === null) {
+            return Promise.reject({status: 401});
+        }
         try {
-            if (localStorage.getItem('token') === null) {
-                return Promise.reject();
-            }
-            await fetch(`/api/sessions/${localStorage.getItem('token')}`, {
+            const sessions = await fetch(`/api/sessions/${localStorage.getItem('token')}`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
-            })
+            });
+            if (sessions.status === 401) {
+                return Promise.reject({status: 401});
+            }
             return Promise.resolve();
         } catch (e) {
-            return Promise.reject();
+            return Promise.reject({status: 401});
         }
     },
     logout: () => {

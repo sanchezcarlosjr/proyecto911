@@ -9,7 +9,7 @@ interface LoginResponse {
 }
 
 interface ErrorResponse {
-    error: string;
+    message: string;
 }
 
 export default async function handler(
@@ -28,14 +28,15 @@ export default async function handler(
                     }
                 }).then(response => response.text());
                 if (response === "false") {
-                    throw new Error('user is not authorized');
+                    return res.status(401).json({ message: "ra.auth.sign_in_error" });
                 }
                 const token = await sign({email: `${req.body.username}@uabc.edu.mx`}) as string;
-                return res.status(401).json({ token });
+                return res.status(201).json({ token });
             default:
-                return res.status(406).json({"error": "Method is not allowed."});
+                return res.status(406).json({message: "ra.notification.http_error"});
         }
     } catch (error) {
-        return res.status(500).json({ "error": (error as any).message });
+        console.warn("[pages/api/login] Line 39", error);
+        return res.status(500).json({ message: "ra.notification.http_error" });
     }
 }

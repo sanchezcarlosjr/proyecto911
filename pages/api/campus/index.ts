@@ -32,6 +32,6 @@ export default async function handler(
                 throw new Error('Method not allowed');
         }
     } catch (error) {
-        return res.status(500).json({"message": (error as any).message});
+        return res.status(503).json({"message": "ra.notification.http_error"});
     }
 }
