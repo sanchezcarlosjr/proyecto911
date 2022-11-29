@@ -9,7 +9,7 @@ interface ErrorResponse {
 }
 
 export default class Handler {
-    constructor(private model: any, private fListQuery: (query: Object) => Object) {
+    constructor(private model: any, private fListQuery: (query: Object) => Object = (query) => ({})) {
     }
 
     async handle_index(req: NextApiRequest, res: NextApiResponse<any | ErrorResponse>) {
