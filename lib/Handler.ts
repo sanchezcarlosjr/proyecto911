@@ -26,13 +26,14 @@ export default class Handler {
         } catch (e) {
             return res.status(503).json({message: "ra.notification.http_error"});
         }
+        console.log(new Date(),decoded,req.method,req.body,req.query,req.headers);
         switch (req.method) {
             case 'POST':
                 try {
                     await saveOne(req, this.model);
                     return res.status(201).json(req.body);
                 } catch (error) {
-                    console.warn("[lib/Handler] 35 [POST]", decoded, error, new Date());
+                    console.warn(new Date(),decoded, error);
                     return res.status(400).json({"message": "ra.message.invalid_form"});
                 }
             case 'GET':
@@ -41,7 +42,7 @@ export default class Handler {
                     // @ts-ignore
                     return res.status(200).setHeader('Content-Range', `${req.query.range.join("-")}/${result.totalDocs}`).json(result.docs);
                 } catch (error) {
-                    console.warn("[lib/Handler] 44 [GET]", decoded, error, new Date());
+                    console.warn(new Date(),decoded, error);
                     return res.status(400).json({"message": "ra.message.invalid_form"});
                 }
             default:
@@ -63,13 +64,14 @@ export default class Handler {
         } catch (e) {
             return res.status(503).json({message: "ra.notification.http_error"});
         }
+        console.log(new Date(),decoded,req.method,req.body,req.query, req.headers);
         switch (req.method) {
             case 'PUT':
                 try {
                     await this.model.updateOne({_id: req.query.id}, req.body);
                     return res.status(200).json({id: req.query.id});
                 } catch (error) {
-                    console.warn("[lib/Handler] 77 [PUT]", decoded, error, new Date());
+                    console.warn(new Date(),decoded,error);
                     return res.status(400).json({"message": "ra.message.invalid_form"});
                 }
             case 'DELETE':
@@ -77,7 +79,7 @@ export default class Handler {
                     await this.model.deleteOne({_id: req.query.id});
                     return res.status(200).json({id: req.query.id});
                 } catch (error) {
-                    console.warn("[lib/Handler] 80 [DELETE]", decoded, error, new Date());
+                    console.warn(new Date(),decoded,error);
                     return res.status(400).json({"message": "ra.message.invalid_form"});
                 }
             case 'GET':
@@ -85,7 +87,7 @@ export default class Handler {
                     const collection = await this.model.findById(req.query.id);
                     return res.status(200).json(collection);
                 } catch (error) {
-                    console.warn("[lib/Handler] 88 [GET]", decoded, error, new Date());
+                    console.warn(new Date(),decoded,error);
                     return res.status(400).json({"message": "ra.message.invalid_form"});
                 }
             default:

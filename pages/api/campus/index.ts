@@ -32,6 +32,7 @@ export default async function handler(
                 throw new Error('Method not allowed');
         }
     } catch (error) {
+        console.warn(new Date(), error);
         return res.status(503).json({"message": "ra.notification.http_error"});
     }
 }

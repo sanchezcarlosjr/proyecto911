@@ -22,7 +22,7 @@ export default async function handler(
                 return res.status(406).json({ message: 'ra.notification.http_error' });
         }
     } catch (error) {
-        console.warn('[pages/api/sessions] Line 25', error);
+        console.warn(new Date(), error);
         return res.status(401).json({ message: "ra.auth.auth_check_error" });
     }
 }
