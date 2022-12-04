@@ -9,6 +9,7 @@ interface IUser extends Document {
 
 interface IUserMethods {
     can: (action: string) => boolean;
+    getPermissions: () => string[];
 }
 
 interface UserModel extends Model<IUser, {}, IUserMethods> {
@@ -56,6 +57,16 @@ const userSchema = new Schema(
                 });
                 return (this as any).permissions.some((p: any) => p.name === permission);
             },
+            getPermissions() {
+                this.populate({
+                    path: "role",
+                    populate: {
+                        path: "permissions",
+                        model: "Permission",
+                    },
+                });
+                return (this as any).permissions;
+            }
         }
     }
 );

@@ -31,8 +31,9 @@ export default async function handler(
                 if (!authorized) {
                     throw new Error('user is not authorized');
                 }
-                const token = await sign({ email: `${req.body.username}@uabc.edu.mx` }) as string;
-                return res.status(401).json({ token });
+                const permissions = user.getPermissions();
+                const token = await sign({ email: `${req.body.username}@uabc.edu.mx`, claims: permissions}) as string;
+                return res.status(201).json({ token });
             default:
                 throw new Error('Method not allowed');
         }
