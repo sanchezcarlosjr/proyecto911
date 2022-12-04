@@ -1,6 +1,22 @@
-import mongoose from "mongoose";
+import { Document, Model, Schema, Types, HydratedDocument, model } from "mongoose";
 
-const userSchema = new mongoose.Schema(
+interface IUser extends Document {
+    email: string;
+    salt: string;
+    hash: string;
+    role: Types.ObjectId;
+}
+
+interface IUserMethods {
+    can: (action: string) => boolean;
+    getPermissions: () => string[];
+}
+
+interface UserModel extends Model<IUser, {}, IUserMethods> {
+    findByEmail: (email: string) => Promise<HydratedDocument<IUser, IUserMethods>>;
+}
+
+const userSchema = new Schema(
     {
         email: {
             type: String,
@@ -18,8 +34,9 @@ const userSchema = new mongoose.Schema(
             required: true,
         },
         role: {
-            type: String,
-            required: false,
+            type: Schema.Types.ObjectId,
+            ref: "Role",
+            required: true,
         }
     },
     {
@@ -29,7 +46,29 @@ const userSchema = new mongoose.Schema(
                 return this.find({ email: new RegExp(email, "i") });
             },
         },
+        methods: {
+            can(permission: string) {
+                this.populate({
+                    path: "role",
+                    populate: {
+                        path: "permissions",
+                        model: "Permission",
+                    },
+                });
+                return (this as any).permissions.some((p: any) => p.name === permission);
+            },
+            getPermissions() {
+                this.populate({
+                    path: "role",
+                    populate: {
+                        path: "permissions",
+                        model: "Permission",
+                    },
+                });
+                return (this as any).permissions;
+            }
+        }
     }
 );
 
-export default mongoose.models.User || mongoose.model('User', userSchema);
+export default model<IUser, UserModel>('User', userSchema);

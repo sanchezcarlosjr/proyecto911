@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import dbConnect from '../../lib/ dbConnect';
-import sessionController from "../../controllers/session";
-import {Cypher} from "../../lib/Cypher";
-import {sign} from "../../lib/sign";
+import { Cypher } from "../../lib/Cypher";
+import { sign } from "../../lib/sign";
+import userController from '../../controllers/user'
 
 interface LoginResponse {
     token: string;
@@ -27,10 +26,13 @@ export default async function handler(
                         'Authorization': process.env.API_AUTHORIZATION ?? ""
                     }
                 }).then(response => response.text());
-                if (response === "false") {
+                const user = await userController.getUser(req.body.username);
+                const authorized = !!response && user.can('login');
+                if (!authorized) {
                     return res.status(401).json({ message: "ra.auth.sign_in_error" });
                 }
-                const token = await sign({email: `${req.body.username}@uabc.edu.mx`}) as string;
+                const permissions = user.getPermissions();
+                const token = await sign({ email: `${req.body.username}@uabc.edu.mx`, claims: permissions}) as string;
                 return res.status(201).json({ token });
             default:
                 return res.status(406).json({message: "ra.notification.http_error"});

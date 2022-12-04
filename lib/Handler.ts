@@ -1,8 +1,9 @@
-import {NextApiRequest, NextApiResponse} from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "./ dbConnect";
-import {saveOne} from "./saveOne";
-import {getList} from "./getList";
+import { saveOne } from "./saveOne";
+import { getList } from "./getList";
 import jwt from "jsonwebtoken";
+import userController from "../controllers/user";
 
 interface ErrorResponse {
     message: string;
