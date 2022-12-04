@@ -6,5 +6,13 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<any>
 ) {
-    return (new Handler(Agreements)).handle_index(req, res);
+    return (new Handler(Agreements, (q) => (
+        {
+            $or: [
+                {_id: {$regex: `.*${q}.*`, $options: "i"}},
+                {nombre_de_convenio: {$regex: `.*${q}.*`, $options: "i"}},
+                {periodo: {$regex: `.*${q}.*`, $options: "i"}},
+            ]
+        }
+    ))).handle_index(req, res);
 }

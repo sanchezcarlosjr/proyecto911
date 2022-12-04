@@ -10,7 +10,6 @@
     "test": "jest ./tests"
   },
   "dependencies": {
-    "@blackbox-vision/ra-language-spanish": "github:blackboxvision/ra-language-spanish",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.4",
     "mongoose-paginate-v2": "^1.7.1",

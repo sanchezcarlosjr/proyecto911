@@ -16,13 +16,14 @@ import {
 } from 'react-admin';
 import {ListActions} from "./list_actions";
 import {Filter} from "./filter";
+import {IdInputValidator, InputValidator, PeriodInput} from "./common_inputs";
 
 
 const Agreement = <SimpleForm>
-    <TextInput source="id" label="Clave" validate={[required()]} fullWidth />
-    <TextInput source="periodo" fullWidth />
-    <TextInput source="nombre_de_convenio" fullWidth />
-    <TextInput source="nombre_de_la_institución_u_organización" fullWidth />
+    <TextInput source="id" label="Clave" validate={IdInputValidator}  fullWidth />
+    {PeriodInput}
+    <TextInput source="nombre_de_convenio" validate={InputValidator} fullWidth />
+    <TextInput source="nombre_de_la_institución_u_organización" validate={InputValidator} fullWidth />
     <DateInput source="inicio_de_convenio" fullWidth />
     <SelectInput source="sector_de_la_institución_u_organización" choices={[
         { id: 'PUBLICO', name: 'PUBLICO' },
@@ -33,11 +34,12 @@ const Agreement = <SimpleForm>
         { id: 'NACIONAL', name: 'NACIONAL' },
         { id: 'INTERNACIONAL', name: 'INTERNACIONAL' }
     ]} fullWidth />
-    <TextInput source="país_de_la_institución_u_organización" fullWidth />
+    <TextInput validate={InputValidator} source="país_de_la_institución_u_organización" fullWidth />
     <BooleanInput source="es_convenio_académico"/>
     <BooleanInput source="es_convenio_investigación"/>
     <BooleanInput source="es_convenio_de_intercambio_estudiantil"/>
     <BooleanInput source="es_convenio_de_movilidad_académica"/>
+    <BooleanInput source="es_convenio_de_doble_grado"  />
 </SimpleForm>;
 
 export const AgreementList = () => (
@@ -55,6 +57,7 @@ export const AgreementList = () => (
             <BooleanField source="es_convenio_investigación"/>
             <BooleanField source="es_convenio_de_intercambio_estudiantil"/>
             <BooleanField source="es_convenio_de_movilidad_académica"/>
+            <BooleanField source="es_convenio_de_doble_grado" />
         </Datagrid>
     </List>
 );

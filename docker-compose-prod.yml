@@ -3,6 +3,7 @@ version: "3.5"
 services:
   gluetun:
     image: qmcgaw/gluetun
+    restart: unless-stopped
     cap_add:
       - NET_ADMIN
     ports:
@@ -20,6 +21,7 @@ services:
       - "OPENVPN_PASSWORD=${OPENVPN_PASSWORD}"
   mongo:
     image: mongo:latest
+    restart: unless-stopped
     container_name: mongo
     network_mode: "service:gluetun"
     environment:
@@ -36,11 +38,11 @@ services:
         target: /data/configdb
   app:
     container_name: app
+    restart: unless-stopped
     network_mode: "service:gluetun"
     build: .
     depends_on:
       - mongo
-    restart: unless-stopped
   
 volumes:
   MONGO_DATA:

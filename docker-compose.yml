@@ -30,6 +30,7 @@ services:
       - ./admin:/usr/src/app/admin
       - ./pages:/usr/src/app/pages
       - ./lib:/usr/src/app/lib
+      - ./styles:/usr/src/app/styles
   mongo:
     image: mongo:latest
     container_name: mongo

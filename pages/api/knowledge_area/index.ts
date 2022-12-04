@@ -1,7 +1,7 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
 
 interface ErrorResponse {
-    message: string;
+    error: string;
 }
 
 export default async function handler(
@@ -11,28 +11,27 @@ export default async function handler(
     try {
         switch (req.method) {
             case 'GET':
-                const response = await fetch(`${process.env.API}/escolar/catalogos/campus`, {
+                const response = await fetch(`${process.env.API}/escolar/catalogos/areas-conocimiento`, {
                     headers: {
                         'Authorization': process.env.API_AUTHORIZATION ?? ""
                     }
                 }).then(response => response.json());
-                let campus = response['campus'].map((campus: { idCampus: string, nombreCampus: string }) => (
+                let knowledgeAreas = response['areas-conocimiento'].map((campus: { clave: string, nombre: string }) => (
                     {
-                        id: String(campus['idCampus']),
-                        nombre: campus['nombreCampus']
+                        id: campus['clave'],
+                        nombre: campus['nombre']
                     }
                 ));
                 const id = req.query.filter === undefined ? "" : JSON.parse(req.query.filter as string)['id'];
                 if (id) {
-                    campus = campus.filter((campus: {id: string}) => campus.id === id[0]);
+                    knowledgeAreas = knowledgeAreas.filter((campus: {id: number}) => campus.id === id[0]);
                 }
-                const total = campus.length;
-                return res.status(200).setHeader('Content-Range', `0-${total - 1}/${total}`).json(campus);
+                const total = knowledgeAreas.length;
+                return res.status(200).setHeader('Content-Range', `0-${total - 1}/${total}`).json(knowledgeAreas);
             default:
                 throw new Error('Method not allowed');
         }
     } catch (error) {
-        console.warn(new Date(), error);
-        return res.status(503).json({"message": "ra.notification.http_error"});
+        return res.status(500).json({"error": (error as any).message});
     }
 }

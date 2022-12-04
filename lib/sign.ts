@@ -6,7 +6,7 @@ export const sign = (body: Object) => {
             body,
             process.env.JWT_SECRET || "secret",
             {
-                expiresIn: '3h'
+                expiresIn: '1h'
             },
             (err, token) => {
                 resolve(token);

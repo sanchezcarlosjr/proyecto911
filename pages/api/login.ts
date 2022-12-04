@@ -8,7 +8,7 @@ interface LoginResponse {
 }
 
 interface ErrorResponse {
-    error: string;
+    message: string;
 }
 
 export default async function handler(
@@ -29,15 +29,16 @@ export default async function handler(
                 const user = await userController.getUser(req.body.username);
                 const authorized = !!response && user.can('login');
                 if (!authorized) {
-                    throw new Error('user is not authorized');
+                    return res.status(401).json({ message: "ra.auth.sign_in_error" });
                 }
                 const permissions = user.getPermissions();
                 const token = await sign({ email: `${req.body.username}@uabc.edu.mx`, claims: permissions}) as string;
                 return res.status(201).json({ token });
             default:
-                throw new Error('Method not allowed');
+                return res.status(406).json({message: "ra.notification.http_error"});
         }
     } catch (error) {
-        return res.status(500).json({ "error": (error as any).message });
+        console.warn(new Date(), error);
+        return res.status(500).json({ message: "ra.notification.http_error" });
     }
 }
