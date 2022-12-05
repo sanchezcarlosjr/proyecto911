@@ -29,8 +29,9 @@ services:
     volumes:
       - ./admin:/usr/src/app/admin
       - ./pages:/usr/src/app/pages
+      - ./controllers:/usr/src/app/controllers
+      - ./models:/usr/src/app/models
       - ./lib:/usr/src/app/lib
-      - ./styles:/usr/src/app/styles
   mongo:
     image: mongo:latest
     container_name: mongo
@@ -45,17 +46,6 @@ services:
       - type: volume
         source: MONGO_CONFIG
         target: /data/configdb
-  mongo-express:
-    image: mongo-express:latest
-    network_mode: "service:gluetun"
-    container_name: mongo-express
-    environment:
-       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-       ME_CONFIG_MONGODB_ADMINPASSWORD: admin
-       ME_CONFIG_MONGODB_SERVER: localhost
-       ME_CONFIG_MONGODB_PORT: "27017"
-    depends_on:
-      - mongo
   
 volumes:
   MONGO_DATA:

@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { Cypher } from "../../lib/Cypher";
-import { sign } from "../../lib/sign";
+import type {NextApiRequest, NextApiResponse} from 'next'
+import {sign} from "../../lib/sign";
 import userController from '../../controllers/user'
+import {isAuthenticated} from "../../lib/isAuthenticated";
 
 interface LoginResponse {
     token: string;
@@ -18,14 +18,7 @@ export default async function handler(
     try {
         switch (req.method) {
             case 'POST':
-                const cypher = new Cypher();
-                const resource = `${process.env.API}/escolar/alumno/auth?json={ "usuario": "${req.body.username}", "contrasena": "${cypher.encrypt(req.body.password)}" }`;
-                const authenticated: boolean = await fetch(resource, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': process.env.API_AUTHORIZATION ?? ""
-                    }
-                }).then(response => !!response.text());
+                const authenticated = await isAuthenticated(req.body.username, req.body.password);
                 const user = await userController.getUser(req.body.username);
                 const authorized = authenticated && user.can('login');
                 if (!authorized) {
@@ -39,6 +32,6 @@ export default async function handler(
         }
     } catch (error) {
         console.warn(error);
-        return res.status(500).json({ message: "ra.notification.http_error" });
+        return res.status(401).json({ message: "ra.auth.sign_in_error" });
     }
 }

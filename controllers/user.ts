@@ -17,8 +17,7 @@ export default {
     });
   },
   getUser: async (email: string) => {
-    const user = await User.findByEmail(email) as any;
-    return user;
+    return await User.findByEmail(email) as any;
   },
   deleteUser: async (id: string) => {
     const user = await User.findById(id);
