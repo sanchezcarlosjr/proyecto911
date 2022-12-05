@@ -1,4 +1,7 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
+import dbConnect from "../../../lib/ dbConnect";
+import {getList} from "../../../lib/getList";
+import Campus from "../../../models/campus";
 
 interface ErrorResponse {
     message: string;
@@ -9,30 +12,28 @@ export default async function handler(
     res: NextApiResponse<any[] | ErrorResponse>
 ) {
     try {
-        switch (req.method) {
-            case 'GET':
-                const response = await fetch(`${process.env.API}/escolar/catalogos/campus`, {
-                    headers: {
-                        'Authorization': process.env.API_AUTHORIZATION ?? ""
-                    }
-                }).then(response => response.json());
-                let campus = response['campus'].map((campus: { idCampus: string, nombreCampus: string }) => (
+        await dbConnect();
+    } catch (e) {
+        return res.status(503).json({"message": "ra.notification.http_error"});
+    }
+    switch (req.method) {
+        case 'GET':
+            try {
+                const result = await getList(req, Campus, (q) => (
                     {
-                        id: String(campus['idCampus']),
-                        nombre: campus['nombreCampus']
+                        $or: [
+                            {_id: {$regex: `.*${q}.*`, $options: "i"}},
+                            {nombre: {$regex: `.*${q}.*`, $options: "i"}}
+                        ]
                     }
                 ));
-                const id = req.query.filter === undefined ? "" : JSON.parse(req.query.filter as string)['id'];
-                if (id) {
-                    campus = campus.filter((campus: {id: string}) => campus.id === id[0]);
-                }
-                const total = campus.length;
-                return res.status(200).setHeader('Content-Range', `0-${total - 1}/${total}`).json(campus);
-            default:
-                throw new Error('Method not allowed');
-        }
-    } catch (error) {
-        console.warn(error);
-        return res.status(503).json({"message": "ra.notification.http_error"});
+                // @ts-ignore
+                return res.status(200).setHeader('Content-Range', `${req.query.range.join("-")}/${result.totalDocs}`).json(result.docs);
+            } catch (error) {
+                console.warn(error);
+                return res.status(503).json({"message": "ra.notification.http_error"});
+            }
+        default:
+            return res.status(401).json({"message": "Method is not allowed."});
     }
 }
