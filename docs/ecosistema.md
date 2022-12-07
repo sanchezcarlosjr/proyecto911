@@ -7,10 +7,10 @@ Nuestro ecosistema es el siguiente:
 ```plantuml:md-ecosistema
 @startwbs
 * Ecosistema
-* Proceso de desarrollo de software
-** RUP.
-** Minutas en Google Docs.
-** Cada correo debe pasar por la profesora Judith. 
+** Proceso de desarrollo de software
+*** RUP.
+*** Minutas en Google Docs.
+*** Cada correo debe pasar por la profesora Judith. 
 ** Control de versiones
 *** Git
 *** GitHub
