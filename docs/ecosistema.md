@@ -7,6 +7,10 @@ Nuestro ecosistema es el siguiente:
 ```plantuml:md-ecosistema
 @startwbs
 * Ecosistema
+* Proceso de desarrollo de software
+** RUP.
+** Minutas en Google Docs.
+** Cada correo debe pasar por la profesora Judith. 
 ** Control de versiones
 *** Git
 *** GitHub
@@ -14,12 +18,12 @@ Nuestro ecosistema es el siguiente:
 *** Pruebas unitarias
 **** Jest
 *** Pruebas de integración
-**** Selenium
+**** Cypress. Usamos el servidor de preproducción.
 ** Modelado
 *** MermaidJS (por defecto en notion).
 *** PlantUML (cuando MermaidJS no permita modelar, usamos este).
 ** Capa de presentación
-*** JavaScript-NPM-Node
+*** TypeScript-NPM-Node
 **** ReactAdmin
 ** Interfaces de comunicación
 *** Servicio web
@@ -33,9 +37,8 @@ Nuestro ecosistema es el siguiente:
 ***** NextJS
 ***** Moongose
 ** Capa de datos
-*** Excel (.xlx)
+*** Excel (.csv)
 *** MongoDB
-*** mongo-express (interactuar con MongoDB con UI)
 *** API Cimarrón
 ** Documentación
 *** Referente a gestión
@@ -46,7 +49,7 @@ Nuestro ecosistema es el siguiente:
 *** Continua integracion/despliegue
 **** GitHub Action
 *** Servidor de producción
-**** Mexicali?
+**** Coordinación en Mexicali.
 *** Desarrollo de preproducción
 **** Computadora proporcionada por la profesora Judith
 @endwbs
